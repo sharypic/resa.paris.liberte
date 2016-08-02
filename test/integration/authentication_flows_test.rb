@@ -18,8 +18,10 @@ class SignInFlowsTest < ActionDispatch::IntegrationTest
 
     assert_select "form[action='#{resident_session_path}']" do
       assert_select 'input[name="resident[email]"]',
+                    true
                     'Missing email input'
       assert_select 'input[name="resident[password]"]',
+                    true
                     'Missing password input'
     end
 
