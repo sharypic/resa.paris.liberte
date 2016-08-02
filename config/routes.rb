@@ -5,7 +5,10 @@ Rails.application.routes.draw do
     passwords: 'residents/passwords',
   }
 
-  get 'pages/home'
   root 'pages#home'
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+  resources :rooms, only: [:index], param: :slug do
+    resources :calendars, only: [:index]
+  end
+
 end

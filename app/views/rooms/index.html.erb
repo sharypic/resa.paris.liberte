@@ -1,0 +1,9 @@
+<div class="row">
+  <% Room.list.each.with_index do |room| %>
+      <div class="col-sm-6 col-xs-12">
+        <h2><%= room.name %></h2>
+        <p><%= room.seats %> personnes / <%= room.cost_per_half_hour %>€/h</p>
+        <p><%= link_to 'book', '#', class: 'btn btn-primary' %>
+      </div>
+  <% end %>
+</div>
