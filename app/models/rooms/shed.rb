@@ -5,6 +5,10 @@ module Rooms
         'Atelier'
       end
 
+      def to_slug
+        name.parameterize
+      end
+
       def seats
         20
       end

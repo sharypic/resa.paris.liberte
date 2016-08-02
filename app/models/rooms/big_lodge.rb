@@ -5,6 +5,10 @@ module Rooms
         'Grande loge'
       end
 
+      def to_slug
+        name.parameterize
+      end
+
       def seats
         4
       end

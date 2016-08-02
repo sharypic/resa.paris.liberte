@@ -5,6 +5,10 @@ module Rooms
         'Petite loge'
       end
 
+      def to_slug
+        name.parameterize
+      end
+
       def seats
         2
       end

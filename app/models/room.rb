@@ -2,6 +2,20 @@
 # Style: not raising NotImplemented error because it's for not yet implemented,
 #        not abstact
 class Room < ApplicationRecord
+ # Helpers
+  def self.slug?(slug)
+    list.map(&:to_param).include?(slug)
+  end
+
+  def self.list
+    [
+      Rooms::Shed,
+      Rooms::Square,
+      Rooms::BigLodge,
+      Rooms::SmallLodge
+    ]
+  end
+
   # Booking properties
   AbstractError = 'AsbtractMethod, sub class only'
 
@@ -20,5 +34,4 @@ class Room < ApplicationRecord
   def cost_per_half_hour
     raise AbstractError
   end
-
 end

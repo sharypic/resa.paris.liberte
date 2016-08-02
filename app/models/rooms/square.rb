@@ -5,6 +5,10 @@ module Rooms
         'Carré'
       end
 
+      def to_slug
+        name.parameterize
+      end
+
       def seats
         10
       end
