@@ -1,4 +1,4 @@
-# List rooms and calendar
+# List rooms
 class RoomsController < ApplicationController
   before_action :authenticate_resident!
 

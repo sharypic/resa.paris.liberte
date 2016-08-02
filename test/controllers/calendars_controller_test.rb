@@ -24,7 +24,7 @@ class IndexRoomCalendarsControllerTest < ActionDispatch::IntegrationTest
     sign_in(@resident)
 
     Room.list.each do |room|
-      get room_calendars_path(room_slug: Rooms::Square.to_param)
+      get room_calendars_path(room_slug: Rooms::Square.to_slug)
       assert_response :success
     end
   end

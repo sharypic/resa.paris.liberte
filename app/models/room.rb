@@ -4,7 +4,7 @@
 class Room < ApplicationRecord
  # Helpers
   def self.slug?(slug)
-    list.map(&:to_param).include?(slug)
+    list.map(&:to_slug).include?(slug)
   end
 
   def self.list
