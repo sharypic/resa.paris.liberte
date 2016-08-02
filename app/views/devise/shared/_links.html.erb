@@ -1,0 +1,9 @@
+<%- if controller_name != 'sessions' %>
+<%= link_to t(".sign_in", :default => "Sign in"), new_resident_session_path(:resident) %><br />
+<% end -%>
+
+<%- if controller_name != 'passwords' %>
+<%= link_to t(".forgot_your_password", :default => "Forgot your password?"), new_resident_password_path(:resident) %><br />
+<% end -%>
+
+

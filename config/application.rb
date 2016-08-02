@@ -13,5 +13,8 @@ module ResaParisLiberte
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
+
+    # Devise mailer options
+    config.action_mailer.default_url_options = { host: ENV['HOST_WITH_PORT'].to_s }
   end
 end
