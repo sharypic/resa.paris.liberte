@@ -9,7 +9,5 @@ class PagesControllerTest < ActionDispatch::IntegrationTest
   test 'should get home on request root_url' do
     get root_url
     assert_response :success
-    assert_select 'input[name="resident[email]"]'
-    assert_select 'input[name="resident[password]"]'
   end
 end

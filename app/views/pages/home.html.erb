@@ -1,1 +1,5 @@
-<%= render template: 'devise/sessions/new', locals: {resource: Resident.new, resource_name: :resident } %>
+<% if resident_signed_in? %>
+
+<% else %>
+  <%= render template: 'devise/sessions/new', locals: {resource: Resident.new, resource_name: :resident } %>
+<% end %>

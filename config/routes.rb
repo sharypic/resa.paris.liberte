@@ -1,9 +1,8 @@
 Rails.application.routes.draw do
 
   devise_for :residents, path_names: {
-    sign_in: 'login',
-    sign_out: 'logout',
-    password: 'secret',
+    sessions: 'residents/sessions',
+    passwords: 'residents/passwords',
   }
 
   get 'pages/home'
