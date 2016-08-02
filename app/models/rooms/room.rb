@@ -2,13 +2,13 @@
 # Style: not raising NotImplemented error because it's for not yet implemented,
 #        not abstact
 class Room < ApplicationRecord
- # Helperse
+  # Helperse
   def self.slug?(slug)
     list.map(&:to_slug).include?(slug)
   end
 
   def self.class_for_slug(slug)
-    list.find{ |klass| klass.to_slug == slug }
+    list.find { |klass| klass.to_slug == slug }
   end
 
   def self.list
@@ -21,7 +21,7 @@ class Room < ApplicationRecord
   end
 
   # Booking properties
-  AbstractError = 'AsbtractMethod, sub class only'
+  AbstractError = 'AsbtractMethod, sub class only'.freeze
 
   # def denomination
   #   raise AbstractError

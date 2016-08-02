@@ -6,7 +6,7 @@ class SignInFlowsTest < ActionDispatch::IntegrationTest
   setup do
     @password = 'okokok'
     @resident = Resident.create!(email: 'fourcade.m@gmail.com',
-                             password: @password)
+                                 password: @password)
   end
 
   teardown do
@@ -19,21 +19,20 @@ class SignInFlowsTest < ActionDispatch::IntegrationTest
     assert_select "form[action='#{resident_session_path}']" do
       assert_select 'input[name="resident[email]"]',
                     true
-                    'Missing email input'
+      'Missing email input'
       assert_select 'input[name="resident[password]"]',
                     true
-                    'Missing password input'
+      'Missing password input'
     end
 
     assert_select ".navbar a[href='#{destroy_resident_session_path}']",
                   false
-                  'Logout should not be present when not connected'
-
+    'Logout should not be present when not connected'
   end
 
   test 'Sign in failure from homepage' do
     post resident_session_path, params: { resident: { email: @resident.email,
-                                                      password: "fail" } }
+                                                      password: 'fail' } }
 
     assert_select '.alert-danger .text-danger',
                   'Invalid Email or password.',
@@ -47,7 +46,6 @@ class SignInFlowsTest < ActionDispatch::IntegrationTest
     assert_select '.alert-info .text-notice',
                   'Signed in successfully.',
                   'Alert sign in success missing'
-
   end
 
   test 'Logout from homepage' do
@@ -56,7 +54,7 @@ class SignInFlowsTest < ActionDispatch::IntegrationTest
 
     assert_select ".navbar a[href='#{destroy_resident_session_path}']",
                   'Signout'
-                  'Logout link missing'
+    'Logout link missing'
 
     delete destroy_resident_session_path
     follow_redirect!

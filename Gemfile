@@ -37,11 +37,11 @@ gem 'bootstrap-sass'
 gem 'devise'
 gem 'devise-bootstrap-views'
 
-
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
-  gem 'dotenv-rails', :groups => [:development, :test]
+  gem 'dotenv-rails', groups: [:development, :test]
+  gem 'rubocop'
 end
 
 group :development do

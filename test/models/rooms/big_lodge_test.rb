@@ -21,4 +21,3 @@ class BigLodgeTest < ActiveSupport::TestCase
     assert_equal 20, @room.cost_per_half_hour
   end
 end
-

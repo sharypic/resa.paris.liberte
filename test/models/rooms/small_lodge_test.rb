@@ -21,4 +21,3 @@ class SmallLodgeTest < ActiveSupport::TestCase
     assert_equal 10, @room.cost_per_half_hour
   end
 end
-

@@ -21,4 +21,3 @@ class SquareTest < ActiveSupport::TestCase
     assert_equal 40, @room.cost_per_half_hour
   end
 end
-

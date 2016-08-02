@@ -21,4 +21,3 @@ class ShedTest < ActiveSupport::TestCase
     assert_equal 125, @room.cost_per_half_hour
   end
 end
-

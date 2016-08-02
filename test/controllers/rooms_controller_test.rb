@@ -6,7 +6,6 @@ class IndexRoomsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @resident = Resident.create!(email: 'fourcade.m@gmail.com',
                                  password: 'okokok')
-
   end
 
   test 'redirects to homepage when not signed in' do

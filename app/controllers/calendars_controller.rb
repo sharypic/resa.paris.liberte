@@ -7,9 +7,9 @@ class CalendarsController < ApplicationController
     date_rendered = Date.today
     datetime_rendered = date_rendered.to_datetime
 
-    render locals: {start_datetime: datetime_rendered + 8.hours,
-                    end_datetime: datetime_rendered + 20.hours,
-                    rooms: Room.class_for_slug(params[:room_slug]).all}
+    render locals: { start_datetime: datetime_rendered + 8.hours,
+                     end_datetime: datetime_rendered + 20.hours,
+                     rooms: Room.class_for_slug(params[:room_slug]).all }
   end
 
   private

@@ -10,9 +10,7 @@ def create_rooms
   Shed.create!
 
   4.times do
-    [Square, BigLodge, SmallLodge].each do |room_class|
-      room_class.create!
-    end
+    [Square, BigLodge, SmallLodge].each(&:create!)
   end
 end
 
