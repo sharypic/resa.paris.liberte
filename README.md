@@ -42,9 +42,11 @@ Not yet Available
  
 ## Services (job queues, cache servers, search engines, etc.)
 Not yet Available
-## Deployment instructions
-Have heroku keys, git push heroku master:master
 
+## Deployment instructions
+* Have heroku access (ask to fourcade.m@gmail.com)
+* add heroku repo as ```git remote add heroku https://git.heroku.com/{APPNAME}```
+* then ```./deploy.sh```
 
 ## Feature set
 
