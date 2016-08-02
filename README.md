@@ -8,7 +8,10 @@ version is 2.3.1 (specified in Gemfile). Keep it up to last security patch
 * ENV
 
 ```
+# host 
 HOST_WITH_PORT=
+# temp password for demo
+DEFAULT_PWD=
 ```
 
 ## Configuration
@@ -35,7 +38,7 @@ heroku config:add/set ENVKEY=ENVVALUE
 * migrate with ```bin/rails db:create```
 
 ## Database initialization
-Not yet Available
+```bin/rails rake db:seed```
 
 ## How to run the test suite
 * ```bin/rails test```
