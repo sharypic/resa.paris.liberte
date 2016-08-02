@@ -21,5 +21,7 @@ def create_residents
                    password: ENV['DEFAULT_PWD'])
 end
 
-create_rooms
-create_residents
+ActiveRecord::Base.transaction do
+  create_rooms
+  create_residents
+end
