@@ -16,5 +16,7 @@ module ResaParisLiberte
 
     # Devise mailer options
     config.action_mailer.default_url_options = { host: ENV['HOST_WITH_PORT'].to_s }
+
+    config.autoload_paths += %W(#{config.root}/app/models/rooms)
   end
 end
