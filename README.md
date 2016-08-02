@@ -1,27 +1,50 @@
-# README
+## Ruby
+version is 2.3.1 (specified in Gemfile). Keep it up to last security patch
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## System dependencies.
+* See Gemfile/Gemfile.lock for ruby dependencies
+* DB is Postgres 
+* Runs on Heroku
+* ENV
 
-Things you may want to cover:
+```
+HOST_WITH_PORT=
+```
 
-* Ruby version is 2.3.1. Keep it up to last security patch
+## Configuration
+### Development/Test
+* Recommended ruby env with rbenv
+* Recommended usage of gemset
+* Configuration is done via dot.env ; sets ENV dependencies
 
-* System dependencies. Postgres & see Gemfile
+```
+rbenv install 2.3.1
+gem install bundler
+bundle install
+```
 
-* Configuration
+### Production
+Expose ENV variable via 
 
-* Database creation bin/rails db:create
+```
+heroku config:add/set ENVKEY=ENVVALUE
+```
 
-* Database initialization
+## Database creation / migration
+* creates with ```bin/rails ```
+* migrate with ```bin/rails db:create```
 
-* How to run the test suite bin/rails test
+## Database initialization
+Not yet Available
 
-* Services (job queues, cache servers, search engines, etc.)
+## How to run the test suite
+* ```bin/rails test```
+ 
+## Services (job queues, cache servers, search engines, etc.)
+Not yet Available
+## Deployment instructions
+Have heroku keys, git push heroku master:master
 
-* Deployment instructions
-
-* ...
 
 ## Feature set
 
