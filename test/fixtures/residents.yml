@@ -1,0 +1,5 @@
+mfo:
+  team_id: 1
+  email: fourcade.m@gmail.com
+  encrypted_password: <%= Resident.new.send(:password_digest, 'okokok') %>
+

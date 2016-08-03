@@ -2,11 +2,11 @@ require 'test_helper'
 
 class SignInFlowsTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
+  fixtures :residents
 
   setup do
     @password = 'okokok'
-    @resident = Resident.create!(email: 'fourcade.m@gmail.com',
-                                 password: @password)
+    @resident = residents(:mfo)
   end
 
   teardown do

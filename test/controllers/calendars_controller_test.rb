@@ -2,10 +2,10 @@ require 'test_helper'
 
 class IndexRoomCalendarsControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
+  fixtures :teams, :residents
 
   setup do
-    @resident = Resident.create!(email: 'fourcade.m@gmail.com',
-                                 password: 'okokok')
+    @resident = residents(:mfo)
   end
 
   test 'redirects to homepage when not signed in' do

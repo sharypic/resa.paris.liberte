@@ -1,0 +1,29 @@
+shed:
+  type: Shed
+
+square_0:
+  type: Square
+square_1:
+  type: Square
+square_2:
+  type: Square
+square_3:
+  type: Square
+
+small_lodge_0:
+  type: SmallLodge
+small_lodge_1:
+  type: SmallLodge
+small_lodge_2:
+  type: SmallLodge
+small_lodge_3:
+  type: SmallLodge
+
+big_lodge_0:
+  type: BigLodge
+big_lodge_1:
+  type: BigLodge
+big_lodge_2:
+  type: BigLodge
+big_lodge_3:
+  type: BigLodge
