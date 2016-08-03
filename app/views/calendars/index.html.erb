@@ -1,4 +1,4 @@
-<table class="table">
+<table class="table table-bordered table-cal">
   <thead>
     <tr>
       <th></th>
@@ -9,11 +9,21 @@
   </thead>
 
   <tbody>
-    <% iterate_day(start_datetime, end_datetime, 30.minutes) do |step| %>
+    <% iterate_day(start_datetime, end_datetime, 30.minutes) do |half_hour_starts_at, half_hour_ends_at| %>
       <tr>
-        <td><%= step.strftime('%H:%M') %></td>
+        <td class="td-time"><%= half_hour_starts_at.strftime('%H:%M') %></td>
+
         <% rooms.each.with_index do |room, i| %>
-          <td></td>
+          <% resa = room.reservations.find { |reservation| reservation.in?(half_hour_starts_at, half_hour_ends_at) } %>
+          <% if resa == nil %>
+            <td></td>
+          <% elsif !resa.rendered? %>
+            <td class="td-reserved" rowspan="<%= resa.half_hours_used %>">
+              <%= resa.name %>
+              <%- resa.mark_as_rendered %>
+            </td>
+          <% else %>
+          <% end %>
         <% end %>
       </tr>
     <% end %>

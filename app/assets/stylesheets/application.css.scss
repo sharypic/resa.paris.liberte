@@ -6,3 +6,18 @@
 @import 'devise_bootstrap_views';
 
 @import 'components/alert';
+
+.table-cal{
+  td{
+    vertical-align: middle;
+    text-align: center;
+  }
+}
+.td-time{
+  text-align: right;
+}
+.td-reserved{
+  background-color: red;
+  color: white;
+  font-weight: bold;
+}

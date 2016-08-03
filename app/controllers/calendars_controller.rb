@@ -6,10 +6,15 @@ class CalendarsController < ApplicationController
   def index
     date_rendered = Date.today
     datetime_rendered = date_rendered.to_datetime
+    starts_at = datetime_rendered + 8.hours
+    ends_at = datetime_rendered + 20.hours
 
-    render locals: { start_datetime: datetime_rendered + 8.hours,
-                     end_datetime: datetime_rendered + 20.hours,
-                     rooms: Room.class_for_slug(params[:room_slug]).all }
+    rooms = Room.class_for_slug(params[:room_slug])
+                .reservations_in(starts_at, ends_at)
+
+    render locals: { start_datetime: starts_at,
+                     end_datetime: ends_at,
+                     rooms: rooms }
   end
 
   private
