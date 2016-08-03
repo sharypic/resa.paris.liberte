@@ -43,6 +43,7 @@ group :development, :test do
   gem 'dotenv-rails'
   gem 'rubocop'
   gem 'minitest-perf'
+  gem 'annotate'
 end
 
 group :development do

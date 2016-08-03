@@ -1,3 +1,13 @@
+# == Schema Information
+#
+# Table name: rooms
+#
+#  id         :integer          not null, primary key
+#  type       :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 # STI Root for Shed, Square, BigLodge, SmallLodge
 # Rooms can be booked [via a reservations] by users
 # Each kind of room has special booking constraints

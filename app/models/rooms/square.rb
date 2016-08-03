@@ -1,3 +1,13 @@
+# == Schema Information
+#
+# Table name: rooms
+#
+#  id         :integer          not null, primary key
+#  type       :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 # STI from room, denominated as "Carre"
 class Square < Room
   # Booking properties
