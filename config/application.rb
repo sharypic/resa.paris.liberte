@@ -22,5 +22,8 @@ module ResaParisLiberte
     }
 
     config.autoload_paths += %W(#{config.root}/app/models/rooms)
+
+    config.time_zone = ActiveSupport::TimeZone::MAPPING['Paris']
+    config.active_record.default_timezone = :utc
   end
 end
