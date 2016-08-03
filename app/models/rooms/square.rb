@@ -1,5 +1,6 @@
-
+# STI from room, denominated as "Carre"
 class Square < Room
+  # Booking properties
   module BookingProperties
     def denomination
       'Carré'
@@ -14,7 +15,7 @@ class Square < Room
     end
 
     def free_time_per_week
-      (2.hour + 30.minutes).to_i
+      (2.hours + 30.minutes).to_i
     end
 
     def cost_per_half_hour

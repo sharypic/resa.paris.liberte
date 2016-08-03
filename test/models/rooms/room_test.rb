@@ -7,7 +7,6 @@ class RoomTest < ActiveSupport::TestCase
     assert Room.slug?(Shed.to_slug)
     assert Room.slug?(Shed.to_slug)
   end
-
 end
 
 class RoomScopesTest < ActiveSupport::TestCase
@@ -15,11 +14,11 @@ class RoomScopesTest < ActiveSupport::TestCase
   fixtures :teams, :residents, :rooms
 
   test 'reservations_in' do
-    starts_at = Date.today.to_datetime + 8.hours
+    starts_at = Time.zone.today + 8.hours
     ends_at = starts_at + 30.minutes
     small_lodge = rooms(:small_lodge_0)
 
-    reservation = Reservation.create(name: "hello",
+    reservation = Reservation.create(name: 'hello',
                                      starts_at: starts_at,
                                      ends_at: ends_at,
                                      resident: residents(:mfo),
@@ -30,5 +29,4 @@ class RoomScopesTest < ActiveSupport::TestCase
     assert_equal small_lodge, rooms.first
     assert_equal reservation, rooms.first.reservations.first
   end
-
 end

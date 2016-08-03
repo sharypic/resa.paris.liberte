@@ -9,13 +9,17 @@ Bundler.require(*Rails.groups)
 Dotenv::Railtie.load if Rails.env.development? || Rails.env.test?
 
 module ResaParisLiberte
+  # Base Application
   class Application < Rails::Application
-    # Settings in config/environments/* take precedence over those specified here.
+    # Settings in config/environments/* take precedence over those
+    # specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
 
     # Devise mailer options
-    config.action_mailer.default_url_options = { host: ENV['HOST_WITH_PORT'].to_s }
+    config.action_mailer.default_url_options = {
+      host: ENV['HOST_WITH_PORT'].to_s
+    }
 
     config.autoload_paths += %W(#{config.root}/app/models/rooms)
   end

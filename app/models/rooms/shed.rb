@@ -1,4 +1,6 @@
+# STI from room, denominated as "Atelier"
 class Shed < Room
+  # Booking properties
   module BookingProperties
     def denomination
       'Atelier'

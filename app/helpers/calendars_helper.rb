@@ -1,3 +1,7 @@
+# Simple iterator to render a calendar
+# from a datetime
+# to a datetime
+# by step
 module CalendarsHelper
   def iterate_day(from, to, step)
     while from <= to

@@ -2,13 +2,14 @@ require 'test_helper'
 
 class ReservationTest < ActiveSupport::TestCase
   setup do
-    @starts_at = Time.now
+    @starts_at = Time.zone.now
     @ends_at = 2.hours.from_now
     @reservation = Reservation.new(starts_at: @starts_at,
                                    ends_at: @ends_at)
   end
 
-  test '.in? returns true when given starts_at and ends_at are similar to resa dates' do
+  test '.in? returns true ' \
+       'when given starts_at and ends_at are similar to resa dates' do
     assert @reservation.in?(@starts_at, @ends_at)
   end
 
@@ -20,7 +21,8 @@ class ReservationTest < ActiveSupport::TestCase
     assert @reservation.in?(@starts_at, @ends_at - 30.minutes)
   end
 
-  test '.in? returns false when given end date is out of range of resa dates' do
+  test '.in? returns false ' \
+       'when given end date is out of range of resa dates' do
     assert_not @reservation.in?(@starts_at, @ends_at + 30.minutes)
   end
 
@@ -30,9 +32,9 @@ class ReservationTest < ActiveSupport::TestCase
 
   test '.half_hours_used' do
     assert_equal 1, Reservation.new(starts_at: 30.minutes.ago,
-                                    ends_at: Time.now).half_hours_used
-    assert_equal 2, Reservation.new(starts_at: 1.hours.ago,
-                                    ends_at: Time.now).half_hours_used
+                                    ends_at: Time.zone.now).half_hours_used
+    assert_equal 2, Reservation.new(starts_at: 1.hour.ago,
+                                    ends_at: Time.zone.now).half_hours_used
     assert_equal 4, @reservation.half_hours_used
   end
 

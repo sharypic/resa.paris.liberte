@@ -7,8 +7,8 @@ class Reservation < ApplicationRecord
   def in?(starts_at, ends_at)
     # exact matching
     (self.starts_at == starts_at && self.ends_at == ends_at) ||
-    (starts_at > self.starts_at && ends_at <= self.ends_at) ||
-    (ends_at <= self.ends_at && starts_at >= self.starts_at)
+      (starts_at > self.starts_at && ends_at <= self.ends_at) ||
+      (ends_at <= self.ends_at && starts_at >= self.starts_at)
   end
 
   def half_hours_used
@@ -21,6 +21,6 @@ class Reservation < ApplicationRecord
   end
 
   def rendered?
-    !!@rendered
+    @rendered
   end
 end

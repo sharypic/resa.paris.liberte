@@ -1,5 +1,6 @@
-
+# STI from room, denominated as "Grande loge"
 class BigLodge < Room
+  # Booking properties
   module BookingProperties
     def denomination
       'Grande loge'

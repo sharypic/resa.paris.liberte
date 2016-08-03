@@ -1,5 +1,6 @@
-
+# STI from room, denominated as "Petite loge"
 class SmallLodge < Room
+  # Booking properties
   module BookingProperties
     def denomination
       'Petite loge'

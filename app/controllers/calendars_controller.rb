@@ -1,13 +1,12 @@
-# List rooms and calendar
+# List show a calendar for a rom type
 class CalendarsController < ApplicationController
   before_action :authenticate_resident!
   before_action :validate_room_id
 
   def index
-    date_rendered = Date.today
-    datetime_rendered = date_rendered.to_datetime
-    starts_at = datetime_rendered + 8.hours
-    ends_at = datetime_rendered + 20.hours
+    date = Time.zone.today
+    starts_at = date + 8.hours
+    ends_at = date + 20.hours
 
     rooms = Room.class_for_slug(params[:room_slug])
                 .reservations_in(starts_at, ends_at)

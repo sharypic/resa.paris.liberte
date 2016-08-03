@@ -1,6 +1,6 @@
 require 'test_helper'
-
-class SignInFlowsTest < ActionDispatch::IntegrationTest
+# Test sign success & failure as well as sign out
+class AuthenticationFlowsTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
   fixtures :residents
 
@@ -9,25 +9,21 @@ class SignInFlowsTest < ActionDispatch::IntegrationTest
     @resident = residents(:mfo)
   end
 
-  teardown do
-    @resident.destroy
-  end
-
   test 'Homepage structure' do
     get root_url
 
     assert_select "form[action='#{resident_session_path}']" do
       assert_select 'input[name="resident[email]"]',
-                    true
-      'Missing email input'
+                    true,
+                    'Missing email input'
       assert_select 'input[name="resident[password]"]',
-                    true
-      'Missing password input'
+                    true,
+                    'Missing password input'
     end
 
     assert_select ".navbar a[href='#{destroy_resident_session_path}']",
-                  false
-    'Logout should not be present when not connected'
+                  false,
+                  'Logout should not be present when not connected'
   end
 
   test 'Sign in failure from homepage' do
@@ -53,8 +49,8 @@ class SignInFlowsTest < ActionDispatch::IntegrationTest
     get root_url
 
     assert_select ".navbar a[href='#{destroy_resident_session_path}']",
-                  'Signout'
-    'Logout link missing'
+                  'Signout',
+                  'Logout link missing'
 
     delete destroy_resident_session_path
     follow_redirect!

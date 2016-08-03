@@ -4,7 +4,7 @@ def run
     create_teams
     create_residents
     create_rooms
-    create_reservations
+    create_reservations(Time.zone.today)
   end
 end
 
@@ -27,20 +27,14 @@ def create_residents
                    team: Team.first)
 end
 
-def create_reservations
-  today = Date.today.to_datetime
-
-  half_hour_resa = Reservation.create!(name: '30 minutes resa',
-                                       starts_at: today + 8.hours,
-                                       ends_at: today + 8.hours + 30.minutes,
-                                       room: SmallLodge.first,
-                                       resident: Resident.first)
-
-  two_hours_resa = Reservation.create!(name: '2 hours reservation',
-                                       starts_at: today + 10.hours,
-                                       ends_at: today + 10.hours,
-                                       room: SmallLodge.first,
-                                       resident: Resident.first)
+# rubocop:disable Metrics/AbcSize
+def create_reservations(today)
+  opts = { room: SmallLodge.first, resident: Resident.first }
+  Reservation.create!(opts.merge(starts_at: today + 8.hours,
+                                 ends_at: today + 8.hours + 30.minutes))
+  Reservation.create!(opts.merge(starts_at: today + 10.hours,
+                                 ends_at: today + 10.hours))
 end
+# rubocop:enable Metrics/AbcSize
 
 run

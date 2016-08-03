@@ -1,19 +1,20 @@
-#
-# Style: not raising NotImplemented error because it's for not yet implemented,
-#        not abstact
+# STI Root for Shed, Square, BigLodge, SmallLodge
+# Rooms can be booked [via a reservations] by users
+# Each kind of room has special booking constraints
 class Room < ApplicationRecord
   has_many :reservations
 
-  scope :reservations_in, -> (starts_at, ends_at) {
-    # explicit n+1 query ; easier than left outer join throught AR
+  # explicit n+1 query ; easier than left outer join throught AR
+  scope :reservations_in, lambda { |starts_at, ends_at|
     all.entries.map do |room|
       room.reservations
-          .where("starts_at >= :starts_at and ends_at <= :ends_at",
+          .where('starts_at >= :starts_at and ends_at <= :ends_at',
                  starts_at: starts_at, ends_at: ends_at)
       room
     end
   }
-  # Helperse
+
+  # Helpers
   def self.slug?(slug)
     list.map(&:to_slug).include?(slug)
   end
@@ -30,23 +31,4 @@ class Room < ApplicationRecord
       SmallLodge
     ]
   end
-
-  # Booking properties
-  AbstractError = 'AsbtractMethod, sub class only'.freeze
-
-  # def denomination
-  #   raise AbstractError
-  # end
-
-  # def seats
-  #   raise AbstractError
-  # end
-
-  # def free_time_per_week
-  #   raise AbstractError
-  # end
-
-  # def cost_per_half_hour
-  #   raise AbstractError
-  # end
 end
