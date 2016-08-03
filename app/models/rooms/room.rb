@@ -25,14 +25,6 @@ class Room < ApplicationRecord
   }
 
   # Helpers
-  def self.slug?(slug)
-    list.map(&:to_slug).include?(slug)
-  end
-
-  def self.class_for_slug(slug)
-    list.find { |klass| klass.to_slug == slug }
-  end
-
   def self.list
     [
       Shed,
@@ -40,5 +32,17 @@ class Room < ApplicationRecord
       BigLodge,
       SmallLodge
     ]
+  end
+
+  def self.slugs
+    list.map(&:to_slug)
+  end
+
+  def self.slug?(slug)
+    slugs.include?(slug)
+  end
+
+  def self.class_for_slug(slug)
+    list.find { |klass| klass.to_slug == slug }
   end
 end

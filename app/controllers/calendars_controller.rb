@@ -1,8 +1,9 @@
 # List show a calendar for a rom type
 class CalendarsController < ApplicationController
   before_action :authenticate_resident!
-  before_action :validate_room_id
+  before_action :validate_room_slug
 
+  # Nested below as get /rooms/:slug/calendars
   def index
     date = Time.zone.today
     starts_at = date + 8.hours
@@ -18,7 +19,7 @@ class CalendarsController < ApplicationController
 
   private
 
-  def validate_room_id
+  def validate_room_slug
     redirect_to(rooms_path) unless Room.slug?(params[:room_slug])
   end
 end

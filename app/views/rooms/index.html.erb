@@ -3,7 +3,7 @@
       <div class="col-sm-6 col-xs-12">
         <h2><%= room.name %></h2>
         <p><%= room.seats %> personnes / <%= room.cost_per_half_hour %>€/h</p>
-        <p><%= link_to 'book', room_calendars_path(room.to_slug), class: 'btn btn-primary' %>
+        <p><%= link_to 'book', room_calendars_path({room_slug: room.to_slug}.merge(date_to_param(date))), class: 'btn btn-primary' %>
       </div>
   <% end %>
 </div>
