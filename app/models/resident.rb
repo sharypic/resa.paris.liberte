@@ -7,4 +7,5 @@ class Resident < ApplicationRecord
          :validatable
 
   belongs_to :team
+  has_many :reservations
 end

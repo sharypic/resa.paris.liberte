@@ -2,6 +2,8 @@
 # Style: not raising NotImplemented error because it's for not yet implemented,
 #        not abstact
 class Room < ApplicationRecord
+  has_many :reservations
+
   # Helperse
   def self.slug?(slug)
     list.map(&:to_slug).include?(slug)
