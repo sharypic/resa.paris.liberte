@@ -5,4 +5,6 @@ class Resident < ApplicationRecord
          :rememberable,
          :trackable,
          :validatable
+
+  belongs_to :team
 end
