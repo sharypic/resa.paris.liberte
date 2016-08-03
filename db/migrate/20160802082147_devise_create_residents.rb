@@ -25,6 +25,6 @@ class DeviseCreateResidents < ActiveRecord::Migration[5.0]
     add_index :residents, :email,                unique: true
     add_index :residents, :reset_password_token, unique: true
 
-    add_reference :residents, :team, index: true, foreign_key: true
+    # add_reference :residents, :team, index: true, foreign_key: true
   end
 end
