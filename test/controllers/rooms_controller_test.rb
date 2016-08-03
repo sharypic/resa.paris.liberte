@@ -20,8 +20,7 @@ class IndexRoomsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
 
     Room.list.each do |room|
-      opts = { room_slug: room.to_slug }
-      opts = opts.merge(date_to_param(Time.zone.today))
+      opts = { room_slug: room.to_slug }.merge(date_to_param(Time.zone.today))
       url = room_calendars_path(opts)
 
       assert_select "a[href='#{url}']"
