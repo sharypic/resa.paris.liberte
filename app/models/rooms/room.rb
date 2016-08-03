@@ -4,6 +4,15 @@
 class Room < ApplicationRecord
   has_many :reservations
 
+  scope :reservations_in, -> (starts_at, ends_at) {
+    # explicit n+1 query ; easier than left outer join throught AR
+    all.entries.map do |room|
+      room.reservations
+          .where("starts_at >= :starts_at and ends_at <= :ends_at",
+                 starts_at: starts_at, ends_at: ends_at)
+      room
+    end
+  }
   # Helperse
   def self.slug?(slug)
     list.map(&:to_slug).include?(slug)
