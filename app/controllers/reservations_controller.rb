@@ -7,9 +7,15 @@ class ReservationsController < ApplicationController
 
   # Nested below as get /rooms/:id/reservations/new
   def new
-    render locals: locals_vars
+    render locals: {
+      reservation: current_resident.reservations.new(
+        room_id: @room.id,
+        starts_at: datetime_from_param(params)
+      )
+    }
   end
 
+  # Nested below as get /rooms/:id/reservations
   def create
     reservation = current_resident.reservations.new(reservation_attributes)
 
@@ -33,15 +39,6 @@ class ReservationsController < ApplicationController
       ends_at(1i) ends_at(2i) ends_at(3i) ends_at(4i) ends_at(5i)
     )
     params.require(:reservation).permit(permitted)
-  end
-
-  def locals_vars
-    {
-      reservation: current_resident.reservations.new(
-        room_id: @room.id,
-        starts_at: datetime_from_param(params)
-      )
-    }
   end
 
   def validate_room_id
