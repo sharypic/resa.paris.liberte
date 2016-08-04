@@ -54,3 +54,42 @@ class ReservationTest < ActiveSupport::TestCase
     assert @reservation.rendered?
   end
 end
+
+class ReservationWithFixturesTest < ActiveSupport::TestCase
+  fixtures :rooms, :residents, :teams
+
+  test '.team_have_enough_free_credits?' do
+    reservation = Reservation.new(
+      name: 'fail',
+      room: rooms(:shed),
+      resident: residents(:mfo),
+      starts_at: Time.zone.today,
+      ends_at: Time.zone.tomorrow
+    )
+    assert_not reservation.save
+    assert_equal 1, reservation.errors.size
+    assert reservation.errors.key?(:not_enough_credits)
+    error_message = reservation.errors[:not_enough_credits].first
+    assert_equal 'Pas assez de crédit', error_message
+  end
+
+  test '.team_have_enough_paid_credits?' do
+    room = rooms(:shed)
+    resident = residents(:mfo)
+
+    reservation = Reservation.new(
+      name: 'fail',
+      room: room,
+      resident: resident,
+      starts_at: Time.zone.today,
+      ends_at: Time.zone.tomorrow
+    )
+    assert_not reservation.save
+
+    CreditLine.create(room_type: room.type,
+                      team: resident.team,
+                      amount: 1.day.to_i)
+
+    assert reservation.save
+  end
+end

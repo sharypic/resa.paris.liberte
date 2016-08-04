@@ -13,6 +13,7 @@
 # Each kind of room has special booking constraints
 class Room < ApplicationRecord
   has_many :reservations
+  has_many :credit_lines
 
   # explicit n+1 query ; easier than left outer join throught AR
   # with n<=4 [acceptable]
