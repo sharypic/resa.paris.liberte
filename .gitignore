@@ -19,3 +19,6 @@
 # IDEs
 resa.paris.liberte.sublime-project
 resa.paris.liberte.sublime-workspace
+coverage
+.minitest-perf.db
+*.DS_Store
