@@ -13,8 +13,8 @@ class SmallLodgeTest < ActiveSupport::TestCase
     assert_equal 2, @room.seats
   end
 
-  test 'free_time_per_week' do
-    assert_equal 5.hours.to_i, @room.free_time_per_week
+  test 'free_seconds_per_week' do
+    assert_equal 5.hours.to_i, @room.free_seconds_per_week
   end
 
   test 'cost_per_half_hour' do

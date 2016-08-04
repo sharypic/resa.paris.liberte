@@ -17,8 +17,8 @@ class Reservation < ApplicationRecord
   belongs_to :resident
   belongs_to :room
 
-  scope :this_week, lambda {
-    from = Time.zone.today.beginning_of_week
+  scope :week_of, lambda { |date|
+    from = date.beginning_of_week
     to = from + 1.week
     where('starts_at >= :starts_at AND ends_at <= :ends_at',
           starts_at: from, ends_at: to)
@@ -33,10 +33,10 @@ class Reservation < ApplicationRecord
   end
 
   def half_hours_used
-    duration / 30.minutes.to_i
+    duration_in_seconds / 30.minutes.to_i
   end
 
-  def duration
+  def duration_in_seconds
     (ends_at - starts_at).to_i
   end
 

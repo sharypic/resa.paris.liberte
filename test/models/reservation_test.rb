@@ -38,14 +38,14 @@ class ReservationTest < ActiveSupport::TestCase
     assert_equal 4, @reservation.half_hours_used
   end
 
-  test '.duration' do
+  test '.duration_in_seconds' do
     assert_equal 30.minutes.to_i,
                  Reservation.new(starts_at: 30.minutes.ago,
-                                 ends_at: Time.zone.now).duration
+                                 ends_at: Time.zone.now).duration_in_seconds
     assert_equal 1.hour.to_i,
                  Reservation.new(starts_at: 1.hour.ago,
-                                 ends_at: Time.zone.now).duration
-    assert_equal 2.hours.to_i, @reservation.duration
+                                 ends_at: Time.zone.now).duration_in_seconds
+    assert_equal 2.hours.to_i, @reservation.duration_in_seconds
   end
 
   test '.marks_as_rendered & .rendered?' do

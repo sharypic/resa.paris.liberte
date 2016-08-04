@@ -24,7 +24,7 @@ class BigLodge < Room
       4
     end
 
-    def free_time_per_week
+    def free_seconds_per_week
       5.hours.to_i
     end
 

@@ -24,7 +24,7 @@ class Square < Room
       10
     end
 
-    def free_time_per_week
+    def free_seconds_per_week
       (2.hours + 30.minutes).to_i
     end
 
