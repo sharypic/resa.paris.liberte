@@ -1,5 +1,11 @@
 require 'simplecov'
-SimpleCov.start 'rails'
+SimpleCov.start 'rails' do
+  add_filter do |source_file|
+    # ignores boilerplates, ex: devise, application_*...
+    source_file.lines.count <= 6
+  end
+end
+
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'

@@ -2,7 +2,9 @@
   <% Room.list.each.with_index do |room| %>
       <div class="col-sm-6 col-xs-12" id="test-<%= room.name %>">
         <h2 class='room-denomination'><%= room.denomination %></h2>
+
         <p><span class='room-seats'><%= room.seats %></span> personnes / <span class='room-cost-per-half-hour'><%= room.cost_per_half_hour %></span>€/h</p>
+
         <%= block_free_seconds_per_week(current_resident, room, date) %>
       </div>
   <% end %>
