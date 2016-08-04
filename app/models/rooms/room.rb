@@ -15,6 +15,7 @@ class Room < ApplicationRecord
   has_many :reservations
 
   # explicit n+1 query ; easier than left outer join throught AR
+  # with n<=4 [acceptable]
   scope :reservations_in, lambda { |starts_at, ends_at|
     all.entries.map do |room|
       room.reservations

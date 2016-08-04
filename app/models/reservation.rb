@@ -17,6 +17,13 @@ class Reservation < ApplicationRecord
   belongs_to :resident
   belongs_to :room
 
+  scope :this_week, lambda {
+    from = Time.zone.today.beginning_of_week
+    to = from + 1.week
+    where('starts_at >= :starts_at AND ends_at <= :ends_at',
+          starts_at: from, ends_at: to)
+  }
+
   # Time utils
   def in?(starts_at, ends_at)
     # exact matching
@@ -26,7 +33,11 @@ class Reservation < ApplicationRecord
   end
 
   def half_hours_used
-    (ends_at.to_i - starts_at.to_i) / 30.minutes.to_i
+    duration / 30.minutes.to_i
+  end
+
+  def duration
+    (ends_at - starts_at).to_i
   end
 
   # Rendering helpers

@@ -13,4 +13,15 @@
 class Team < ApplicationRecord
   has_many :residents
   has_many :reservations, through: :residents
+
+  def weekly_free_time_available(room)
+    room.free_time_per_week - weekly_consumned_time(room)
+  end
+
+  def weekly_consumned_time(room)
+    reservations.joins(:room)
+                .where(rooms: { type: room.type })
+                .this_week
+                .sum(&:duration)
+  end
 end
