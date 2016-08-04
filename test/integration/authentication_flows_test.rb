@@ -5,7 +5,7 @@ class AuthenticationFlowsTest < ActionDispatch::IntegrationTest
   fixtures :residents
 
   setup do
-    @password = 'okokok'
+    @password = 'guillaume'
     @resident = residents(:mfo)
   end
 
