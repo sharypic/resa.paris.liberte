@@ -33,7 +33,7 @@ class Reservation < ApplicationRecord
   end
 
   def half_hours_used
-    duration_in_seconds / 30.minutes.to_i
+    DatetimeHelper.seconds_to_half_hour(duration_in_seconds)
   end
 
   def duration_in_seconds

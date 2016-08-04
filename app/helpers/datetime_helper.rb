@@ -25,4 +25,8 @@ module DatetimeHelper
                     param[:hour],
                     param[:minute])
   end
+
+  def self.seconds_to_half_hour(amount_in_seconds)
+    amount_in_seconds / 30.minutes.to_i
+  end
 end
