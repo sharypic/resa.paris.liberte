@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class ReservationsControllerTest < ActionDispatch::IntegrationTest
+class NewReservationsControllerTest < ActionDispatch::IntegrationTest
   include DatetimeHelper
   include Devise::Test::IntegrationHelpers
   fixtures :teams, :residents, :rooms
@@ -15,7 +15,7 @@ class ReservationsControllerTest < ActionDispatch::IntegrationTest
     opts = { room_id: @room.id }.merge(datetime_to_param(@date))
 
     get new_room_reservations_path(opts)
-    assert_response :redirect
+    assert_redirected_to root_url
   end
 
   test 'redirects to rooms_path when room_id is invalid' do
@@ -23,7 +23,7 @@ class ReservationsControllerTest < ActionDispatch::IntegrationTest
     sign_in(@resident)
 
     get new_room_reservations_path(opts)
-    assert_response :redirect
+    assert_redirected_to rooms_path
   end
 
   test 'renders calendar when user is sign_in and slug_id valid' do

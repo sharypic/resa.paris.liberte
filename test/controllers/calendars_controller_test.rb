@@ -13,7 +13,7 @@ class IndexRoomCalendarsControllerTest < ActionDispatch::IntegrationTest
     opts = { room_slug: 'test' }.merge(date_to_param(Time.zone.today))
 
     get room_calendars_path(opts)
-    assert_response :redirect
+    assert_redirected_to root_url
   end
 
   test 'redirects to rooms_path when slug_id is invalid' do
@@ -21,7 +21,7 @@ class IndexRoomCalendarsControllerTest < ActionDispatch::IntegrationTest
     sign_in(@resident)
 
     get room_calendars_path(opts)
-    assert_response :redirect
+    assert_redirected_to rooms_path
   end
 
   test 'renders calendar when user is sign_in and slug_id valid' do
