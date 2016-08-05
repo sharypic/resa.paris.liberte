@@ -6,7 +6,7 @@
 # Debug
 set -x
 
-$HEROKU_APP_NAME="resa-liberte-paris"
+HEROKU_APP_NAME=resa-liberte-paris
 
 echo "Push to heroku"
 git push heroku master:master
