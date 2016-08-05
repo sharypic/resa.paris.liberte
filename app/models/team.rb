@@ -10,6 +10,7 @@
 
 # Team is a company/association which have
 # * many residents able to book a room
+# * holds paying credits
 class Team < ApplicationRecord
   has_many :residents
   has_many :reservations, through: :residents
@@ -20,7 +21,7 @@ class Team < ApplicationRecord
   end
 
   def weekly_free_seconds_consumned(room, date)
-    type = room.is_a?(Class) ? room.name : room.type
+    type = room_type_from_instance_or_class(room)
 
     reservations.joins(:room)
                 .where(rooms: { type: type })
@@ -29,13 +30,18 @@ class Team < ApplicationRecord
   end
 
   def paid_seconds_available(room)
-    room_type = room.is_a?(Class) ? room.name : room.type
-    room_credit_line = time_account_lines.find_by(room_type: room_type)
+    Account.new(self, room_type_from_instance_or_class(room))
+           .balance
+  end
 
-    if room_credit_line
-      room_credit_line.amount
+  private
+
+  # room is STI, given an instance or class, gives back STI.type to use in AR
+  def room_type_from_instance_or_class(instance_or_class)
+    if instance_or_class.is_a?(Class)
+      instance_or_class.name
     else
-      0
+      instance_or_class.type
     end
   end
 end

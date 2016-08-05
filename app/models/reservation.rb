@@ -28,29 +28,12 @@ class Reservation < ApplicationRecord
   }
   validate :team_have_enough_credits?, on: :create
 
-  # Time utils
-  def in?(starts_at, ends_at)
-    # exact matching
-    same_boundaries?(starts_at, ends_at) ||
-      starts_at_overlap?(starts_at, ends_at) ||
-      ends_at_overlap?(starts_at, ends_at)
-  end
-
   def half_hours_used
     DatetimeHelper.seconds_to_half_hour(duration_in_seconds)
   end
 
   def duration_in_seconds
     (ends_at.to_i - starts_at.to_i).to_i
-  end
-
-  # Rendering helpers
-  def mark_as_rendered
-    @rendered = true
-  end
-
-  def rendered?
-    @rendered
   end
 
   # Constraints to book a room
@@ -69,6 +52,26 @@ class Reservation < ApplicationRecord
     paid_seconds = team.paid_seconds_available(room)
     total = paid_seconds + team.weekly_free_seconds_available(room, starts_at)
     duration_in_seconds <= total
+  end
+
+  # DEVNOTE: this code a nothing to do here.
+  # TODO: extract it in a "presenter" for UI [used in calendar view]
+  # * in?, same_boundaries?, starts_at_overlap?, ends_at_overlap?
+  # * mark_as_rendered, rendered
+  def in?(starts_at, ends_at)
+    # exact matching
+    same_boundaries?(starts_at, ends_at) ||
+      starts_at_overlap?(starts_at, ends_at) ||
+      ends_at_overlap?(starts_at, ends_at)
+  end
+
+  # Rendering helpers
+  def mark_as_rendered
+    @rendered = true
+  end
+
+  def rendered?
+    @rendered
   end
 
   private
