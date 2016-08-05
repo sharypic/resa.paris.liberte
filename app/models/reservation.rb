@@ -18,6 +18,7 @@ class Reservation < ApplicationRecord
   belongs_to :room
 
   has_one :team, through: :resident
+  has_one :time_account_line, dependent: :destroy
 
   scope :week_of, lambda { |date|
     from = date.beginning_of_week

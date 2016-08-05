@@ -13,7 +13,7 @@
 class Team < ApplicationRecord
   has_many :residents
   has_many :reservations, through: :residents
-  has_many :credit_lines
+  has_many :time_account_lines
 
   def weekly_free_seconds_available(room, date)
     room.free_seconds_per_week - weekly_free_seconds_consumned(room, date)
@@ -30,7 +30,7 @@ class Team < ApplicationRecord
 
   def paid_seconds_available(room)
     room_type = room.is_a?(Class) ? room.name : room.type
-    room_credit_line = credit_lines.find_by(room_type: room_type)
+    room_credit_line = time_account_lines.find_by(room_type: room_type)
 
     if room_credit_line
       room_credit_line.amount
