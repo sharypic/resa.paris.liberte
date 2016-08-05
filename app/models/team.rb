@@ -20,6 +20,7 @@ class Team < ApplicationRecord
     room.free_seconds_per_week - weekly_free_seconds_consumned(room, date)
   end
 
+  # DEVNOTE: should be a SQL sum, not in memory
   def weekly_free_seconds_consumned(room, date)
     type = room_type_from_instance_or_class(room)
 
