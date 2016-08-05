@@ -52,25 +52,27 @@ class Reservation < ApplicationRecord
     @rendered
   end
 
+  # Constraints to book a room
   def team_have_enough_credits?
-    if !team_have_enough_free_credits? && !team_have_enough_paid_credits?
+    if !team_have_enough_free_seconds? && !team_have_enough_paid_seconds?
       errors.add(:not_enough_credits, 'Pas assez de crédit')
     end
   end
 
-  def team_have_enough_free_credits?
+  def team_have_enough_free_seconds?
     free_seconds = team.weekly_free_seconds_available(room, starts_at)
-    duration_in_seconds < free_seconds
+    duration_in_seconds <= free_seconds
   end
 
-  def team_have_enough_paid_credits?
+  def team_have_enough_paid_seconds?
     paid_seconds = team.paid_seconds_available(room)
     total = paid_seconds + team.weekly_free_seconds_available(room, starts_at)
-    duration_in_seconds < total
+    duration_in_seconds <= total
   end
 
   private
 
+  # Sweetness to make time comparison more readable
   def same_boundaries?(starts_at, ends_at)
     self.starts_at == starts_at && self.ends_at == ends_at
   end

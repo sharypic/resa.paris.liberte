@@ -24,8 +24,12 @@ class SmallLodge < Room
       2
     end
 
+    def free_time_per_week
+      5.hours
+    end
+
     def free_seconds_per_week
-      5.hours.to_i
+      free_time_per_week.to_i
     end
 
     def cost_per_half_hour

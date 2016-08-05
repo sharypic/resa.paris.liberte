@@ -24,8 +24,12 @@ class Shed < Room
       20
     end
 
+    def free_time_per_week
+      1.hour + 30.minutes
+    end
+
     def free_seconds_per_week
-      (1.hour + 30.minutes).to_i
+      free_time_per_week.to_i
     end
 
     def cost_per_half_hour

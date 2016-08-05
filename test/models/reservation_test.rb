@@ -58,7 +58,8 @@ end
 class ReservationWithFixturesTest < ActiveSupport::TestCase
   fixtures :rooms, :residents, :teams
 
-  test '.team_have_enough_free_credits?' do
+  test '.team_have_enough_free_seconds? blocks creation when reservation ' \
+       'duration is too long' do
     reservation = Reservation.new(
       name: 'fail',
       room: rooms(:shed),
@@ -73,7 +74,21 @@ class ReservationWithFixturesTest < ActiveSupport::TestCase
     assert_equal 'Pas assez de crédit', error_message
   end
 
-  test '.team_have_enough_paid_credits?' do
+  test 'fix: .team_have_enough_free_seconds? does not blocks creation ' \
+       'when reservation duration in seconds is equal to free seconds' do
+    room = rooms(:shed)
+    reservation = Reservation.new(
+      name: 'fail',
+      room: room,
+      resident: residents(:mfo),
+      starts_at: Time.zone.today,
+      ends_at: Time.zone.today + room.free_time_per_week
+    )
+    assert reservation.save
+  end
+
+  test '.team_have_enough_paid_seconds? does not block creation when ' \
+       'reservation duation fits in free_seconds and paid_seconds' do
     room = rooms(:shed)
     resident = residents(:mfo)
 

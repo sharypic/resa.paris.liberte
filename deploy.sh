@@ -16,3 +16,4 @@ heroku run rake db:migrate -a $HEROKU_APP_NAME
 
 echo "Restart"
 heroku restart -a $HEROKU_APP_NAME
+
