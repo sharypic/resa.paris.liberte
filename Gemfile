@@ -1,13 +1,14 @@
 source 'https://rubygems.org'
 ruby '2.3.1'
 
+# 8)
 gem 'rails', '~> 5.0.0'
 
+# Backends
 gem 'pg', '~> 0.18'
-
 gem 'puma', '~> 3.0'
 
-
+# UI
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
