@@ -101,9 +101,10 @@ class ReservationWithFixturesTest < ActiveSupport::TestCase
     )
     assert_not reservation.save
 
-    TimeAccountLine.create(room_type: room.type,
-                           team: resident.team,
-                           amount: 1.day.to_i)
+    Credit.create(room_type: room.type,
+                  team: resident.team,
+                  amount: 1.day.to_i,
+                  reservation: reservation)
 
     assert reservation.save
   end
