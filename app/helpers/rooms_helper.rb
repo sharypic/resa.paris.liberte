@@ -45,12 +45,16 @@ module RoomsHelper
                 class: 'notice-progress-consumption'
   end
 
-  def link_to_free_booking(room, date, free_seconds_available)
+  def room_calendars_date_path(room, date)
     url_opts = { room_slug: room.to_slug }.merge(date_to_param(date))
 
+    room_calendars_path(url_opts)
+  end
+
+  def link_to_free_booking(room, date, free_seconds_available)
     if DatetimeHelper.seconds_to_half_hour(free_seconds_available) > 0
       link_to('Réserver',
-              room_calendars_path(url_opts),
+              room_calendars_date_path(room, date),
               class: 'btn btn-primary')
     else
       mail_to(BILLING_EMAIL, 'Acheter des crédits', class: 'btn btn-danger')
@@ -58,11 +62,9 @@ module RoomsHelper
   end
 
   def link_to_paid_booking(room, date, paid_seconds_available)
-    url_opts = { room_slug: room.to_slug }.merge(date_to_param(date))
-
     if DatetimeHelper.seconds_to_half_hour(paid_seconds_available) > 0
       link_to('Réserver avec des crédits payant',
-              room_calendars_path(url_opts),
+              room_calendars_date_path(room, date),
               class: 'btn btn-warning')
     else
       mail_to(BILLING_EMAIL,

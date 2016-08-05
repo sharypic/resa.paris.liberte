@@ -9,13 +9,17 @@
         <span class="icon-bar"></span>
       </button>
 
-      <a class="navbar-brand" href="#">resa.paris.liberte</a>
+      <%= link_to root_path, class: 'navbar-brand' do %>
+        <%= image_tag 'logo/header-icon-31x40.png', alt: "Logo Liberté Paris", size: "31x40" %>
+      <% end %>
     </div>
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-        <li><a href="#">Link</a></li>
+        <li><%= link_to "Salles", rooms_path %></li>
+        <% Room.list.each.with_index do |room| %>
+          <li><%= link_to room.denomination, room_calendars_date_path(room, Time.zone.today) %></li>
+        <% end %>
       </ul>
 
       <ul class="nav navbar-nav navbar-right">

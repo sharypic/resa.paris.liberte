@@ -6,13 +6,17 @@
 @import 'devise_bootstrap_views';
 
 @import 'components/alert';
+@import 'components/navbar';
 
+
+// calendar
 .table-cal{
   td{
     vertical-align: middle;
     text-align: center;
   }
 }
+
 .td-time{
   text-align: right;
 }
