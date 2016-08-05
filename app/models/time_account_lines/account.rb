@@ -7,9 +7,11 @@ class Account
     @room_type = room_type
   end
 
+  # when a reservation is created
   def debit(reservation)
   end
 
+  # when a user pay for some time
   def credit(amount)
   end
 

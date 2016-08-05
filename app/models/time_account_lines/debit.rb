@@ -12,7 +12,9 @@
 #  updated_at     :datetime         not null
 #
 
-# Positive time account line
+# Positive time account line (amount<0)
 class Debit < TimeAccountLine
   belongs_to :reservation
+
+  validates :amount, numericality: { less_than: 0 }
 end

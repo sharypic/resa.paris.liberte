@@ -12,6 +12,7 @@
 #  updated_at     :datetime         not null
 #
 
-# Positive time account line
+# Positive time account line (amount>0)
 class Credit < TimeAccountLine
+  validates :amount, numericality: { greater_than: 0 }
 end
