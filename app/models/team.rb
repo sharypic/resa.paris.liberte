@@ -17,19 +17,20 @@ class Team < ApplicationRecord
   has_many :time_account_lines
 
   def weekly_free_seconds_available(room, date)
-    room.free_seconds_per_week - weekly_free_seconds_consumned(room, date)
+    total = room.free_seconds_per_week -
+            weekly_free_seconds_consumned(room, date)
+    total = 0 if total < 0
+    total
   end
 
   # DEVNOTE: should be a SQL sum, not in memory
   def weekly_free_seconds_consumned(room, date)
     type = room_type_from_instance_or_class(room)
 
-    total = reservations.joins(:room)
-                        .where(rooms: { type: type })
-                        .week_of(date)
-                        .sum(&:duration_in_seconds)
-    total = 0 if total < 0
-    total
+    reservations.joins(:room)
+                .where(rooms: { type: type })
+                .week_of(date)
+                .sum(&:duration_in_seconds)
   end
 
   def paid_seconds_available(room)

@@ -4,6 +4,8 @@ SimpleCov.start 'rails' do
     # ignores boilerplates, ex: devise, application_*...
     source_file.lines.count <= 6
   end
+
+  add_group 'Service', 'app/services'
 end
 
 ENV['RAILS_ENV'] ||= 'test'
