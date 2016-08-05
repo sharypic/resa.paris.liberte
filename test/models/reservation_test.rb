@@ -87,8 +87,8 @@ class ReservationWithFixturesTest < ActiveSupport::TestCase
     assert reservation.save
   end
 
-  test '.team_have_enough_paid_seconds? does not block creation when ' \
-       'reservation duation fits in free_seconds and paid_seconds' do
+  test '.team_have_enough_paid_seconds? blocks creation when ' \
+       'reservation duration does not fit in free_seconds plus paid_seconds' do
     room = rooms(:shed)
     resident = residents(:mfo)
 
@@ -100,11 +100,23 @@ class ReservationWithFixturesTest < ActiveSupport::TestCase
       ends_at: Time.zone.tomorrow
     )
     assert_not reservation.save
+  end
 
+  test '.team_have_enough_paid_seconds? allows creation when ' \
+       'reservation duration fit in free_seconds plus paid_seconds' do
+    room = rooms(:shed)
+    resident = residents(:mfo)
+
+    reservation = Reservation.new(
+      name: 'fail',
+      room: room,
+      resident: resident,
+      starts_at: Time.zone.today,
+      ends_at: Time.zone.tomorrow
+    )
     Credit.create(room_type: room.type,
                   team: resident.team,
-                  amount: 1.day.to_i,
-                  reservation: reservation)
+                  amount: 1.day.to_i)
 
     assert reservation.save
   end

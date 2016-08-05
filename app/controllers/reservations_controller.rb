@@ -19,7 +19,7 @@ class ReservationsController < ApplicationController
   def create
     reservation = current_resident.reservations.new(reservation_attributes)
 
-    if reservation.save
+    if DebitReservation.new(reservation).process
       opts = { room_slug: reservation.room.to_slug }
       opts = opts.merge(date_to_param(reservation.starts_at))
 

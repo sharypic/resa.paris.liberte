@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class TestAccount < ActiveSupport::TestCase
+class AccountTest < ActiveSupport::TestCase
   fixtures :rooms, :teams, :residents
 
   setup do
@@ -57,7 +57,7 @@ class TestAccount < ActiveSupport::TestCase
                                   room: @room)
 
     assert_raises(Account::NegativeBalance) do
-      @account.debit(reservation)
+      @account.debit(reservation, -reservation.duration_in_seconds)
     end
   end
 
@@ -70,7 +70,7 @@ class TestAccount < ActiveSupport::TestCase
     credit_by(reservation.duration_in_seconds)
 
     debit = assert_difference('Debit.count', 1) do
-      @account.debit(reservation)
+      @account.debit(reservation, -reservation.duration_in_seconds)
     end
     assert_equal debit.reservation, reservation, 'reservation not assigned'
     assert_equal debit.team, @team, 'team not assigned'

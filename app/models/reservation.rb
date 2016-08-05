@@ -26,6 +26,7 @@ class Reservation < ApplicationRecord
     where('starts_at >= :starts_at AND ends_at <= :ends_at',
           starts_at: from, ends_at: to)
   }
+
   validate :team_have_enough_credits?, on: :create
 
   def half_hours_used
