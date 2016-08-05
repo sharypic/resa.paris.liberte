@@ -5,7 +5,8 @@
 
         <p><span class='room-seats'><%= room.seats %></span> personnes / <span class='room-cost-per-half-hour'><%= room.cost_per_half_hour %></span>€/h</p>
 
-        <%= block_free_seconds_per_week(current_resident, room, date) %>
+        <%= block_free_seconds_per_week(current_resident.team, room, date) %>
+        <%= block_paid_seconds(current_resident.team, room, date) %>
       </div>
   <% end %>
 </div>

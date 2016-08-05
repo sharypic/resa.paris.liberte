@@ -34,6 +34,9 @@ gem 'jbuilder', '~> 2.5'
 # UI
 gem 'bootstrap-sass'
 
+# Admin : not sure good idea to use a branch gem
+# gem "administrate", "~> 0.2.2"
+
 # Auth
 gem 'devise'
 gem 'devise-bootstrap-views'
