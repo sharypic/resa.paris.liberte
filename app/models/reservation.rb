@@ -27,8 +27,10 @@ class Reservation < ApplicationRecord
           starts_at: from, ends_at: to)
   }
 
+  before_validation :cache_duration_in_seconds
+
+  validates :cached_duration_in_seconds, numericality: { greater_than: 0 }
   validate :team_have_enough_credits?, on: :create
-  before_save :cache_duration_in_seconds
 
   # Helpers
   def half_hours_used

@@ -1,7 +1,6 @@
 # Deals with accounting for a team and different booking
 class Account
   class NegativeBalance < StandardError; end
-  class InvalidDebit < StandardError; end
 
   attr_reader :team, :room_type
 

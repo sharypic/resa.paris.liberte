@@ -8,6 +8,11 @@ gem 'rails', '~> 5.0.0'
 gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.0'
 
+# Jobs
+gem 'delayed_job'
+# gem 'delayed_job_web'
+
+
 # UI
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
@@ -18,6 +23,7 @@ gem 'bootstrap-sass'
 
 # Admin : not sure good idea to use a branch gem
 # gem "administrate", "~> 0.2.2"
+
 
 # Auth
 gem 'devise'

@@ -10,20 +10,34 @@ class DebitReservation
   end
 
   def process
-    return reservation.save if reservation.team_have_enough_free_seconds?
+    return save_reservation if reservation.team_have_enough_free_seconds?
     return false unless reservation.team_have_enough_paid_seconds?
-    safe_reservation_and_debit_create
+    safe_save_reservation_with_debit
   end
 
   private
 
-  def safe_reservation_and_debit_create
+  def save_reservation
+    reservation.save!
+    queue_reservation_create_mail_job
+  end
+
+  def safe_save_reservation_with_debit
     ActiveRecord::Base.transaction do
-      amount = reservation.duration_in_seconds
-      amount -= team.weekly_free_seconds_available(room,
-                                                   reservation.starts_at)
       reservation.save!
-      account.debit(reservation, -amount)
+      account.debit(reservation, amount_to_debit)
+      queue_reservation_create_mail_job
     end
+  end
+
+  def amount_to_debit
+    amount = reservation.duration_in_seconds
+    amount -= team.weekly_free_seconds_available(room,
+                                                 reservation.starts_at)
+    -amount
+  end
+
+  def queue_reservation_create_mail_job
+    ReservationCreateMailJob.perform_later(reservation)
   end
 end
