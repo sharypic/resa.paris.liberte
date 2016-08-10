@@ -1,1 +1,22 @@
-<mj-text>reservation_created.mjml.erb</mj-text>
+<mj-section background-color="#fff">
+  <mj-column>
+    <mj-text font-size="20px" align="center" color="#000" font-family="helvetica">Votre réservation a bien été prise en compte</mj-text>
+
+    <mj-table cellpadding=2>
+      <tr>
+        <td font-weight="bold" align="right">Quand :</td>
+        <td align="left">Le <%= I18n.l(@reservation.starts_at, format: :YMD_with_text) %> - de <%= I18n.l(@reservation.starts_at, format: :hours_minutes) %> à <%= I18n.l(@reservation.ends_at, format: :hours_minutes) %></td>
+      </tr>
+      <tr>
+        <td font-weight="bold" align="right">Ou :</td>
+        <td align="left"><%= @reservation.room.name %></td>
+      </tr>
+    </mj-table>
+
+    <mj-text font-size="11px" align="center">Vous pouvez à tout moment modifier cette réservation</mj-text>
+
+    <mj-button font-family="Helvetica" background-color="#F8FF01" color="black">
+      Don't click me!
+    </mj-button>
+  </mj-column>
+</mj-section>

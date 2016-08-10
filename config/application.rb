@@ -33,5 +33,8 @@ module ResaParisLiberte
 
     # Active job
     config.active_job.queue_adapter = :delayed_job
+
+    # Locale
+    config.i18n.available_locales = %i(fr)
   end
 end

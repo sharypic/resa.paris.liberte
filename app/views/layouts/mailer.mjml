@@ -1,12 +1,15 @@
 <mjml>
   <mj-body>
     <mj-container>
-      <mj-section>
+      <mj-section background-color="#000">
         <mj-column>
-          <mj-text>MAILER.mjml</mj-text>
-          <%= yield %>
-        </mj-column>
+          <mj-image width="60" src="<%= asset_url('logo/apple-icon-60x60.png') %>"></mj-image>
+          <mj-divider border-color="#F8FF01"></mj-divider>
+        <mj-column>
       </mj-section>
+
+      <%= yield %>
+
     </mj-container>
   </mj-body>
 </mjml>

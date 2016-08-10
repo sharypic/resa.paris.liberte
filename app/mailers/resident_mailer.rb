@@ -3,16 +3,12 @@ class ResidentMailer < ApplicationMailer
   ICAL_ATTACHMENT_NAME = 'meeting.ics'.freeze
 
   def reservation_created(reservation)
-    icalendar = Icalendar::Calendar.new
-    ical_presenter = ReservationIcalPresenter.new(reservation)
-    ical_presenter.populate(icalendar)
+    @reservation = reservation
+    icalendar = ReservationIcalPresenter.new(reservation)
+                                        .populate(Icalendar::Calendar.new)
 
     attachments[ICAL_ATTACHMENT_NAME] = { mime_type: 'application/ics',
                                           content: icalendar.to_ical }
-
-    mail(to: reservation.resident.email, subject: 'Hello') do |format|
-      format.text
-      format.mjml
-    end
+    mail(to: reservation.resident.email, subject: 'Hello', &:mjml)
   end
 end

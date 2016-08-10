@@ -26,6 +26,10 @@ class Room < ApplicationRecord
     end
   }
 
+  def name
+    denomination
+  end
+
   # Helpers
   def self.list
     [
