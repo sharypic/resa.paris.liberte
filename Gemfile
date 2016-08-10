@@ -24,6 +24,7 @@ gem 'bootstrap-sass'
 # Admin : not sure good idea to use a branch gem
 # gem "administrate", "~> 0.2.2"
 
+gem 'mjml-rails'
 
 # Auth
 gem 'devise'

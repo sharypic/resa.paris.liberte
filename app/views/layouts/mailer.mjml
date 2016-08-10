@@ -1,0 +1,12 @@
+<mjml>
+  <mj-body>
+    <mj-container>
+      <mj-section>
+        <mj-column>
+          <mj-text>MAILER.mjml</mj-text>
+          <%= yield %>
+        </mj-column>
+      </mj-section>
+    </mj-container>
+  </mj-body>
+</mjml>

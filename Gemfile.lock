@@ -101,6 +101,7 @@ GEM
     minitest-perf (0.1.0)
       minitest (~> 5.0)
       sqlite3
+    mjml-rails (2.2.0)
     nio4r (1.2.1)
     nokogiri (1.6.8)
       mini_portile2 (~> 2.1.0)
@@ -213,6 +214,7 @@ DEPENDENCIES
   jquery-rails
   listen (~> 3.0.5)
   minitest-perf
+  mjml-rails
   pg (~> 0.18)
   puma (~> 3.0)
   rails (~> 5.0.0)

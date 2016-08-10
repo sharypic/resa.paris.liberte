@@ -3,15 +3,19 @@ version is 2.3.1 (specified in Gemfile). Keep it up to last security patch
 
 ## System dependencies.
 * See Gemfile/Gemfile.lock for ruby dependencies
-* DB is Postgres 
+* DB is Postgres
 * Runs on Heroku
 * ENV
+* NodeJS (responsive email via mjml, ruby gems is a wrapper around nodejs mjml)
 
 ```
-# host 
+# host
 HOST_WITH_PORT=
+
 # temp password for demo
 DEFAULT_PWD=
+
+MAIL_FROM=
 ```
 
 ## Configuration
@@ -27,7 +31,7 @@ bundle install
 ```
 
 ### Production
-Expose ENV variable via 
+Expose ENV variable via
 
 ```
 heroku config:add/set ENVKEY=ENVVALUE
@@ -42,7 +46,7 @@ heroku config:add/set ENVKEY=ENVVALUE
 
 ## How to run the test suite
 * ```bin/rails test```
- 
+
 ## Services (job queues, cache servers, search engines, etc.)
 Not yet Available
 
