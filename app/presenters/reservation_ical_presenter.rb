@@ -33,7 +33,6 @@ class ReservationIcalPresenter
     event.organizer = mailto
     event.organizer = organizer
     event.location = location
-    event.x_apple_structured_location = x_apple_structured_location
     event
   end
 
@@ -41,18 +40,9 @@ class ReservationIcalPresenter
     ENV['ADDRESS']
   end
 
-  def x_apple_structured_location
-    Icalendar::Values::Uri.new(
-      'geo:48.8679692,-2.3484546',
-      'x-address' => ENV['ADDRESS'],
-      'x-apple-radius' => '14938.102',
-      'x-title' => 'Liberté Paris'
-    )
-  end
-
   def organizer
     Icalendar::Values::CalAddress.new("mailto:#{reservation.resident.email}",
-                                      cn: reservation.team)
+                                      cn: reservation.team.name)
   end
 
   def timezone
@@ -79,7 +69,7 @@ class ReservationIcalPresenter
   private
 
   # rubocop:disable Rails/TimeZone
-  # Because timezone is managed by Icalendar::Values::DateTime
+  # Because timezone is managed by Icalendar::Values::Datetime
   def datetime_starts_at
     DateTime.new(*[starts_at.year,
                    starts_at.month,
