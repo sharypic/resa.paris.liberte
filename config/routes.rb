@@ -7,6 +7,12 @@ Rails.application.routes.draw do
     passwords: 'residents/passwords'
   }
 
+  # Dev, mailing
+  unless Rails.env.production?
+    get '/rails/mailers' => 'mailers_preview#index'
+    get '/rails/mailers/*path' => 'mailers_preview#preview'
+  end
+
   segment_date = '/:year/:month/:day'
   segment_datetime = "#{segment_date}/:hour/:minute"
 
