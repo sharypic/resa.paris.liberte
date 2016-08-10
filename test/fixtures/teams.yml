@@ -5,7 +5,9 @@
 # below each fixture, per the syntax in the comments below
 #
 dev:
+  id: 1
   name: 'developpers'
 
 staff:
+  id: 2
   name: 'staff'

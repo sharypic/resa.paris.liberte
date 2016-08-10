@@ -22,18 +22,20 @@ class DebitReservation
     queue_reservation_create_mail_job
   end
 
-  # rubocop:disable Metrics/AbcSize
   def safe_save_reservation_with_debit
     ActiveRecord::Base.transaction do
-      amount = reservation.duration_in_seconds
-      amount -= team.weekly_free_seconds_available(room,
-                                                   reservation.starts_at)
       reservation.save!
-      account.debit(reservation, -amount)
+      account.debit(reservation, amount_to_debit)
       queue_reservation_create_mail_job
     end
   end
-  # rubocop:enable Metrics/AbcSize
+
+  def amount_to_debit
+    amount = reservation.duration_in_seconds
+    amount -= team.weekly_free_seconds_available(room,
+                                                 reservation.starts_at)
+    -amount
+  end
 
   def queue_reservation_create_mail_job
     ReservationCreateMailJob.perform_later(reservation)

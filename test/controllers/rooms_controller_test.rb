@@ -3,7 +3,7 @@ require 'test_helper'
 class IndexRoomsControllerTest < ActionDispatch::IntegrationTest
   include DatetimeHelper
   include Devise::Test::IntegrationHelpers
-  fixtures :residents
+  fixtures :teams, :residents, :rooms
 
   setup do
     @resident = residents(:mfo)

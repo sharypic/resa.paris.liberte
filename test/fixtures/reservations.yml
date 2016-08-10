@@ -2,6 +2,5 @@ reservation_shed_1_hours:
   name: 'reservation_shed_1_hours'
   starts_at: <%= Time.zone.today %>
   ends_at: <% Time.zone.today + 1.hour %>
-  room: shed # id: 1 # rooms(:shed)
-  resident: mfo # id: 1 # residents(:mfo)
+  room_id: 1 # rooms(:shed)
 

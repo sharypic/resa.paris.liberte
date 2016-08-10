@@ -3,8 +3,7 @@ require 'test_helper'
 class CreateReservationsControllerTest < ActionDispatch::IntegrationTest
   include DatetimeHelper
   include Devise::Test::IntegrationHelpers
-
-  fixtures :residents, :rooms, :teams
+  fixtures :teams, :residents, :rooms
 
   setup do
     @room = rooms(:shed)
