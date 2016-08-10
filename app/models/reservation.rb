@@ -28,7 +28,9 @@ class Reservation < ApplicationRecord
   }
 
   validate :team_have_enough_credits?, on: :create
+  before_save :cache_duration_in_seconds
 
+  # Helpers
   def half_hours_used
     DatetimeHelper.seconds_to_half_hour(duration_in_seconds)
   end
@@ -37,7 +39,12 @@ class Reservation < ApplicationRecord
     (ends_at.to_i - starts_at.to_i).to_i
   end
 
-  # Constraints to book a room
+  # Before save
+  def cache_duration_in_seconds
+    self.cached_duration_in_seconds = duration_in_seconds
+  end
+
+  # Validations: constraints to book a room
   def team_have_enough_credits?
     if !team_have_enough_free_seconds? && !team_have_enough_paid_seconds?
       errors.add(:not_enough_credits, 'Pas assez de crédit')
@@ -66,7 +73,7 @@ class Reservation < ApplicationRecord
       ends_at_overlap?(starts_at, ends_at)
   end
 
-  # Rendering helpers
+  # Rendering state helpers
   def mark_as_rendered
     @rendered = true
   end

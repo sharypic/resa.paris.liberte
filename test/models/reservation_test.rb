@@ -120,4 +120,16 @@ class ReservationWithFixturesTest < ActiveSupport::TestCase
 
     assert reservation.save
   end
+
+  test '.before_save sets duration_in_seconds' do
+    reservation = Reservation.new(name: 'passthru cache_duration_in_seconds',
+                                  starts_at: 1.hour.ago,
+                                  ends_at: 1.minute.ago,
+                                  room: rooms(:shed),
+                                  resident: residents(:mfo))
+    reservation.save
+    reservation.reload
+    assert_equal (1.minute.ago.to_i - 1.hour.ago.to_i),
+                 reservation.cached_duration_in_seconds
+  end
 end

@@ -23,14 +23,13 @@ class Team < ApplicationRecord
     total
   end
 
-  # DEVNOTE: should be a SQL sum, not in memory
   def weekly_free_seconds_consumned(room, date)
     type = room_type_from_instance_or_class(room)
 
     reservations.joins(:room)
                 .where(rooms: { type: type })
                 .week_of(date)
-                .sum(&:duration_in_seconds)
+                .sum(:cached_duration_in_seconds)
   end
 
   def paid_seconds_available(room)
