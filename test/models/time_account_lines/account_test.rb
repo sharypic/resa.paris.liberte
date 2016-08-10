@@ -1,17 +1,16 @@
 require 'test_helper'
 
 class AccountTest < ActiveSupport::TestCase
-  fixtures :rooms, :teams, :residents
+  fixtures :rooms, :residents
 
   setup do
     @room = rooms(:shed)
-    @team = teams(:dev)
     @resident = residents(:mfo)
-    @account = Account.new(@team, @room.class.name)
+    @account = Account.new(@resident.team, @room.class.name)
   end
 
   def credit_by(amount)
-    Credit.create!(team: @team,
+    Credit.create!(team: @resident.team,
                    room_type: @room.class.name,
                    amount: amount)
   end
@@ -24,7 +23,9 @@ class AccountTest < ActiveSupport::TestCase
 
   test '.balance with a credit line' do
     amount = 10_000
-    Credit.create!(team: @team, room_type: @room.class.name, amount: amount)
+    Credit.create!(team: @resident.team,
+                   room_type: @room.class.name,
+                   amount: amount)
 
     assert_equal amount,
                  @account.balance,
@@ -38,7 +39,7 @@ class AccountTest < ActiveSupport::TestCase
                                       resident: @resident,
                                       room: @room)
     credit = credit_by(1.hour.to_i)
-    debit = Debit.create!(team: @team,
+    debit = Debit.create!(team: @resident.team,
                           room_type: @room.class.name,
                           amount: -reservation.duration_in_seconds,
                           reservation: reservation)
@@ -73,7 +74,7 @@ class AccountTest < ActiveSupport::TestCase
       @account.debit(reservation, -reservation.duration_in_seconds)
     end
     assert_equal debit.reservation, reservation, 'reservation not assigned'
-    assert_equal debit.team, @team, 'team not assigned'
+    assert_equal debit.team, @resident.team, 'team not assigned'
     assert_equal debit.amount,
                  -reservation.duration_in_seconds,
                  'amount not negative'
@@ -86,7 +87,7 @@ class AccountTest < ActiveSupport::TestCase
     credit = assert_difference('Credit.count', 1) do
       @account.credit(amount)
     end
-    assert_equal credit.team, @team, 'team not assigned'
+    assert_equal credit.team, @resident.team, 'team not assigned'
     assert_equal credit.room_type, @room.type, 'type not assigned'
     assert_equal credit.amount, amount, 'amount not assigned'
     assert_equal amount, @account.balance, 'balance not updated'

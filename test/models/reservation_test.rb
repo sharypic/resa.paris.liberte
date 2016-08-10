@@ -56,7 +56,7 @@ class ReservationTest < ActiveSupport::TestCase
 end
 
 class ReservationWithFixturesTest < ActiveSupport::TestCase
-  fixtures :rooms, :residents, :teams
+  fixtures :rooms, :residents
 
   test '.team_have_enough_free_seconds? blocks creation when reservation ' \
        'duration is too long' do

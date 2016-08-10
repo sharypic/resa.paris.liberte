@@ -11,7 +11,7 @@ end
 
 class RoomScopesTest < ActiveSupport::TestCase
   self.use_instantiated_fixtures = true
-  fixtures :teams, :residents, :rooms
+  fixtures :residents, :rooms
 
   test 'reservations_in' do
     starts_at = Time.zone.today + 8.hours

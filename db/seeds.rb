@@ -4,7 +4,7 @@ def run
     create_teams
     create_residents
     create_rooms
-    create_reservations(Time.zone.today)
+    # create_reservations(Time.zone.today)
   end
 end
 
