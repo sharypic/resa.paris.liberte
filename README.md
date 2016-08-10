@@ -28,7 +28,7 @@ SMTP_ENABLE_STARTTLS_AUTO=
 ```
 
 ## Configuration
-### Development/Test
+### Setup
 * Recommended ruby env with rbenv
 * Recommended usage of gemset
 * Configuration is done via .env ; sets ENV dependencies
@@ -38,12 +38,18 @@ rbenv install 2.3.1 # install ruby
 gem install bundler # install dependency manager
 # setup .env
 bundle install # install dependencies
+```
+### Run development server 
+```
 heroku local
+```
+### Run development console
+```
+heroku local:run rails c
 ```
 
 ### Production
 Expose ENV variable via
-
 ```
 heroku config:add/set ENVKEY=ENVVALUE
 ```
