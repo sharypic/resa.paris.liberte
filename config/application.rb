@@ -25,6 +25,7 @@ module ResaParisLiberte
     config.autoload_paths += %W(#{config.root}/app/models/rooms)
     config.autoload_paths += %W(#{config.root}/app/models/time_account_lines)
     config.autoload_paths += %W(#{config.root}/app/services)
+    config.autoload_paths += %W(#{config.root}/app/presenters)
 
     # Timezone
     config.time_zone = ActiveSupport::TimeZone::MAPPING['Paris']

@@ -25,7 +25,12 @@ gem 'bootstrap-sass'
 # Admin : not sure good idea to use a branch gem
 # gem "administrate", "~> 0.2.2"
 
+# Mail
 gem 'mjml-rails'
+
+# icalendar tested with tzinfo <=1.1.0, don't without checking
+gem 'tzinfo', '~> 1.1.0'
+gem 'icalendar'
 
 # Auth
 gem 'devise'
