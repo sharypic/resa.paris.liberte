@@ -38,7 +38,6 @@ gem 'devise-bootstrap-views'
 
 group :development, :test do
   gem 'byebug', platform: :mri
-  gem 'dotenv-rails'
   gem 'rubocop'
   gem 'minitest-perf'
   gem 'annotate'
@@ -47,6 +46,7 @@ end
 group :development do
   # Access an IRB console on exception pages
   # or by using <%= console %> anywhere in the code.
+  gem 'foreman'
   gem 'web-console'
   gem 'listen', '~> 3.0.5'
   gem 'spring'
@@ -54,6 +54,7 @@ group :development do
 end
 
 group :test do
+  gem 'dotenv-rails'
   gem 'simplecov', require: false
 end
 

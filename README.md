@@ -4,8 +4,9 @@ version is 2.3.1 (specified in Gemfile). Keep it up to last security patch
 ## System dependencies.
 * See Gemfile/Gemfile.lock for ruby dependencies
 * DB is Postgres
-* Runs on Heroku
-* ENV
+* Production Runs on Heroku
+* Development Runs with heroku toolbel with ```heroku local```
+* ENV [via heroku local source .env]
 * NodeJS (responsive email via mjml, ruby gems is a wrapper around nodejs mjml)
 
 ```
@@ -22,12 +23,14 @@ MAIL_FROM=
 ### Development/Test
 * Recommended ruby env with rbenv
 * Recommended usage of gemset
-* Configuration is done via dot.env ; sets ENV dependencies
+* Configuration is done via .env ; sets ENV dependencies
 
 ```
-rbenv install 2.3.1
-gem install bundler
-bundle install
+rbenv install 2.3.1 # install ruby
+gem install bundler # install dependency manager
+# setup .env
+bundle install # install dependencies
+heroku local
 ```
 
 ### Production
