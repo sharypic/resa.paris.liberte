@@ -1,5 +1,5 @@
 fr:
   time:
     formats:
-      YMD_with_text: '%A %-d %b %Y'
+      YMD_with_text: '%-d(%a) %b %Y'
       hours_minutes: '%H:%M'

@@ -1,6 +1,6 @@
 # Emails sent to resident
 class ResidentMailer < ApplicationMailer
-  ICAL_ATTACHMENT_NAME = 'meeting.ics'.freeze
+  ICAL_ATTACHMENT_NAME = 'invite.ics'.freeze
 
   def reservation_created(reservation)
     @reservation = reservation
