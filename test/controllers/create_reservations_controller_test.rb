@@ -52,7 +52,6 @@ class CreateReservationsControllerTest < ActionDispatch::IntegrationTest
     assert_difference('Reservation.count', 1) do
       post room_reservations_path(url_opts), params: @reservation_params
     end
-
     reservation = Reservation.first
     assert_equal @room, reservation.room
     assert_equal residents(:mfo), reservation.resident
