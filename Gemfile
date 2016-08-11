@@ -11,12 +11,18 @@ gem 'puma', '~> 3.0'
 # Jobs
 gem 'delayed_job'
 gem 'delayed_job_active_record'
-# gem 'delayed_job_web'
+# Delayed Job Web interface fix
+# see: https://github.com/ejschmitt/delayed_job_web/issues/84
+gem 'sinatra', github: 'sinatra/sinatra'
+gem 'rack-protection', github: 'sinatra/rack-protection'
+gem 'delayed_job_web'
 
-# UI
+# Preprocessors
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
+
+# Front end Frameworks
 gem 'jquery-rails'
 gem 'turbolinks', '~> 5'
 gem 'bootstrap-sass'

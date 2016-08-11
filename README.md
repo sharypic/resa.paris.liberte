@@ -9,15 +9,40 @@ version is 2.3.1 (specified in Gemfile). Keep it up to last security patch
 * ENV [via heroku local source .env]
 * NodeJS (responsive email via mjml, ruby gems is a wrapper around nodejs mjml)
 
+
+## Configuration
+### Setup stacks
+* Recommended ruby env with rbenv
+* Recommended usage of gemset
+* Configuration is done via .env ; sets ENV dependencies
+
+```
+# Install node for && MJML
+brew insall node
+npm install -g mjml
+
+# Install ruby version, bundler & gemfile dependencies
+rbenv install 2.3.1 
+gem install bundler 
+bundle install 
+```
+
+### Setup .env
+Copy .env.sample to .env and update value
+
 ```
 # host
 HOST_WITH_PORT=
 
-# temp password for demo
+# Temp password for demo
 DEFAULT_PWD=
 
+# Defaults for mails
 MAIL_FROM=
+# Address of coworking space (send with .ics data)
+ADDRESS=
 
+# SMTP setup
 SMTP_ADDRESS=
 SMTP_PORT=
 SMTP_DOMAIN=
@@ -25,20 +50,12 @@ SMTP_USER_NAME=
 SMTP_PASSWORD=
 SMTP_AUTHENTICATION=
 SMTP_ENABLE_STARTTLS_AUTO=
+
+# Delayed Job Basic auth
+DJ_USERNAME=hello
+DJ_PASSWORD=world
 ```
 
-## Configuration
-### Setup
-* Recommended ruby env with rbenv
-* Recommended usage of gemset
-* Configuration is done via .env ; sets ENV dependencies
-
-```
-rbenv install 2.3.1 # install ruby
-gem install bundler # install dependency manager
-# setup .env
-bundle install # install dependencies
-```
 ### Run development server
 ```
 heroku local

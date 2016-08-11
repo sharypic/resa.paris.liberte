@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  root 'pages#home'
-
   # Authentication
   devise_for :residents, path_names: {
     sessions: 'residents/sessions',
@@ -13,6 +11,12 @@ Rails.application.routes.draw do
     get '/rails/mailers/*path' => 'mailers_preview#preview'
   end
 
+  # Delayed job UI
+  match '/delayed_job' => DelayedJobWeb, :anchor => false, via: [:get, :post]
+
+  # App routes
+  root 'pages#home'
+  # General routes
   segment_date = '/:year/:month/:day'
   segment_datetime = "#{segment_date}/:hour/:minute"
 
