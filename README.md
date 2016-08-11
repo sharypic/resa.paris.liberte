@@ -72,6 +72,8 @@ Expose ENV variable via
 heroku config:add/set ENVKEY=ENVVALUE
 ```
 
+Also you need to setup two buildpacks : ruby (default) plus node (for mjml), see: https://github.com/sighmon/mjml-rails#deploying-with-heroku
+
 ## Database creation / migration
 * creates with ```bin/rails ```
 * migrate with ```bin/rails db:create```

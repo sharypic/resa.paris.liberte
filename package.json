@@ -1,0 +1,26 @@
+{
+  "name": "your-site",
+  "version": "1.0.0",
+  "description": "Now with MJML email templates!",
+  "main": "index.js",
+  "directories": {
+    "doc": "doc",
+    "test": "test"
+  },
+  "dependencies": {
+    "mjml": "^2.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/your-repo/your-site.git"
+  },
+  "keywords": [
+    "mailer"
+  ],
+  "author": "Your Name",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sighmon/mjml-rails/issues"
+  },
+  "homepage": "https://github.com/sighmon/mjml-rails"
+}
