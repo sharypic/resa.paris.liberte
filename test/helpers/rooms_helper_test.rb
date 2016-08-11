@@ -2,6 +2,7 @@ require 'test_helper'
 
 class RoomsHelperTest < ActionView::TestCase
   include DatetimeHelper
+  fixtures :teams
 
   setup do
     @room = Shed.new
@@ -10,6 +11,15 @@ class RoomsHelperTest < ActionView::TestCase
 
   # test '.block_free_seconds_per_week' do
   # end
+
+  test '.block_paid_seconds does not include progress bar' do
+    paid_seconds_available = teams(:dev).paid_seconds_available(@room)
+    fragment = node(block_paid_seconds(paid_seconds_available))
+
+    assert_select fragment, 'div' do
+      assert_select '.progress', false
+    end
+  end
 
   test '.progress' do
     fragment = node(progress_bar(10))
@@ -48,8 +58,8 @@ class RoomsHelperTest < ActionView::TestCase
     fragment = node(link_to_free_booking(@room, @date, 29.minutes.to_i))
 
     assert_select fragment,
-                  "a.btn-danger[href='mailto:#{RoomsHelper::BILLING_EMAIL}']",
-                  'Acheter des crédits'
+                  'button.btn.btn-primary.disabled',
+                  'Réserver'
   end
 
   test '.link_to_paid_book with credits >= 30.minutes' do
@@ -65,8 +75,8 @@ class RoomsHelperTest < ActionView::TestCase
   test '.link_to_paid_book with credits < 30.minutes' do
     fragment = node(link_to_paid_booking(@room, @date, 29.minutes.to_i))
     assert_select fragment,
-                  "a.btn-danger[href='mailto:#{RoomsHelper::BILLING_EMAIL}']",
-                  'Provisionner des crédits'
+                  'a.btn-warning',
+                  false
   end
 
   protected
