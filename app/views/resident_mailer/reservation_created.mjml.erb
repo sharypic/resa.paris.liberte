@@ -1,26 +1,26 @@
 <mj-section background-color="#fff">
   <mj-column>
-    <mj-text font-size="20px" align="center" color="#000" font-family="helvetica">Votre réservation a bien été prise en compte</mj-text>
+    <mj-text font-size="20px" align="center" color="#000" font-family="helvetica"><%= I18n.t('mail.reservation_created.body.title') %></mj-text>
 
     <mj-table padding="10px" cellpadding="3">
       <tr>
-        <td style="color:#666;" align="right">Quand</td>
-        <td align="left">Le <%= I18n.l(@reservation.starts_at, format: :YMD_with_text) %> - de <%= I18n.l(@reservation.starts_at, format: :hours_minutes) %> à <%= I18n.l(@reservation.ends_at, format: :hours_minutes) %></td>
+        <td style="color:#666;" align="right"><%= I18n.t('mail.reservation_created.body.when.label') %></td>
+        <td align="left"><%= I18n.t('mail.reservation_created.body.when.value', date: I18n.l(@reservation.starts_at, format: :YMD_with_text), starts_at: I18n.l(@reservation.starts_at, format: :hours_minutes), ends_at: I18n.l(@reservation.ends_at, format: :hours_minutes)) %></td>
       </tr>
       <tr>
-        <td style="color:#666;" align="right">Ou</td>
-        <td align="left"><%= @reservation.room.name %></td>
+        <td style="color:#666;" align="right"><%= I18n.t('mail.reservation_created.body.where.label') %></td>
+        <td align="left"><%= I18n.t('mail.reservation_created.body.where.value', room_name: @reservation.room.name) %></td>
       </tr>
     </mj-table>
 
-    <mj-text font-size="11px" align="center">Vous pouvez ajouter ce RDV à votre calendrier en téléchargeant le fichier invite.ics en PJ et en double cliquant dessus</mj-text>
+    <mj-text font-size="11px" align="center"><%= I18n.t('mail.reservation_created.body.cta.download_ics') %></mj-text>
   </mj-column>
 </mj-section>
 <mj-section>
   <mj-column  background-color="#000">
-    <mj-text font-size="11px" color="#fff" align="center">Vous avez fait une erreur ?</mj-text>
+    <mj-text font-size="11px" color="#fff" align="center"><%= I18n.t('mail.reservation_created.body.cta.edit_reservation.label') %></mj-text>
     <mj-button font-family="Helvetica" background-color="#F8FF01" color="black">
-      Modifier ma réservation
+      <%= I18n.t('mail.reservation_created.body.cta.edit_reservation.button') %>
     </mj-button>
   <mj-column>
 </mj-section>

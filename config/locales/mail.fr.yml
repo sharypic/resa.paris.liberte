@@ -1,0 +1,21 @@
+fr:
+  mail:
+    ##################
+    # ResidentMailer #
+    ##################
+    reservation_created:
+      subject: 'Confirmation : %{reservation_name}'
+      body:
+        title: 'Votre réservation a bien été prise en compte'
+        when:
+          label: "Quand"
+          value: "Le %{date} - de %{starts_at} à %{ends_at}"
+        where:
+          label: "Ou"
+          value: "%{room_name}"
+        cta:
+          download_ics: "Vous pouvez ajouter ce RDV à votre calendrier en téléchargeant le fichier invite.ics en PJ et en double cliquant dessus"
+          edit_reservation:
+            label: "Vous avez changé d'avis?"
+            button: 'Mettre à jour la réservation'
+

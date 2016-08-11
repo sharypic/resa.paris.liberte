@@ -39,7 +39,7 @@ gem install bundler # install dependency manager
 # setup .env
 bundle install # install dependencies
 ```
-### Run development server 
+### Run development server
 ```
 heroku local
 ```
@@ -65,7 +65,7 @@ heroku config:add/set ENVKEY=ENVVALUE
 * ```bin/rails test```
 
 ## Services (job queues, cache servers, search engines, etc.)
-Not yet Available
+* async processing is done via Delayed job duee to it's "lightweight" (does not requires a redis)
 
 ## Deployment instructions
 * Have heroku access (ask to fourcade.m@gmail.com)
