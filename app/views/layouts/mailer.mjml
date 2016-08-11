@@ -7,9 +7,7 @@
           <mj-divider border-color="#F8FF01"></mj-divider>
         <mj-column>
       </mj-section>
-
       <%= yield %>
-
     </mj-container>
   </mj-body>
 </mjml>

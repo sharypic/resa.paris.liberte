@@ -13,7 +13,6 @@ gem 'delayed_job'
 gem 'delayed_job_active_record'
 # gem 'delayed_job_web'
 
-
 # UI
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
@@ -34,7 +33,6 @@ gem 'icalendar'
 
 # Auth
 gem 'devise'
-gem 'devise-bootstrap-views'
 
 group :development, :test do
   gem 'byebug', platform: :mri
@@ -46,11 +44,14 @@ end
 group :development do
   # Access an IRB console on exception pages
   # or by using <%= console %> anywhere in the code.
-  gem 'foreman'
   gem 'web-console'
   gem 'listen', '~> 3.0.5'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+
+  # Generators, not needed in production
+  gem 'devise-bootstrap-views'
+  gem 'devise-i18n'
 end
 
 group :test do
