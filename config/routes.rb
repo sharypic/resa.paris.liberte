@@ -5,11 +5,16 @@ Rails.application.routes.draw do
     passwords: 'residents/passwords'
   }
 
-  # Dev, mailing
+  # Dev
   unless Rails.env.production?
+    # mail
     get '/rails/mailers' => 'mailers_preview#index'
     get '/rails/mailers/*path' => 'mailers_preview#preview'
+
+    # JS spec
+    mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)
   end
+
 
   # Delayed job UI
   match '/delayed_job' => DelayedJobWeb, :anchor => false, via: [:get, :post]
@@ -25,6 +30,8 @@ Rails.application.routes.draw do
   resources :rooms, only: [:index] do
     # A resident can a calendars of all Rooms by type (:room_calendars)
     collection do
+      get :index, path: "(#{segment_date})", as: :dated
+
       resources :calendars, only: [:index],
                             path: ":room_slug/calendars#{segment_date}",
                             as: :room_calendars

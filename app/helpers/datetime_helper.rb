@@ -18,6 +18,12 @@ module DatetimeHelper
     }
   end
 
+  def date_from_param(param)
+    Time.zone.local(param[:year],
+                    param[:month],
+                    param[:day])
+  end
+
   def datetime_from_param(param)
     Time.zone.local(param[:year],
                     param[:month],

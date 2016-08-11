@@ -26,6 +26,7 @@ gem 'coffee-rails', '~> 4.2'
 gem 'jquery-rails'
 gem 'turbolinks', '~> 5'
 gem 'bootstrap-sass'
+gem 'bootstrap-datepicker-rails'
 
 # Admin : not sure good idea to use a branch gem
 # gem "administrate", "~> 0.2.2"
@@ -46,6 +47,7 @@ group :development, :test do
   gem 'rubocop'
   gem 'minitest-perf'
   gem 'annotate'
+  gem 'jasmine-rails'
 end
 
 group :development do

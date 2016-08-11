@@ -22,9 +22,9 @@ brew insall node
 npm install -g mjml
 
 # Install ruby version, bundler & gemfile dependencies
-rbenv install 2.3.1 
-gem install bundler 
-bundle install 
+rbenv install 2.3.1
+gem install bundler
+bundle install
 ```
 
 ### Setup .env
@@ -55,7 +55,8 @@ SMTP_ENABLE_STARTTLS_AUTO=
 DJ_USERNAME=hello
 DJ_PASSWORD=world
 ```
-
+### Various documentations
+* Datepicker : https://github.com/Nerian/bootstrap-datepicker-rails
 ### Run development server
 ```
 heroku local
