@@ -67,11 +67,12 @@ class ReservationWithFixturesTest < ActiveSupport::TestCase
       starts_at: Time.zone.today,
       ends_at: Time.zone.tomorrow
     )
-    assert_not reservation.save
-    assert_equal 1, reservation.errors.size
-    assert reservation.errors.key?(:not_enough_credits)
-    error_message = reservation.errors[:not_enough_credits].first
-    assert_equal 'Pas assez de crédit', error_message
+    assert_not reservation.save, 'should not be valid due to too long duration'
+    assert_equal 2, reservation.errors.size, 'should have 2 errors'
+    assert reservation.errors.key?(:starts_at), 'starts_at should be in error'
+    assert reservation.errors.key?(:ends_at), 'ends_at should be in error'
+    assert_equal ['Pas assez de crédit'],
+                 reservation.errors.messages.fetch(:starts_at)
   end
 
   test 'fix: .team_have_enough_free_seconds? does not blocks creation ' \
@@ -131,5 +132,21 @@ class ReservationWithFixturesTest < ActiveSupport::TestCase
     reservation.reload
     assert_equal (1.minute.ago.to_i - 1.hour.ago.to_i),
                  reservation.cached_duration_in_seconds
+  end
+
+  test '.validates one reservation per room per period' do
+    room = rooms(:small_lodge_0)
+    resident = residents(:mfo)
+    Reservation.create!(name: 'fail',
+                        room: room,
+                        resident: resident,
+                        starts_at: Time.zone.today + 8.hours,
+                        ends_at: Time.zone.today + 10.hours)
+
+    assert_not Reservation.new(name: 'fail',
+                               room: room,
+                               resident: resident,
+                               starts_at: Time.zone.today + 8.hours,
+                               ends_at: Time.zone.today + 10.hours).valid?
   end
 end

@@ -39,6 +39,7 @@ gem 'icalendar'
 
 # Auth
 gem 'devise'
+gem 'devise-bootstrap-views'
 
 group :development, :test do
   gem 'byebug', platform: :mri
@@ -56,7 +57,6 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
 
   # Generators, not needed in production
-  gem 'devise-bootstrap-views'
   gem 'devise-i18n'
 end
 

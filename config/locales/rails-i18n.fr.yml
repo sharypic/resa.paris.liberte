@@ -7,6 +7,15 @@ fr:
         restrict_dependent_destroy:
           has_one: "Vous ne pouvez pas supprimer l'enregistrement car une personne à charge %{record} existe"
           has_many: "Vous ne pouvez pas supprimer l'enregistrement parce que les %{record} dépendants existent"
+      models:
+        reservation:
+          attributes:
+            starts_at:
+              not_enough_credits: 'Pas assez de crédit'
+              busy: 'Une réservation à déjà été prise sur ce créneaux horraire'
+            ends_at:
+              not_enough_credits: 'Pas assez de crédit'
+              busy: 'Une réservation à déjà été prise sur ce créneaux horraire'
   date:
     abbr_day_names:
     - dim

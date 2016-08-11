@@ -28,7 +28,7 @@ class Team < ApplicationRecord
 
     reservations.joins(:room)
                 .where(rooms: { type: type })
-                .week_of(date)
+                .for_week(date)
                 .sum(:cached_duration_in_seconds)
   end
 

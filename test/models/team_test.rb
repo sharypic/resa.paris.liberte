@@ -91,6 +91,6 @@ class TeamTest < ActiveSupport::TestCase
 
     assert_equal 0,
                  teams(:staff).weekly_free_seconds_consumned(room, @date),
-                 'possible problem with week_of'
+                 'possible problem with for_week'
   end
 end

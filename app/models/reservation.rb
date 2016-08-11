@@ -20,17 +20,23 @@ class Reservation < ApplicationRecord
   has_one :team, through: :resident
   has_one :time_account_line, dependent: :destroy
 
-  scope :week_of, lambda { |date|
+  scope :for_week, lambda { |date|
     from = date.beginning_of_week
-    to = from + 1.week
-    where('starts_at >= :starts_at AND ends_at <= :ends_at',
-          starts_at: from, ends_at: to)
+    for_period(from, from + 1.week)
   }
+  scope :for_period, lambda { |from, to|
+    where('starts_at > :starts_at AND ends_at < :ends_at', starts_at: from,
+                                                           ends_at: to)
+  }
+  scope :in_range, -> (range) { where(starts_at: range).where(ends_at: range) }
+  scope :for_room, -> (room_id) { where(room_id: room_id) }
 
   before_validation :cache_duration_in_seconds
 
   validates :cached_duration_in_seconds, numericality: { greater_than: 0 }
-  validate :team_have_enough_credits?, on: :create
+
+  validate :validates_team_have_enough_credits?, on: :create
+  validate :validates_free_slot?
 
   # Helpers
   def half_hours_used
@@ -47,12 +53,21 @@ class Reservation < ApplicationRecord
   end
 
   # Validations: constraints to book a room
-  def team_have_enough_credits?
+  def validates_team_have_enough_credits?
     if !team_have_enough_free_seconds? && !team_have_enough_paid_seconds?
-      errors.add(:not_enough_credits, 'Pas assez de crédit')
+      errors.add(:starts_at, :not_enough_credits)
+      errors.add(:ends_at, :not_enough_credits)
     end
   end
 
+  def validates_free_slot?
+    if Reservation.for_room(room_id).in_range(starts_at..ends_at).count > 0
+      errors.add(:starts_at, :busy)
+      errors.add(:ends_at, :busy)
+    end
+  end
+
+  # Validations helpers
   def team_have_enough_free_seconds?
     free_seconds = team.weekly_free_seconds_available(room, starts_at)
     duration_in_seconds <= free_seconds
