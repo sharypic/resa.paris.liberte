@@ -13,7 +13,7 @@ class RoomScopesTest < ActiveSupport::TestCase
   self.use_instantiated_fixtures = true
   fixtures :teams, :residents, :rooms
 
-  test 'reservations_in' do
+  test 'reservations_for_date' do
     starts_at = Time.zone.today + 8.hours
     ends_at = starts_at + 30.minutes
     small_lodge = rooms(:small_lodge_0)
@@ -24,7 +24,7 @@ class RoomScopesTest < ActiveSupport::TestCase
                                      resident: residents(:mfo),
                                      room: small_lodge)
 
-    rooms = SmallLodge.reservations_in(starts_at, ends_at)
+    rooms = SmallLodge.reservations_for_date(Time.zone.today)
     assert_equal 4, rooms.entries.size
     assert_equal small_lodge, rooms.first
     assert_equal reservation, rooms.first.reservations.first

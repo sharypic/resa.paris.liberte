@@ -1,23 +1,32 @@
 # List show a calendar for a rom type
 class CalendarsController < ApplicationController
+  include DateParser
+
   before_action :authenticate_resident!
   before_action :validate_room_slug
 
   # Nested below as get /rooms/:slug/calendars
   def index
-    date = Time.zone.today
-    starts_at = date + 8.hours
-    ends_at = date + 20.hours
-
-    rooms = Room.class_for_slug(params[:room_slug])
-                .reservations_in(starts_at, ends_at)
-
-    render locals: { start_datetime: starts_at,
-                     end_datetime: ends_at,
-                     rooms: rooms }
+    render locals: locals_for_index
+  rescue MalformattedDateError
+    redirect_to redirect_room_url, flash: { alert: t('errors.date.malformed') }
+  rescue DayOffError
+    redirect_to redirect_room_url, flash: { notice: t('errors.date.day_off') }
   end
 
   private
+
+  def redirect_room_url
+    opts = { room_slug: params[:room_slug] }.merge(date_to_param(default_date))
+    room_calendars_path(opts)
+  end
+
+  def locals_for_index
+    date = date_or_default(params)
+    rooms = Room.class_for_slug(params[:room_slug]).reservations_for_date(date)
+
+    { date: date, rooms: rooms }
+  end
 
   def validate_room_slug
     redirect_to(rooms_path) unless Room.slug?(params[:room_slug])

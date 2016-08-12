@@ -17,7 +17,10 @@ class Room < ApplicationRecord
 
   # explicit n+1 query ; easier than left outer join throught AR
   # with n<=4 [acceptable]
-  scope :reservations_in, lambda { |starts_at, ends_at|
+  scope :reservations_for_date, lambda { |date|
+    starts_at = date + 8.hours
+    ends_at = date + 20.hours
+
     all.entries.map do |room|
       room.reservations
           .where('starts_at >= :starts_at and ends_at <= :ends_at',

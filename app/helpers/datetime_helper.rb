@@ -32,6 +32,10 @@ module DatetimeHelper
                     param[:minute])
   end
 
+  def day_off?(date)
+    date.sunday? || date.saturday?
+  end
+
   def self.seconds_to_half_hour(amount_in_seconds)
     amount_in_seconds / 30.minutes.to_i
   end
