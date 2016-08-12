@@ -24,7 +24,7 @@
 
       <ul class="nav navbar-nav navbar-right">
         <% if resident_signed_in? %>
-          <li><%= link_to t('.signout'), destroy_resident_session_path, method: :delete %></li>
+          <li><%= link_to t('devise.shared.links.sign_out'), destroy_resident_session_path, method: :delete %></li>
         <% else %>
           <li><a href="#">Link</a></li>
         <% end %>

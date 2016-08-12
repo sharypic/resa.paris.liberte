@@ -31,7 +31,7 @@ class AuthenticationFlowsTest < ActionDispatch::IntegrationTest
                                                       password: 'fail' } }
 
     assert_select '.alert-danger .text-danger',
-                  'Invalid Email or password.',
+                  I18n.t('devise.failure.invalid'),
                   'Alert sign in failure missing'
   end
 
@@ -40,7 +40,7 @@ class AuthenticationFlowsTest < ActionDispatch::IntegrationTest
                                                       password: @password } }
     follow_redirect!
     assert_select '.alert-info .text-notice',
-                  'Signed in successfully.',
+                  I18n.t('devise.sessions.signed_in'),
                   'Alert sign in success missing'
   end
 
@@ -49,13 +49,13 @@ class AuthenticationFlowsTest < ActionDispatch::IntegrationTest
     get root_url
 
     assert_select ".navbar a[href='#{destroy_resident_session_path}']",
-                  'Signout',
+                  I18n.t('devise.shared.links.sign_out'),
                   'Logout link missing'
 
     delete destroy_resident_session_path
     follow_redirect!
     assert_select '.alert-info .text-notice',
-                  'Signed out successfully.',
+                  I18n.t('devise.sessions.signed_out'),
                   'Alert sign out success missing'
   end
 end
