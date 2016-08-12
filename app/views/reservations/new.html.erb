@@ -4,7 +4,7 @@
   </div>
 
   <div class="panel-body">
-    <%= form_for(reservation, as: :reservation, url: room_reservations_path(room_id: reservation.room_id), html: { role: "form" }) do |f| %>
+    <%= form_for([:room, reservation], html: { role: "form" }) do |f| %>
 
 
       <%= f.hidden_field :room_id, value: reservation.room_id %>

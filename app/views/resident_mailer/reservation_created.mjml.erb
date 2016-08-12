@@ -18,9 +18,9 @@
 </mj-section>
 <mj-section>
   <mj-column  background-color="#000">
-    <mj-text font-size="11px" color="#fff" align="center"><%= I18n.t('mail.reservation_created.body.cta.edit_reservation.label') %></mj-text>
-    <mj-button font-family="Helvetica" background-color="#F8FF01" href="<%= edit_room_reservation_url(room_id: @reservation.room.id, id: @reservation.id) %>" color="black">
-      <%= I18n.t('mail.reservation_created.body.cta.edit_reservation.button') %>
+    <mj-text font-size="11px" color="#fff" align="center"><%= I18n.t('mail.reservation_created.body.cta.delete_reservation.label') %></mj-text>
+    <mj-button font-family="Helvetica" background-color="#F8FF01" href="<%= room_calendars_url({ room_slug: @reservation.room.to_slug }.merge(date_to_param(@reservation.starts_at))) %>" color="black">
+      <%= I18n.t('mail.reservation_created.body.cta.delete_reservation.button') %>
     </mj-button>
   <mj-column>
 </mj-section>

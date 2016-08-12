@@ -3,14 +3,13 @@ fr:
     show:
       team: 'Pour %{team_name}'
       user: 'Par %{user_name}'
-      edit: 'Changer de créneaux'
-    edit:
-      title: 'Changer votre réservation - %{room_name} le %{day} de %{hour}'
-      from_starts_at: 'De'
-      to_ends_at: 'à'
-      submit: 'Mettre à jour'
+      destroy: 'Supprimer cette réservation'
+      confirm: 'Êtes-vous sur ?'
     new:
       title: 'Réserver - %{room_name} le %{day} de %{hour}'
       from_starts_at: 'De'
       to_ends_at: 'à'
       submit: 'Réserver'
+    destroy:
+      success: "La réservation vient d'être supprimée"
+      error: "La réservation vient d'être supprimée"

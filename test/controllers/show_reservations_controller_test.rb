@@ -49,8 +49,10 @@ class CreateReservationsControllerTest < ActionDispatch::IntegrationTest
     assert_select 'li.reservation-resident-fullname',
                   I18n.t('reservations.show.user', user_name: user_name),
                   'Missing resident name'
-    assert_select '.reservation-edit',
-                  I18n.t('reservations.show.edit'),
+    destroy_url = room_reservation_path(room_id: reservation.room.id,
+                                        id: reservation.id)
+    assert_select "a.btn-danger[href='#{destroy_url}']",
+                  I18n.t('reservations.show.destroy'),
                   'missing link'
   end
 end

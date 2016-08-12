@@ -6,7 +6,7 @@
 
 <%= I18n.t('mail.reservation_created.body.cta.download_ics') %>
 
-<%= I18n.t('mail.reservation_created.body.cta.edit_reservation.label') %>
+<%= I18n.t('mail.reservation_created.body.cta.delete_reservation.label') %>
 
-<%= I18n.t('mail.reservation_created.body.cta.edit_reservation.button') %> : <%= edit_room_reservation_url(room_id: @reservation.room.id, id: @reservation.id) %>
+<%= I18n.t('mail.reservation_created.body.cta.delete_reservation.button') %> : <%= room_calendars_url({room_slug: @reservation.room.to_slug}.merge(date_to_param(@reservation.starts_at))) %>
 

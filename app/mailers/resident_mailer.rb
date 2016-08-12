@@ -1,5 +1,8 @@
 # Emails sent to resident
 class ResidentMailer < ApplicationMailer
+  include DatetimeHelper
+  helper_method :date_to_param
+
   ICAL_ATTACHMENT_NAME = 'invite.ics'.freeze
 
   def reservation_created(reservation)

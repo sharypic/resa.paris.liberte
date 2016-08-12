@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class EditReservationsControllerTest < ActionDispatch::IntegrationTest
+class DestroyReservationsControllerTest < ActionDispatch::IntegrationTest
   include DatetimeHelper
   include Devise::Test::IntegrationHelpers
   fixtures :teams, :residents, :rooms
@@ -17,28 +17,32 @@ class EditReservationsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'redirects to homepage when not signed in' do
-    get edit_room_reservation_path(room_id: @room.id,
-                                   id: @reservation.id)
+    delete room_reservation_path(room_id: @room.id,
+                                 id: @reservation.id)
     assert_redirected_to root_url
   end
 
   test 'redirects to rooms_path when room_id or id is invalid' do
     sign_in(@resident)
 
-    get edit_room_reservation_path(room_id: 'none',
-                                   id: @reservation.id)
+    delete room_reservation_path(room_id: 'none',
+                                 id: @reservation.id)
     assert_redirected_to rooms_path
 
-    get edit_room_reservation_path(room_id: @room.id, id: 'none')
+    delete room_reservation_path(room_id: @room.id, id: 'none')
     opts = { room_slug: @room.to_slug }.merge(date_to_param(Time.zone.today))
     assert_redirected_to room_calendars_path(opts)
   end
 
-  test 'renders when sign in and valid' do
+  test 'destroy reservation' do
     sign_in(@resident)
+    opts = { room_slug: @room.to_slug }
+    opts = opts.merge(date_to_param(@reservation.starts_at))
 
-    get edit_room_reservation_path(room_id: @room.id,
+    assert_difference('Reservation.count', -1) do
+      delete room_reservation_path(room_id: @room.id,
                                    id: @reservation.id)
-    assert_response :success
+    end
+    assert_redirected_to room_calendars_path(opts)
   end
 end

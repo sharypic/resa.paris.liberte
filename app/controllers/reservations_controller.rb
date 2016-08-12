@@ -19,12 +19,19 @@ class ReservationsController < ApplicationController
     render nothing: true, status: :bad_request
   end
 
-  def edit
-    render locals: { reservation: Reservation.find(params[:id]) }
+  # rubocop:disable Metrics/AbcSize
+  def destroy
+    reservation = Reservation.find(params[:id])
+    opts = { room_slug: @room.to_slug }
+    opts = opts.merge(date_to_param(reservation.starts_at))
+
+    redirect_to room_calendars_path(opts),
+                flash: destroy_reservation_with_flash(reservation)
   rescue ActiveRecord::RecordNotFound
     redirect_to room_calendars_path({ room_slug: @room.to_slug }
                                     .merge(date_to_param(Time.zone.today)))
   end
+  # rubocop:enable Metrics/AbcSize
 
   # Nested below as get /rooms/:id/reservations/new
   def new
@@ -40,7 +47,7 @@ class ReservationsController < ApplicationController
   def create
     reservation = current_resident.reservations.new(reservation_attributes)
 
-    if DebitReservation.new(reservation).process
+    if DebitReservation.new(reservation).create
       opts = { room_slug: reservation.room.to_slug }
       opts = opts.merge(date_to_param(reservation.starts_at))
 
@@ -51,6 +58,14 @@ class ReservationsController < ApplicationController
   end
 
   private
+
+  def destroy_reservation_with_flash(reservation)
+    if reservation.destroy
+      { notice: t('.success') }
+    else
+      { alert: t('.error') }
+    end
+  end
 
   def reservation_attributes
     permitted = %i(

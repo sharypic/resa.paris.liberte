@@ -35,11 +35,13 @@ class ResidentMailerTest < ActionMailer::TestCase
       assert_select :td, text: I18n.t('mail.reservation_created.body.where.value',
                                       room_name: @reservation.room.name)
       assert_select :div, text: I18n.t('mail.reservation_created.body.cta.download_ics')
-      assert_select :div, text: I18n.t('mail.reservation_created.body.cta.edit_reservation.label')
-      assert_select :td, text: I18n.t('mail.reservation_created.body.cta.edit_reservation.button')
-      edit_url = edit_room_reservation_url(room_id: @reservation.room.id,
-                                           id: @reservation.id)
-      assert_select "a[href='#{edit_url}']", text: I18n.t('mail.reservation_created.body.cta.edit_reservation.button')
+      assert_select :div, text: I18n.t('mail.reservation_created.body.cta.delete_reservation.label')
+      assert_select :td, text: I18n.t('mail.reservation_created.body.cta.delete_reservation.button')
+      reservation_url = room_calendars_url(
+        { room_slug: @reservation.room.to_slug }
+        .merge(date_to_param(@reservation.starts_at))
+      )
+      assert_select "a[href='#{reservation_url}']", text: I18n.t('mail.reservation_created.body.cta.delete_reservation.button')
     end
   end
   # rubocop:enable Metrics/LineLength

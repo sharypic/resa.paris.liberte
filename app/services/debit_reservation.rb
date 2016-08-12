@@ -9,7 +9,7 @@ class DebitReservation
     @account = Account.new(@team, @room.type)
   end
 
-  def process
+  def create
     return save_reservation if reservation.team_have_enough_free_seconds?
     return false unless reservation.team_have_enough_paid_seconds?
     safe_save_reservation_with_debit

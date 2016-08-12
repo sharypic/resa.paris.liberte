@@ -20,6 +20,7 @@ Rails.application.routes.draw do
 
   # App routes
   root 'pages#home'
+
   # General routes
   segment_date = '/:year/:month/:day'
   constraints_date = { year: /\d{4}/, month: /\d{2}/, day: /\d{2}/ }
@@ -29,7 +30,7 @@ Rails.application.routes.draw do
   # Core of app is built around Rooms
   # A Resident can view rooms by type (:index)
   resources :rooms, only: [:index] do
-    # A resident can a calendars of all Rooms by type (:room_calendars)
+    # A resident can view calendars of all Rooms by type
     collection do
       get :index, as: :dated,
                   path: "(#{segment_date})",
@@ -41,7 +42,7 @@ Rails.application.routes.draw do
     end
 
     # A Resident can create a reservation for a specific Room
-    resources :reservations, only: [:create, :show, :edit] do
+    resources :reservations, only: [:create, :show, :destroy] do
       collection do
         get :new, as: :new,
                   path: "/new#{segment_datetime}",
