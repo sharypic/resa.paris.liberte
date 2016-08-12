@@ -6,7 +6,7 @@ describe 'Datepicker', ->
   $element = null
 
   beforeEach ->
-    url = 'url'
+    url = '/rooms/:year/:month/:day'
     $element = $("""<input class="datepicker" />""")
 
   describe 'new', ->
@@ -20,7 +20,7 @@ describe 'Datepicker', ->
       expect(datepicker.$element).toBe($element)
 
   describe '.makePicker', ->
-    it 'call datepicker() on given $element', ->
+    it 'instanciate datepicker() on given $element', ->
       datepicker = new App.Datepicker($element, url)
       spyOn($element, 'datepicker')
       datepicker.makePicker()
@@ -28,7 +28,8 @@ describe 'Datepicker', ->
       expect($element.datepicker)
         .toHaveBeenCalledWith(daysOfWeekDisabled: "5,6")
 
-    it 'bind events', ->
+  describe '.bindEvents', ->
+    it 'listens on changeDate', ->
       appDatepicker = new App.Datepicker($element, url)
       BS3Datepicker = appDatepicker.makePicker()
       spyOn(BS3Datepicker, 'on')
@@ -37,12 +38,25 @@ describe 'Datepicker', ->
 
       expect(BS3Datepicker.on).toHaveBeenCalledWith('changeDate',
                                                     appDatepicker.onClick)
+  describe '.rewriteUrl', ->
+    it 'replace :year, :month, :day with date values', ->
+      appDatepicker = new App.Datepicker($element, url)
+      date = new Date()
+
+      expect(appDatepicker.rewriteUrl(date))
+        .toEqual([
+                    '/rooms',
+                    date.getFullYear(),
+                    appDatepicker.padIntegerWithTwoZero(date.getMonth() + 1),
+                    appDatepicker.padIntegerWithTwoZero(date.getDate())
+                  ].join("/"))
 
   describe '.onClick', ->
     it 'delegates visit to turbolink', ->
       spyOn(window.Turbolinks, 'visit')
       datepicker = new App.Datepicker($element, url)
+      event = date: new Date()
+      datepicker.onClick(event)
 
-      datepicker.onClick()
-
-      expect(window.Turbolinks.visit).toHaveBeenCalledWith(url)
+      expect(window.Turbolinks.visit)
+        .toHaveBeenCalledWith(datepicker.rewriteUrl(event.date))

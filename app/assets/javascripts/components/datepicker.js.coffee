@@ -21,12 +21,15 @@
     padIntegerWithTwoZero: (str) ->
       "00#{str}".slice(-2)
 
-    onClick: (event) =>
-      year = event.date.getFullYear()
-      month = event.date.getMonth() + 1
-      day = event.date.getDate()
+    rewriteUrl: (date) ->
+      year = date.getFullYear()
+      month = date.getMonth() + 1
+      day = date.getDate()
 
-      Turbolinks.visit(@url.replace(':year', year)
-                           .replace(':month', @padIntegerWithTwoZero(month))
-                           .replace(':day', @padIntegerWithTwoZero(day)))
+      @url.replace(':year', year)
+          .replace(':month', @padIntegerWithTwoZero(month))
+          .replace(':day', @padIntegerWithTwoZero(day))
+
+    onClick: (event) => Turbolinks.visit(@rewriteUrl(event.date))
+
 )(window.App, window.Turbolinks)
