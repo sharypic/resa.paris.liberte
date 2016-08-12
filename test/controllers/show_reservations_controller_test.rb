@@ -37,15 +37,20 @@ class CreateReservationsControllerTest < ActionDispatch::IntegrationTest
                                       resident: resident)
 
     xhr :get, room_reservation_path(room_id: room.id, id: reservation.id)
+
     assert_response :success
-    assert_select '.reservation-team-name',
-                  reservation.team.name,
+
+    team_name = reservation.team.name
+
+    assert_select 'li.reservation-team-name',
+                  I18n.t('reservations.show.team', team_name: team_name),
                   'Missing team name'
-    assert_select '.reservation-resident-fullname',
-                  reservation.resident.fullname,
+    user_name = reservation.resident.fullname
+    assert_select 'li.reservation-resident-fullname',
+                  I18n.t('reservations.show.user', user_name: user_name),
                   'Missing resident name'
     assert_select '.reservation-edit',
-                  'Edit',
-                  'missing edit link'
+                  I18n.t('reservations.show.edit'),
+                  'missing link'
   end
 end

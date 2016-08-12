@@ -65,7 +65,7 @@ class IndexRoomsControllerTest < ActionDispatch::IntegrationTest
        'redirect to rooms_path' do
     sign_in(@resident)
 
-    get dated_rooms_path(year: 'abc', month: 'def', day: 'ijk')
+    get dated_rooms_path(year: '2016', month: '44', day: '33')
 
     assert_redirected_to rooms_path
   end

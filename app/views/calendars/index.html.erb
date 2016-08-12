@@ -42,26 +42,31 @@
   $(document).ready(function() {
     $('[data-toggle="popover"]').on('click', function(event) {
       var $target = $(event.currentTarget);
-      var $targetIcon = $target.find('.fa').first();
-      // feedback
-      $targetIcon.removeClass('fa-info-circle').addClass('fa-spin fa-spinner')
 
-      $.ajax({
-        method: 'GET',
-        url: $(this).data('content-xhr-url')
-      }).then(function(html) {
-          $target.popover({ trigger: 'manual',
-                            placement: 'top',
-                            content: html,
-                            html: true})
-                 .popover('show')
-        })
-        .fail(function(html) {
-          alert(html)
-        })
-        .always(function(html) {
-          $targetIcon.removeClass('fa-spin fa-spinner').addClass('fa-info-circle')
-        });
+      if ($target.data('popover-visible') == true) {
+        $target.popover('hide')
+               .data('popover-visible', false)
+      } else {
+        var $targetIcon = $target.find('.fa').first()
+
+        $targetIcon.removeClass('fa-info-circle')
+                   .addClass('fa-spin fa-spinner')
+
+        $.ajax({ method: 'GET', url: $(this).data('content-xhr-url') })
+          .then(function(html) {
+            $target.popover({ trigger: 'manual',
+                              placement: 'top',
+                              content: html,
+                              html: true})
+                   .popover('show')
+                   .data('popover-visible', true);
+          })
+          .fail(function(html) { /*TODO*/ })
+          .always(function(html) {
+            $targetIcon.removeClass('fa-spin fa-spinner')
+                       .addClass('fa-info-circle')
+          })
+      }
     })
   })
 </script>
