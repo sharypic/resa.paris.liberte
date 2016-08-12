@@ -9,18 +9,19 @@ class IndexRoomsControllerTest < ActionDispatch::IntegrationTest
     @resident = residents(:mfo)
   end
 
-  test 'redirects to homepage when not signed in' do
+  test 'GET rooms_path, redirects to homepage when not signed in' do
     get rooms_path
-    assert_response :redirect
+    assert_redirected_to root_url
   end
 
-  test 'responds with success when signed in' do
+  test 'GET rooms_path, responds with success when signed in' do
     sign_in(@resident)
     get rooms_path
     assert_response :success
   end
 
-  test 'rendering include links to room & room denominations' do
+  test 'GET rooms_path, rendering includes ' \
+       'links to room & room denominations' do
     sign_in(@resident)
     get rooms_path
 
@@ -43,5 +44,29 @@ class IndexRoomsControllerTest < ActionDispatch::IntegrationTest
                       "missing #{room.name} price per half hour"
       end
     end
+  end
+
+  test 'GET dated_rooms_path with valid date, ' \
+       'shows a date picker with expected date' do
+    sign_in(@resident)
+    date = Time.zone.tomorrow
+
+    get dated_rooms_path(date_to_param(date))
+
+    assert_response :success
+
+    date_value_sector = "[value='#{date.strftime('%d-%m-%Y')}']"
+    assert_select "#js-initialize-datepicker#{date_value_sector}",
+                  true,
+                  'can not find initialized datepicker'
+  end
+
+  test 'GET dated_rooms_path with invalid date, ' \
+       'redirect to rooms_path' do
+    sign_in(@resident)
+
+    get dated_rooms_path(year: 'abc', month: 'def', day: 'ijk')
+
+    assert_redirected_to rooms_path
   end
 end
