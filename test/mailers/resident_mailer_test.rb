@@ -37,6 +37,9 @@ class ResidentMailerTest < ActionMailer::TestCase
       assert_select :div, text: I18n.t('mail.reservation_created.body.cta.download_ics')
       assert_select :div, text: I18n.t('mail.reservation_created.body.cta.edit_reservation.label')
       assert_select :td, text: I18n.t('mail.reservation_created.body.cta.edit_reservation.button')
+      edit_url = edit_room_reservation_url(room_id: @reservation.room.id,
+                                           id: @reservation.id)
+      assert_select "a[href='#{edit_url}']", text: I18n.t('mail.reservation_created.body.cta.edit_reservation.button')
     end
   end
   # rubocop:enable Metrics/LineLength

@@ -8,5 +8,5 @@
 
 <%= I18n.t('mail.reservation_created.body.cta.edit_reservation.label') %>
 
-<%= I18n.t('mail.reservation_created.body.cta.edit_reservation.button') %>
+<%= I18n.t('mail.reservation_created.body.cta.edit_reservation.button') %> : <%= edit_room_reservation_url(room_id: @reservation.room.id, id: @reservation.id) %>
 
