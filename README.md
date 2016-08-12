@@ -94,4 +94,10 @@ Also you need to setup two buildpacks : ruby (default) plus node (for mjml), see
 
 ## Feature set
 
-Books rooms depending on your credits.
+Books rooms depending on your credits
+
+## Frameworks & libs
+* Backend/frontend: Rails ; >5
+* CSS/JS: Bootstrap ; customized and stripped down to the 'bare' minimum, see assets/{stylesheets|javascript}/libs for available parts
+* Icons: font awesome
+

@@ -23,6 +23,12 @@
             <td class="td-reserved" rowspan="<%= resa.half_hours_used %>">
               <%= resa.name %>
               <%- resa.mark_as_rendered %>
+              <button class='btn btn-sm'
+                      data-toggle="popover"
+                      data-title="<%= resa.name %>"
+                      data-content="hello">
+                <%= icon('info-circle') %>
+              </button>
             </td>
           <% else %>
           <% end %>
@@ -32,3 +38,8 @@
   </tbody>
 </table>
 
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('[data-toggle="popover"]').popover();
+  })
+</script>
