@@ -32,5 +32,37 @@ class NewReservationsControllerTest < ActionDispatch::IntegrationTest
 
     get new_room_reservations_path(opts)
     assert_response :success
+    ends_at = @date + 30.minutes
+    assert_select '#reservation_starts_at_1i option' \
+                  "[value='#{@date.strftime('%Y')}']" \
+                  '[selected="selected"]'
+    assert_select '#reservation_starts_at_2i option' \
+                  "[value='#{@date.strftime('%-m')}']" \
+                  '[selected="selected"]'
+    assert_select '#reservation_starts_at_3i option' \
+                  "[value='#{@date.strftime('%d')}']" \
+                  '[selected="selected"]'
+    assert_select '#reservation_starts_at_4i option' \
+                  "[value='#{@date.strftime('%H')}']" \
+                  '[selected="selected"]'
+    assert_select '#reservation_starts_at_5i option' \
+                  "[value='#{@date.strftime('%M')}']" \
+                  '[selected="selected"]'
+
+    assert_select '#reservation_ends_at_1i option' \
+                  "[value='#{ends_at.strftime('%Y')}']" \
+                  '[selected="selected"]'
+    assert_select '#reservation_ends_at_2i option' \
+                  "[value='#{ends_at.strftime('%-m')}']" \
+                  '[selected="selected"]'
+    assert_select '#reservation_ends_at_3i option' \
+                  "[value='#{ends_at.strftime('%d')}']" \
+                  '[selected="selected"]'
+    assert_select '#reservation_ends_at_4i option' \
+                  "[value='#{ends_at.strftime('%H')}']" \
+                  '[selected="selected"]'
+    assert_select '#reservation_ends_at_5i option' \
+                  "[value='#{ends_at.strftime('%M')}']" \
+                  '[selected="selected"]'
   end
 end

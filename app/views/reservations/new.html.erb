@@ -15,9 +15,9 @@
       </div>
 
       <div class="form-group">
-        De <%= f.datetime_select 'starts_at', minute_step: 30, start_hour: 8, end_hour: 20, default: reservation.starts_at %>
+        De <%= f.datetime_select 'starts_at',minute_step: 30, start_hour: 8, end_hour: 20, datetime_separator: ''  %>
 
-        À <%= f.datetime_select 'ends_at', minute_step: 30, start_hour: 8, end_hour: 20, defautl: reservation.starts_at + 30.minutes %>
+        À <%= f.datetime_select 'ends_at', minute_step: 30, start_hour: 8, end_hour: 20, datetime_separator: '', default: reservation.starts_at + 30.minutes %>
       </div>
 
       <%= f.submit "Réserver!", class: "btn btn-primary" %>

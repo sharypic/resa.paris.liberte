@@ -26,3 +26,14 @@
   color: white;
   font-weight: bold;
 }
+
+// That's ugly to hide field that's way,
+// but rails discard_day: true force day at 1.
+#reservation_starts_at_1i,
+#reservation_starts_at_2i,
+#reservation_starts_at_3i,
+#reservation_ends_at_1i,
+#reservation_ends_at_2i,
+#reservation_ends_at_3i{
+  display: none;
+}
