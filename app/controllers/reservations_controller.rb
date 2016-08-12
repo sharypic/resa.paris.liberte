@@ -2,8 +2,29 @@
 class ReservationsController < ApplicationController
   include DatetimeHelper
 
-  before_action :authenticate_resident!
-  before_action :validate_room_id
+  before_action :authenticate_resident!, except: %i(show)
+  before_action :validate_room_id, except: %i(show)
+
+  # Nested below as get /rooms/:id/reservations/:id
+  # Used by popover via ajax request
+  def show
+    if resident_signed_in?
+      render layout: false,
+             locals: { reservation: Reservation.find(params[:id]),
+                       room: Room.find(params[:room_id]) }
+    else
+      render nothing: true, status: :forbidden
+    end
+  rescue ActiveRecord::RecordNotFound
+    render nothing: true, status: :bad_request
+  end
+
+  def edit
+    render locals: { reservation: Reservation.find(params[:id]) }
+  rescue ActiveRecord::RecordNotFound
+    redirect_to room_calendars_path({ room_slug: @room.to_slug }
+                                    .merge(date_to_param(Time.zone.today)))
+  end
 
   # Nested below as get /rooms/:id/reservations/new
   def new

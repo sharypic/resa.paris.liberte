@@ -2,9 +2,12 @@ mfo:
   team_id: 1 # teams(:dev)
   email: fourcade.m@gmail.com
   encrypted_password: <%= Resident.new.send(:password_digest, 'guillaume') %>
+  firstname: 'Martin'
+  lastname: 'Fourcade'
 
 staff_member:
   team_id: 2 # teams(:staff)
   email: staff@admin.com
   encrypted_password: <%= Resident.new.send(:password_digest, 'kikoolol') %>
-
+  firstname: 'Guillaume'
+  lastname: 'Perdrix'

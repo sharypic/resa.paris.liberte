@@ -1,0 +1,16 @@
+fr:
+  reservations:
+    show:
+      team: 'Pour %{team_name}'
+      user: 'Par %{user_name}'
+      edit: 'Changer de créneaux'
+    edit:
+      title: 'Changer votre réservation - %{room_name} le %{day} de %{hour}'
+      from_starts_at: 'De'
+      to_ends_at: 'à'
+      submit: 'Mettre à jour'
+    new:
+      title: 'Réserver - %{room_name} le %{day} de %{hour}'
+      from_starts_at: 'De'
+      to_ends_at: 'à'
+      submit: 'Réserver'

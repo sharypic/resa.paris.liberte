@@ -1,0 +1,15 @@
+fr:
+  activerecord:
+    attributes:
+      reservation:
+        name: 'Nom'
+    errors:
+      models:
+        reservation:
+          attributes:
+            starts_at:
+              not_enough_credits: 'Pas assez de crédit'
+              busy: 'Une réservation à déjà été prise sur ce créneaux horraire'
+            ends_at:
+              not_enough_credits: 'Pas assez de crédit'
+              busy: 'Une réservation à déjà été prise sur ce créneaux horraire'

@@ -24,7 +24,9 @@ end
 def create_residents
   Resident.create!(email: 'fourcade.m@gmail.com',
                    password: ENV['DEFAULT_PWD'],
-                   team: Team.first)
+                   team: Team.first,
+                   firstname: 'Martin',
+                   lastname: 'Fourcade')
 end
 
 # rubocop:disable Metrics/AbcSize

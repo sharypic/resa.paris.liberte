@@ -38,5 +38,11 @@ module ResaParisLiberte
     config.i18n.available_locales = [:fr]
     config.i18n.locale = :fr
     config.i18n.default_locale = :fr
+    config.i18n.load_path += Dir[
+      Rails.root.join('config', 'locales', 'views', '*.yml').to_s
+    ]
+    config.i18n.load_path += Dir[
+      Rails.root.join('config', 'locales', 'activerecord', '*.yml').to_s
+    ]
   end
 end

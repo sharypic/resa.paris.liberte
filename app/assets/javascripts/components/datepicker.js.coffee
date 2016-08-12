@@ -1,4 +1,5 @@
-#see: https://bootstrap-datepicker.readthedocs.io/en/latest/
+# Decorator for bootstrap datetipicker so on click it redirects to an url
+# see: https://bootstrap-datepicker.readthedocs.io/en/latest/
 ((App, Turbolinks) ->
   class App.Datepicker
     constructor: ($element, url) ->

@@ -15,7 +15,6 @@ Rails.application.routes.draw do
     mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)
   end
 
-
   # Delayed job UI
   match '/delayed_job' => DelayedJobWeb, :anchor => false, via: [:get, :post]
 
@@ -23,24 +22,30 @@ Rails.application.routes.draw do
   root 'pages#home'
   # General routes
   segment_date = '/:year/:month/:day'
+  constraints_date = { year: /\d{4}/, month: /\d{2}/, day: /\d{2}/ }
   segment_datetime = "#{segment_date}/:hour/:minute"
+  constraints_datetime = constraints_date.merge(hour: /\d{2}/, minute: /\d{2}/)
 
   # Core of app is built around Rooms
   # A Resident can view rooms by type (:index)
   resources :rooms, only: [:index] do
     # A resident can a calendars of all Rooms by type (:room_calendars)
     collection do
-      get :index, path: "(#{segment_date})", as: :dated
+      get :index, as: :dated,
+                  path: "(#{segment_date})",
+                  constraints: constraints_date
 
       resources :calendars, only: [:index],
-                            path: ":room_slug/calendars#{segment_date}",
-                            as: :room_calendars
+                            as: :room_calendars,
+                            path: ":room_slug/calendars#{segment_date}"
     end
 
     # A Resident can create a reservation for a specific Room
-    resources :reservations, only: [:create] do
+    resources :reservations, only: [:create, :show, :edit] do
       collection do
-        get :new, path: "/new#{segment_datetime}", as: :new
+        get :new, as: :new,
+                  path: "/new#{segment_datetime}",
+                  constraints: constraints_datetime
       end
     end
   end

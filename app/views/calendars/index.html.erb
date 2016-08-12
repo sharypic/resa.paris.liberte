@@ -16,17 +16,17 @@
         <td class="td-time"><%= half_hour_starts_at.strftime('%H:%M') %></td>
 
         <% rooms.each.with_index do |room, i| %>
-          <% resa = room.reservations.find { |reservation| reservation.in?(half_hour_starts_at, half_hour_ends_at) } %>
-          <% if resa == nil %>
+          <% reservation = room.reservations.find { |reservation| reservation.in?(half_hour_starts_at, half_hour_ends_at) } %>
+          <% if reservation == nil %>
             <td class=""><%= link_to "+", new_room_reservations_path({room_id: room.id}.merge(datetime_to_param(half_hour_starts_at))) %> </td>
-          <% elsif !resa.rendered? %>
-            <td class="td-reserved" rowspan="<%= resa.half_hours_used %>">
-              <%= resa.name %>
-              <%- resa.mark_as_rendered %>
+          <% elsif !reservation.rendered? %>
+            <td class="td-reserved" rowspan="<%= reservation.half_hours_used %>">
+              <%= reservation.name %>
+              <%- reservation.mark_as_rendered %>
               <button class='btn btn-sm'
                       data-toggle="popover"
-                      data-title="<%= resa.name %>"
-                      data-content="hello">
+                      data-title="<%= reservation.name %>"
+                      data-content-xhr-url="<%= room_reservation_path(room_id: room.id, id: reservation.id) %>">
                 <%= icon('info-circle') %>
               </button>
             </td>
@@ -40,6 +40,28 @@
 
 <script type="text/javascript">
   $(document).ready(function() {
-    $('[data-toggle="popover"]').popover();
+    $('[data-toggle="popover"]').on('click', function(event) {
+      var $target = $(event.currentTarget);
+      var $targetIcon = $target.find('.fa').first();
+      // feedback
+      $targetIcon.removeClass('fa-info-circle').addClass('fa-spin fa-spinner')
+
+      $.ajax({
+        method: 'GET',
+        url: $(this).data('content-xhr-url')
+      }).then(function(html) {
+          $target.popover({ trigger: 'manual',
+                            placement: 'top',
+                            content: html,
+                            html: true})
+                 .popover('show')
+        })
+        .fail(function(html) {
+          alert(html)
+        })
+        .always(function(html) {
+          $targetIcon.removeClass('fa-spin fa-spinner').addClass('fa-info-circle')
+        });
+    })
   })
 </script>

@@ -28,4 +28,8 @@ class Resident < ApplicationRecord
 
   belongs_to :team
   has_many :reservations
+
+  def fullname
+    "#{firstname} #{lastname}"
+  end
 end
