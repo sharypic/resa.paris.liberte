@@ -49,7 +49,7 @@ class IndexRoomsControllerTest < ActionDispatch::IntegrationTest
   test 'GET dated_rooms_path with valid date, ' \
        'shows a date picker with expected date' do
     sign_in(@resident)
-    date = Time.zone.tomorrow
+    date = Time.zone.today.beginning_of_week
 
     get dated_rooms_path(date_to_param(date))
 
@@ -68,5 +68,20 @@ class IndexRoomsControllerTest < ActionDispatch::IntegrationTest
     get dated_rooms_path(year: 'abc', month: 'def', day: 'ijk')
 
     assert_redirected_to rooms_path
+  end
+
+  test 'GET dated_rooms_path with invalid date, ' \
+       'when date is sunday or saturday' do
+    sign_in(@resident)
+    sunday = Time.zone.today.at_end_of_week
+    saturday = sunday.yesterday
+    redirect_date = Time.zone.today
+    redirect_date = redirect_date.beginning_of_week if day_off?(redirect_date)
+
+    get dated_rooms_path(date_to_param(sunday))
+    assert_redirected_to dated_rooms_path(date_to_param(redirect_date))
+
+    get dated_rooms_path(date_to_param(saturday))
+    assert_redirected_to dated_rooms_path(date_to_param(redirect_date))
   end
 end

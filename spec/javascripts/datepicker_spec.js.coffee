@@ -26,7 +26,11 @@ describe 'Datepicker', ->
       datepicker.makePicker()
 
       expect($element.datepicker)
-        .toHaveBeenCalledWith(daysOfWeekDisabled: "5,6")
+        .toHaveBeenCalledWith(
+          daysOfWeekDisabled: '0,6'
+          weekStart: 1
+          language: 'fr'
+        )
 
   describe '.bindEvents', ->
     it 'listens on changeDate', ->

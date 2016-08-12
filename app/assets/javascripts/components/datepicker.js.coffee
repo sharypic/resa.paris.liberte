@@ -12,7 +12,11 @@
     tearDown: -> null
 
     makePicker: ->
-      @datepicker = @$element.datepicker(daysOfWeekDisabled: "5,6")
+      @datepicker = @$element.datepicker(
+        daysOfWeekDisabled: '0,6'
+        weekStart: 1
+        language: 'fr'
+      )
       @datepicker
 
     bindEvents: ->

@@ -1,0 +1,5 @@
+fr:
+  errors:
+    date:
+      malformed: 'Désolé, la date renseignée est invalide.'
+      day_off: 'Désolé, vous ne pouvez reserver des salles que du lundi au vendredi'

@@ -1,0 +1,10 @@
+<div class="row">
+  <input type="text" id='js-initialize-datepicker' data-provide='datepicker' data-date-format='dd-mm-yyyy' value="<%= date.strftime('%d-%m-%Y') %>" />
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    var datePicker = new App.Datepicker($('#js-initialize-datepicker'), '<%= url_on_date_selected %>');
+    datePicker.setup();
+  })
+</script>

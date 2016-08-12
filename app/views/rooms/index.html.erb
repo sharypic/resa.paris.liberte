@@ -1,6 +1,4 @@
-<div class="row">
-  <input type="text" id='js-initialize-datepicker' data-provide='datepicker' data-date-format='dd-mm-yyyy' value="<%= date.strftime('%d-%m-%Y') %>" />
-</div>
+<%= render partial: 'layouts/datepicker', locals: {date: date, url_on_date_selected: dated_rooms_path(year: ':year', month: ':month', day: ':day') } %>
 
 <div class="row">
   <% Room.list.each.with_index do |room| %>
@@ -13,10 +11,3 @@
       </div>
   <% end %>
 </div>
-
-<script type="text/javascript">
-  $(document).ready(function() {
-    var datePicker = new App.Datepicker($('#js-initialize-datepicker'), '<%= dated_rooms_path(year: ':year', month: ':month', day: ':day') %>');
-    datePicker.setup();
-  })
-</script>

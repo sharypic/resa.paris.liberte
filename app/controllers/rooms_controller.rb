@@ -1,21 +1,15 @@
 # List rooms available to book
 class RoomsController < ApplicationController
-  include DatetimeHelper
+  include DateParser
+
   before_action :authenticate_resident!
 
   def index
-    date = date_or_default
-    render locals: { date: date }
-  rescue ArgumentError
-    redirect_to rooms_path
-  end
-
-  def date_or_default
-    return date_from_param(params) if parse_date?
-    Time.zone.today
-  end
-
-  def parse_date?
-    [:year, :month, :day].all? { |key| params.key?(key) }
+    render locals: { date: date_or_default(params) }
+  rescue MalformattedDateError
+    redirect_to rooms_path, flash: { alert: t('errors.date.malformed') }
+  rescue DayOffError
+    redirect_to dated_rooms_path(date_to_param(default_date)),
+                flash: { notice: t('errors.date.day_off') }
   end
 end
