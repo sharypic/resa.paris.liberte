@@ -57,6 +57,8 @@ DJ_PASSWORD=world
 ```
 ### Various documentations
 * Datepicker : https://github.com/Nerian/bootstrap-datepicker-rails
+
+
 ### Run development server
 ```
 heroku local

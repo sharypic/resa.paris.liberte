@@ -46,6 +46,20 @@ class Reservation < ApplicationRecord
     DatetimeHelper.seconds_to_half_hour(duration_in_seconds)
   end
 
+  # admin
+  def free_half_hour_consumed
+    half_hours_used -
+      paid_half_hour_consumed
+  end
+
+  def paid_half_hour_consumed
+    DatetimeHelper.seconds_to_half_hour(safe_time_account_line.amount).abs
+  end
+
+  def safe_time_account_line
+    time_account_line || NullObjects::TimeAccountLine.new
+  end
+
   def duration_in_seconds
     (ends_at.to_i - starts_at.to_i).to_i
   end

@@ -15,4 +15,12 @@
 # Allow team to pay for more time in room
 class TimeAccountLine < ApplicationRecord
   belongs_to :team
+
+  def half_hours_used
+    if amount > 0
+      DatetimeHelper.seconds_to_half_hour(amount)
+    else
+      -DatetimeHelper.seconds_to_half_hour(-amount)
+    end
+  end
 end

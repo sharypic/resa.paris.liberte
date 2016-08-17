@@ -24,6 +24,7 @@ module ResaParisLiberte
     # Autoload
     config.autoload_paths += %W(#{config.root}/app/models/rooms)
     config.autoload_paths += %W(#{config.root}/app/models/time_account_lines)
+    config.autoload_paths += %W(#{config.root}/app/models/null_objects)
     config.autoload_paths += %W(#{config.root}/app/services)
     config.autoload_paths += %W(#{config.root}/app/presenters)
 

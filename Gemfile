@@ -29,9 +29,6 @@ gem 'bootstrap-sass'
 gem 'bootstrap-datepicker-rails'
 gem 'font-awesome-sass'
 
-# Admin : not sure good idea to use a branch gem
-# gem "administrate", "~> 0.2.2"
-
 # Mail
 gem 'mjml-rails'
 

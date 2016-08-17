@@ -15,6 +15,7 @@
 # Positive time account line (amount<0)
 class Debit < TimeAccountLine
   belongs_to :reservation
-
+  has_one :resident, through: :reservation
+  has_one :room, through: :reservation
   validates :amount, numericality: { less_than: 0 }
 end

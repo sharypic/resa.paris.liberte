@@ -12,9 +12,9 @@
 # * many residents able to book a room
 # * holds paying credits
 class Team < ApplicationRecord
-  has_many :residents
-  has_many :reservations, through: :residents
-  has_many :time_account_lines
+  has_many :residents, dependent: :destroy
+  has_many :reservations, through: :residents, dependent: :destroy
+  has_many :time_account_lines, dependent: :destroy
 
   def weekly_free_seconds_available(room, date)
     total = room.free_seconds_per_week -
