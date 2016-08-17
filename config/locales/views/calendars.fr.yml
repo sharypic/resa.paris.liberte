@@ -1,0 +1,5 @@
+fr:
+  calendars:
+    index:
+      book: 'Réserver %{from}-%{to}'
+      reservations_at: 'Réservation en date du'

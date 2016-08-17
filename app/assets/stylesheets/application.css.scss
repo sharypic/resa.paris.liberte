@@ -99,22 +99,24 @@
     }
   }
 
+
   .block-reserved{
     background-color: $state-danger-bg;
     color: $state-danger-text;
     border-color: $state-danger-border;
 
   }
-
-    .block-reserved-hour,
+    .block-hour-wrapper{
+      margin: 0;
+      text-align: left;
+      line-height: 1;
+      font-weight: bold;
+      font-size: 10px;
+    }
     .block-reserved-name{
       margin: 0;
       text-align: left;
       line-height: 1;
-    }
-    .block-reserved-hour{
-      font-weight: bold;
-      font-size: 10px;
     }
     .block-reserved-name{
       font-size: 12px;

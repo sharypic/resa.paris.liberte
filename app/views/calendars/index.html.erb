@@ -1,4 +1,4 @@
-<h4>Réservation en date du <%= render partial: 'layouts/datepicker', locals: {date: date, url_on_date_selected: room_calendars_path(slug_id: params[:room_slug], year: ':year', month: ':month', day: ':day') } %> </h4>
+<h4><%= t('.reservations_at') %> <%= render partial: 'layouts/datepicker', locals: {date: date, url_on_date_selected: room_calendars_path(slug_id: params[:room_slug], year: ':year', month: ':month', day: ':day') } %> </h4>
 
 <table class="table table-bordered table-cal <%= classname_for_room(params[:room_slug]) %> <%= classname_for_date(date) %> ">
   <colgroup>
@@ -30,13 +30,13 @@
           <% reservation = room.reservations.find { |reservation| reservation.in?(half_hour_starts_at, half_hour_ends_at) } %>
           <% if reservation == nil %>
             <td class="td-open">
-              <%= link_to raw("Reserver"), new_room_reservations_path({room_id: room.id}.merge(datetime_to_param(half_hour_starts_at))), class: 'block-opened' %>
+              <%= link_to t('.book', from: half_hour_starts_at.strftime('%H:%M'), to: half_hour_ends_at.strftime('%H:%M')), new_room_reservations_path({room_id: room.id}.merge(datetime_to_param(half_hour_starts_at))), class: 'block-opened block-hour-wrapper' %>
             </td>
           <% elsif !reservation.rendered? %>
             <%- reservation.mark_as_rendered %>
             <td class="td-reserved" rowspan="<%= reservation.half_hours_used %>">
               <div data-toggle="popover" data-title="<%= reservation.name %>" class='block-reserved' data-content-xhr-url="<%= room_reservation_path(room_id: room.id, id: reservation.id) %>">
-                <p class="block-reserved-hour">
+                <p class="block-hour-wrapper">
                   <%= reservation.starts_at.strftime('%Hh%M') %> - <%= reservation.ends_at.strftime('%Hh%M') %>
                 </p>
                 <p class="block-reserved-name">

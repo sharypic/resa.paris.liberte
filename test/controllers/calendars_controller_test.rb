@@ -46,7 +46,7 @@ class IndexRoomCalendarsControllerTest < ActionDispatch::IntegrationTest
     sign_in(@resident)
     date = Time.zone.today.beginning_of_week
     reservations_start = date + 8.hours
-    reservations_end = date + 20.hours
+    reservations_end = date + 19.hours
 
     opts = { room_slug: SmallLodge.to_slug }.merge(date_to_param(date))
     get room_calendars_path(opts)
@@ -58,8 +58,8 @@ class IndexRoomCalendarsControllerTest < ActionDispatch::IntegrationTest
       url_reservation_begin = new_room_reservations_path opts_reservation_begin
       url_reservation_end = new_room_reservations_path(opts_reservation_end)
 
-      assert_select "a[href='#{url_reservation_begin}']", '+'
-      assert_select "a[href='#{url_reservation_end}']", '+'
+      assert_select "a[href='#{url_reservation_begin}']"
+      assert_select "a[href='#{url_reservation_end}']"
     end
   end
 
