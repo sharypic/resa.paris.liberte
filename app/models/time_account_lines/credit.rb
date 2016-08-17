@@ -17,10 +17,10 @@ class Credit < TimeAccountLine
   validates :amount, numericality: { greater_than: 0 }
 
   def resident
-    NullObjects::Resident.new
+    NullResident.new
   end
 
   def room
-    NullObjects::Room.new
+    NullRoom.new
   end
 end

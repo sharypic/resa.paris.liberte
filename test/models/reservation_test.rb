@@ -13,7 +13,7 @@ class ReservationTest < ActiveSupport::TestCase
   end
 
   test '.safe_time_account_line' do
-    assert_equal NullObjects::TimeAccountLine,
+    assert_equal NullTimeAccountLine,
                  @reservation.safe_time_account_line.class
   end
 

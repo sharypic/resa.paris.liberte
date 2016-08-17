@@ -1,8 +1,7 @@
-module NullObjects
+
   # For TimeAccountLine::Credit: no resident
-  class Resident
+  class NullResident
     def fullname
       ''
     end
   end
-end

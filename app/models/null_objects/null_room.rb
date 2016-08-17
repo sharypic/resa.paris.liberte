@@ -1,6 +1,6 @@
-module NullObjects
+
   # For TimeAccountLine::Credit: no room
-  class Room
+  class NullRoom
     def denomination
       ''
     end
@@ -9,4 +9,4 @@ module NullObjects
       ''
     end
   end
-end
+
