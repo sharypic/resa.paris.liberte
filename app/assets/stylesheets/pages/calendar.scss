@@ -1,0 +1,118 @@
+//
+// table
+//
+.table-cal{
+  border: none;
+  $cell-height: 25px;
+
+  // group col
+  .col-time{ width: 10% }
+  .col-room-atelier{ width: 90% }
+  .col-room-carre,
+  .col-room-grande-loge,
+  .col-room-grande-loge{ width: 22.5% }
+  // all
+  > thead > tr > th,
+  > tbody > tr > td {
+    padding: 0px;
+    vertical-align: middle;
+    text-align: center;
+  }
+  > thead > tr > th {
+    border-bottom: 0;
+  }
+  > tbody > tr > td{
+    position: relative;
+    height: $cell-height;
+    line-height: $cell-height;
+  }
+  // first cell [0,0]
+  .th-no-border{
+    border-top-color: transparent;
+    border-left-color: transparent;
+  }
+  // hours cell [0, ...], position hour top right
+  .td-time{
+    border-left: 0;
+    line-height: 12px;
+    font-size: 12px;
+    padding-right: 3px;
+    padding-top: 3px;
+    vertical-align: top;
+    text-align: right;
+  }
+
+  // alternate rows, marking hour with darker line
+  .tr-full-hour{
+    td{
+      border-color: rgb(215,215,215);
+      border-bottom-style: dotted;
+    }
+    .td-time{
+      border-bottom-color: transparent;
+    }
+  }
+  .tr-half-hour{
+    td{
+      border-bottom-color: rgb(221,221,221);
+      border-top-style: dotted;
+    }
+    .td-time{
+      border-top-color: transparent;
+    }
+  }
+  // link to book
+  .block-opened,
+  .block-reserved{
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 2px;
+    right: 3px;
+    border-width: 1px;
+    border-style: solid;
+  }
+
+  a.block-opened{
+    border-color: transparent;
+    color: transparent;
+    transition: background-color 0.2s linear, color 0.2s linear;
+    &:hover{
+      border-color: $state-success-border;
+      background-color: $state-success-bg;
+      color: $state-success-text;
+      text-decoration: underline;
+    }
+  }
+
+
+  .block-reserved{
+    background-color: $state-danger-bg;
+    color: $state-danger-text;
+    border-color: $state-danger-border;
+
+  }
+    .block-hour-wrapper{
+      margin: 0;
+      text-align: left;
+      line-height: 1;
+      font-weight: bold;
+      font-size: 10px;
+    }
+    .block-reserved-name{
+      margin: 0;
+      text-align: left;
+      line-height: 1;
+    }
+    .block-reserved-name{
+      font-size: 12px;
+    }
+}
+
+//
+// popover
+//
+.popover {
+  color: #000;
+}
