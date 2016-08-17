@@ -26,7 +26,8 @@ def create_residents
                    password: ENV['DEFAULT_PWD'],
                    team: Team.first,
                    firstname: 'Martin',
-                   lastname: 'Fourcade')
+                   lastname: 'Fourcade',
+                   admin: true)
 end
 
 # rubocop:disable Metrics/AbcSize
