@@ -63,12 +63,9 @@ module Admin
 
     # Only allow a trusted parameter "white list" through.
     def resident_params
-      params.require(:resident).permit(:email,
-                                       :password,
-                                       :firstname,
-                                       :lastname,
-                                       :admin,
-                                       :team_id)
+      white_list = %i(email firstname lastname admin team_id)
+      white_list.push(:password) if action_name == 'create'
+      params.require(:resident).permit(*white_list)
     end
   end
 end
