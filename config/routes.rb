@@ -15,6 +15,16 @@ Rails.application.routes.draw do
     mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)
   end
 
+  # Admin
+  namespace :admin do
+    resources :dashboards, only: [:index]
+    resources :teams do
+      resources :residents
+      resources :time_account_lines, only: [:index]
+      resources :reservations, only: [:index]
+    end
+  end
+
   # Delayed job UI
   match '/delayed_job' => DelayedJobWeb, :anchor => false, via: [:get, :post]
 

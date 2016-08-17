@@ -1,0 +1,65 @@
+<%= form_for([:admin, @team, resident]) do |f| %>
+  <% if resident.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(resident.errors.count, "error") %> prohibited this resident from being saved:</h2>
+
+      <ul>
+      <% resident.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <row>
+    <fieldset class="col-md-6">
+      <legend>Information publiques</legned>
+      <div class="form-group">
+        <%= f.label :email %>
+       <%= f.text_field :email, class: 'form-control' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :password %>
+        <%= f.password_field :password, class: 'form-control', readonly: (resident.new_record? ? false : :readonly) %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :firstname %>
+        <%= f.text_field :firstname, class: 'form-control' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :lastname %>
+        <%= f.text_field :lastname, class: 'form-control' %>
+      </div>
+
+
+      <div class="form-group">
+        <%= f.label :team_id %>
+        <%= f.collection_select :team_id, Team.all, :id, :name, class: 'form-control' %>
+      </div>
+
+
+
+      <div class="form-group">
+        <%= f.label :admin %>
+        <%= f.check_box :admin, class: 'form-control' %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit nil, class: 'btn btn-defaul' %>
+      </div>
+    </fieldset>
+
+    <fieldset class="col-md-6">
+      <legend>Information administratives</legned>
+      <% %i(reset_password_token reset_password_sent_at remember_created_at sign_in_count current_sign_in_at last_sign_in_at current_sign_in_ip last_sign_in_ip).each do |readonly_field| %>
+       <div class="form-group">
+          <%= f.label readonly_field %>
+          <%= f.text_field readonly_field, class: 'form-control', readonly: :readonly %>
+        </div>
+      <% end %>
+    </fieldset>
+  </row>
+
+<% end %>

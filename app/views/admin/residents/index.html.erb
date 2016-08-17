@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1><%= @team.name %> > Residents</h1>
+
+<table class="table table-bordered table-stripped">
+  <thead>
+    <tr>
+      <th>Email</th>
+      <th>Password</th>
+      <th>Firstname</th>
+      <th>Lastname</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @residents.each do |resident| %>
+      <tr>
+        <td><%= resident.email %></td>
+        <td><%= resident.password %></td>
+        <td><%= resident.firstname %></td>
+        <td><%= resident.lastname %></td>
+        <td><%= link_to 'Show', admin_team_resident_path(@team, resident) %></td>
+        <td><%= link_to 'Edit', edit_admin_team_resident_path(@team, resident) %></td>
+        <td><%= link_to 'Destroy', admin_team_resident_path(@team, resident), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Resident', new_admin_team_resident_path(@team) %>

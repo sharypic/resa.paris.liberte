@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @resident.email %>
+</p>
+
+<p>
+  <strong>Password:</strong>
+  <%= @resident.password %>
+</p>
+
+<p>
+  <strong>Firstname:</strong>
+  <%= @resident.firstname %>
+</p>
+
+<p>
+  <strong>Lastname:</strong>
+  <%= @resident.lastname %>
+</p>
+
+<%= link_to 'Edit', edit_admin_team_resident_path(@team, @resident) %> |
+<%= link_to 'Back', admin_team_residents_path(@team) %>

@@ -96,10 +96,18 @@ Also you need to setup two buildpacks : ruby (default) plus node (for mjml), see
 
 ## Feature set
 
-Books rooms depending on your credits
+* Books rooms depending on your credits
 
 ## Frameworks & libs
 * Backend/frontend: Rails ; >5
 * CSS/JS: Bootstrap ; customized and stripped down to the 'bare' minimum, see assets/{stylesheets|javascript}/libs for available parts
 * Icons: font awesome
 
+## Implementail details
+Admin does not use external gem (shitty to maintain, IMO). So we fallback to classic rails scaffolding as 
+
+```
+be bin/rails g scaffold_controller admin/residents email:string password:string firstname:string lastname:string --model-name=resident
+
+be bin/rails g scaffold_controller admin/teams name:string  --model-name=team
+```

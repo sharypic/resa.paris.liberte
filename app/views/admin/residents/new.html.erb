@@ -1,0 +1,5 @@
+<h1><%= @team.name %> > New Resident</h1>
+
+<%= render 'form', team: @team, resident: @resident %>
+
+<%= link_to 'Back', admin_team_residents_path(@team) %>

@@ -1,0 +1,18 @@
+fr:
+  activerecord:
+    attributes:
+      resident:
+        email: Courriel
+        lastname: Nom de famille
+        firstname: Prénom
+        team_id: "Organisation de résidence"
+        admin: Administrateur
+        reset_password_token: Jeton pour ré-initiliser son mot de passe
+        reset_password_sent_at: Jeton de ré-initilisation de mot de passe envoyé le
+        remember_created_at: A decider rester connecté le
+        sign_in_count: Nombre de connexion
+        current_sign_in_at: Date de connexion actuelle
+        last_sign_in_at: Dernière date de connexion
+        current_sign_in_ip: IP de connexion actuelle
+        last_sign_in_ip: Dernière IP de connexion
+

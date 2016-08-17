@@ -40,3 +40,4 @@ end
 # rubocop:enable Metrics/AbcSize
 
 run
+Resident.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')

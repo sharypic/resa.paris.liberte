@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1><%= @team.name %> > Crédits</h1>
+
+<table class="table table-bordered table-stripped">
+  <thead>
+    <tr>
+      <th>ID de transaction</th>
+      <th>Type de transaction</th>
+      <th>Quantité</th>
+      <th>Type de salle</th>
+      <th>Identifiant de la salle</th>
+      <th>Résident</th>
+      <th>Date</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @time_account_lines.each do |time_account_line| %>
+      <tr class="row-time-account-line-<%= time_account_line.class.name.downcase %>">
+        <td><%= time_account_line.id %></td>
+        <td><%= time_account_line.class.name %></td>
+        <td><%= time_account_line.half_hours_used %></td>
+        <td><%= time_account_line.room.denomination %></td>
+        <td><%= time_account_line.room.name %></td>
+        <td><%= time_account_line.resident.fullname %></td>
+        <td><%= time_account_line.created_at %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
