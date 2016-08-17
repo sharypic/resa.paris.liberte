@@ -13,3 +13,4 @@ fr:
     destroy:
       success: "La réservation vient d'être supprimée"
       error: "La réservation vient d'être supprimée"
+      time_error: 'Impossible de supprimer une réservation passée'

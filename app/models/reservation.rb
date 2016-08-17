@@ -47,6 +47,10 @@ class Reservation < ApplicationRecord
     (ends_at.to_i - starts_at.to_i).to_i
   end
 
+  def destroyable?
+    starts_at.utc < Time.now.utc
+  end
+
   # Before save
   def cache_duration_in_seconds
     self.cached_duration_in_seconds = duration_in_seconds

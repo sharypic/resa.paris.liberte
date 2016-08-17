@@ -1,9 +1,15 @@
-<%= render partial: 'layouts/datepicker', locals: {date: date, url_on_date_selected: room_calendars_path(slug_id: params[:room_slug], year: ':year', month: ':month', day: ':day') } %>
+<h4>Réservation en date du <%= render partial: 'layouts/datepicker', locals: {date: date, url_on_date_selected: room_calendars_path(slug_id: params[:room_slug], year: ':year', month: ':month', day: ':day') } %> </h4>
 
 <table class="table table-bordered table-cal <%= classname_for_room(params[:room_slug]) %> <%= classname_for_date(date) %> ">
+  <colgroup>
+    <col class="col-time">
+    <% rooms.each.with_index do |room, i| %>
+      <col class="col-room-<%= room.to_slug %>">
+    <% end %>
+  </colgroup>
   <thead>
     <tr>
-      <th></th>
+      <th class="th-no-border"></th>
       <% rooms.each.with_index do |room, i| %>
         <th><%= "#{room.name} - #{i}" %></th>
       <% end %>
@@ -12,23 +18,31 @@
 
   <tbody>
     <% iterate_day(date, 30.minutes) do |half_hour_starts_at, half_hour_ends_at| %>
-      <tr>
-        <td class="td-time"><%= half_hour_starts_at.strftime('%H:%M') %></td>
+      <% full_hour = half_hour_starts_at.min == 0 %>
+      <tr class="<%= full_hour ? 'tr-full-hour' : 'tr-half-hour' %>">
+        <td class="td-time ">
+          <% if full_hour %>
+            <%= half_hour_starts_at.strftime('%H:%M') %>
+          <% end %>
+        </td>
 
         <% rooms.each.with_index do |room, i| %>
           <% reservation = room.reservations.find { |reservation| reservation.in?(half_hour_starts_at, half_hour_ends_at) } %>
           <% if reservation == nil %>
-            <td class=""><%= link_to "+", new_room_reservations_path({room_id: room.id}.merge(datetime_to_param(half_hour_starts_at))) %> </td>
+            <td class="td-open">
+              <%= link_to raw("Reserver"), new_room_reservations_path({room_id: room.id}.merge(datetime_to_param(half_hour_starts_at))), class: 'block-opened' %>
+            </td>
           <% elsif !reservation.rendered? %>
+            <%- reservation.mark_as_rendered %>
             <td class="td-reserved" rowspan="<%= reservation.half_hours_used %>">
-              <%= reservation.name %>
-              <%- reservation.mark_as_rendered %>
-              <button class='btn btn-sm'
-                      data-toggle="popover"
-                      data-title="<%= reservation.name %>"
-                      data-content-xhr-url="<%= room_reservation_path(room_id: room.id, id: reservation.id) %>">
-                <%= icon('info-circle') %>
-              </button>
+              <div data-toggle="popover" data-title="<%= reservation.name %>" class='block-reserved' data-content-xhr-url="<%= room_reservation_path(room_id: room.id, id: reservation.id) %>">
+                <p class="block-reserved-hour">
+                  <%= reservation.starts_at.strftime('%Hh%M') %> - <%= reservation.ends_at.strftime('%Hh%M') %>
+                </p>
+                <p class="block-reserved-name">
+                  <%= reservation.name %>
+                </p>
+              </div>
             </td>
           <% else %>
           <% end %>

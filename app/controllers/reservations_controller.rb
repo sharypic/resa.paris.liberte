@@ -60,7 +60,9 @@ class ReservationsController < ApplicationController
   private
 
   def destroy_reservation_with_flash(reservation)
-    if reservation.destroy
+    if reservation.destroyable?
+      { alert: t('.time_error') }
+    elsif reservation.destroy
       { notice: t('.success') }
     else
       { alert: t('.error') }

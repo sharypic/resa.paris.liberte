@@ -7,7 +7,7 @@ module CalendarsHelper
     from = date + 8.hours
     to = date + 20.hours
 
-    while from <= to
+    while from < to
       next_step = from + step
       yield(from, next_step)
       from = next_step

@@ -1,7 +1,10 @@
 <ul>
+  <li>
+    Le <%= reservation.starts_at.strftime('%Y-%m-%d') %> de <%= reservation.starts_at.strftime('%Hh%M') %> à <%= reservation.ends_at.strftime('%Hh%M') %>
+  </li>
   <li class="reservation-team-name"><%= t('.team', team_name: reservation.team.name) %></li>
   <li class="reservation-resident-fullname"><%= t('.user', user_name: reservation.resident.fullname) %></li>
-  <%if reservation.resident == current_resident %>
+  <%if reservation.resident == current_resident && reservation.destroyable? %>
     <li class="reservation-edit"><%= link_to t('.destroy'), room_reservation_path(room_id: reservation.room.id, id: reservation.id), class: 'btn btn-danger', method: :delete, data: {confirm: t('.confirm') } %></li>
   <% end %>
 </ul>
