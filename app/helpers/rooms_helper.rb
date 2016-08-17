@@ -41,12 +41,10 @@ module RoomsHelper
 
   def label_half_hours_available(seconds_available, type)
     half_hours = DatetimeHelper.seconds_to_half_hour(seconds_available)
-    label_for_type = type == :free ? 'gratuite' : 'payante'
-    suffix = type == :free ? ' cette semaine' : ''
 
     content_tag :p,
-                format('%d demi-heure %s restante%s',
-                       half_hours, label_for_type, suffix),
+                I18n.t("rooms.index.#{type}_half_hours_available",
+                       count: half_hours),
                 class: 'notice-progress-consumption'
   end
 
@@ -60,23 +58,30 @@ module RoomsHelper
                            date,
                            free_seconds_available)
     if DatetimeHelper.seconds_to_half_hour(free_seconds_available) > 0
-      link_to('Réserver',
+      link_to(I18n.t('rooms.index.links.book.text'),
               room_calendars_date_path(room, date),
-              class: 'btn btn-primary')
+              class: 'btn btn-primary',
+              title: I18n.t('rooms.index.links.book.title',
+                            room_denomination: room.denomination))
     else
-      button_tag('Réserver', class: 'btn btn-primary disabled')
+      button_tag(I18n.t('rooms.index.links.book.text'),
+                 class: 'btn btn-primary disabled')
     end
   end
 
   def link_to_paid_booking(room, date, paid_seconds_available)
     if DatetimeHelper.seconds_to_half_hour(paid_seconds_available) > 0
-      link_to('Réserver avec des crédits payant',
+      link_to(I18n.t('rooms.index.links.book_paid.text'),
               room_calendars_date_path(room, date),
-              class: 'btn btn-warning')
+              class: 'btn btn-warning',
+              title: I18n.t('rooms.index.links.book_paid.title'))
     end
   end
 
   def link_to_pay_for_booking
-    mail_to(BILLING_EMAIL, 'Acheter des crédits', class: 'btn btn-danger')
+    mail_to(BILLING_EMAIL,
+            I18n.t('rooms.index.links.pay_for_credits.text'),
+            class: 'btn btn-danger',
+            title: I18n.t('rooms.index.links.pay_for_credits.title'))
   end
 end

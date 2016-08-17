@@ -1,11 +1,16 @@
-<%= render partial: 'layouts/datepicker', locals: {date: date, url_on_date_selected: dated_rooms_path(year: ':year', month: ':month', day: ':day') } %>
+<h4><%= t('.availablity_at') %> <%= render partial: 'layouts/datepicker', locals: {date: date, url_on_date_selected: dated_rooms_path(year: ':year', month: ':month', day: ':day') } %></h4>
 
 <div class="row">
   <% Room.list.each.with_index do |room| %>
       <div class="col-sm-6 col-xs-12" id="test-<%= room.name %>">
         <h2 class='room-denomination'><%= room.denomination %></h2>
 
-        <p><span class='room-seats'><%= room.seats %></span> personnes / <span class='room-cost-per-half-hour'><%= room.cost_per_half_hour %></span>€/h</p>
+        <p>
+          <span class='room-seats'><%= t('.seats', count: room.seats) %></span>
+          —
+          <span class='room-cost-per-half-hour'><%= t('.cost_per_half_hour', count: room.cost_per_half_hour) %>
+          </span>
+        </p>
 
         <%= available_seconds_per_week(current_resident.team, room, date) %>
       </div>

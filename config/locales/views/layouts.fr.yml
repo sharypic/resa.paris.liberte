@@ -1,0 +1,14 @@
+fr:
+  layouts:
+    navbar:
+      links:
+        brand:
+          title: Logo Liberté Paris
+        admin:
+          text: Admin
+          title: Accéder à l'administration
+        rooms:
+          text: Salles
+          title: Afficher les salles disponible
+        room_type:
+          title: "Disponibilités pour %{room_denomination}"

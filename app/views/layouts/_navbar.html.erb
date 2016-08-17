@@ -1,7 +1,6 @@
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
-
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
         <span class="sr-only"></span>
         <span class="icon-bar"></span>
@@ -10,15 +9,19 @@
       </button>
 
       <%= link_to root_path, class: 'navbar-brand' do %>
-        <%= image_tag 'logo/header-icon-31x40.png', alt: "Logo Liberté Paris", size: "31x40" %>
+        <%= image_tag 'logo/header-icon-31x40.png', title: t('.links.brand.title'), size: "31x40" %>
       <% end %>
     </div>
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><%= link_to "Salles", rooms_path %></li>
+        <% if resident_signed_in? && current_resident.admin? %>
+          <li><%= link_to t('.links.admin.text'), admin_dashboards_path, title: t('.links.admin.title') %></li>
+        <% end %>
+
+        <li><%= link_to t('.links.rooms.text'), rooms_path, title: t('.links.rooms.title') %></li>
         <% Room.list.each.with_index do |room| %>
-          <li><%= link_to room.denomination, room_calendars_date_path(room, Time.zone.today) %></li>
+          <li><%= link_to room.denomination, room_calendars_date_path(room, Time.zone.today), title: t('.links.room_type.title', room_denomination: room.denomination) %></li>
         <% end %>
       </ul>
 

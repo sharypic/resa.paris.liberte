@@ -1,0 +1,29 @@
+fr:
+  rooms:
+    index:
+      # Title
+      availablity_at: Disponibilité en date de
+
+      # Labels
+      seats: '%{count} personnes'
+      cost_per_half_hour: '%{count}€/h'
+      free_half_hours_available:
+        zero: '%{count} demi-heure gratuite restante cette semaine'
+        one: '%{count} demi-heure gratuite restante cette semaine'
+        other: '%{count} demi-heures gratuite restantes cette semaine'
+      paid_half_hours_available:
+        zero: '%{count} demi-heure payante restante'
+        one: '%{count} demi-heure payante restante'
+        other: '%{count} demi-heures payante restantes'
+
+      # Links
+      links:
+        book:
+          text: Réserver
+          title: 'Réserver une salle de type %{room_denomination}'
+        book_paid:
+          text: Réserver avec des crédits payant
+          title: La réservation via des crédits payant consomme vos crédits
+        pay_for_credits:
+          text: Acheter des crédits
+          title: Vos crédits acheté ne seront accessible qu'une fois le paiement confirmé
