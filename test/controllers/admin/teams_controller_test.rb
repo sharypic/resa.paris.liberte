@@ -1,11 +1,13 @@
 require 'test_helper'
 
-module Adim
+module Admin
   class TeamsControllerTest < ActionDispatch::IntegrationTest
-    fixtures :teams
+    include Devise::Test::IntegrationHelpers
+    fixtures :teams, :residents
 
     setup do
       @team = teams(:staff)
+      sign_in(residents(:staff_member))
     end
 
     test 'should get index' do

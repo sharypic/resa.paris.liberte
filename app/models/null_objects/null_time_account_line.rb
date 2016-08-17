@@ -5,4 +5,3 @@ class NullTimeAccountLine
     0
   end
 end
-

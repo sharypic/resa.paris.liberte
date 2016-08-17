@@ -37,10 +37,11 @@ class IndexRoomsControllerTest < ActionDispatch::IntegrationTest
                       room.denomination,
                       "missing #{room.name} denomination"
         assert_select 'span.room-seats',
-                      room.seats.to_s,
+                      I18n.t('rooms.index.seats', count: room.seats.to_s),
                       "missing #{room.name} seats"
         assert_select 'span.room-cost-per-half-hour',
-                      room.cost_per_half_hour.to_s,
+                      I18n.t('rooms.index.cost_per_half_hour',
+                             count: room.cost_per_half_hour.to_s),
                       "missing #{room.name} price per half hour"
       end
     end

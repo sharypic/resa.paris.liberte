@@ -8,6 +8,19 @@ class ReservationTest < ActiveSupport::TestCase
                                    ends_at: @ends_at)
   end
 
+  test '.destroyable? returns false for past reservation' do
+    reservation = Reservation.new(starts_at: 2.hours.ago.utc,
+                                  ends_at: 1.hour.ago.utc)
+
+    assert_not reservation.destroyable?
+  end
+
+  test '.destroyable? returns true for futur reservation' do
+    reservation = Reservation.new(starts_at: 2.hours.from_now.utc,
+                                  ends_at: 3.hour.from_now.utc)
+    assert reservation.destroyable?
+  end
+
   test '.free_half_hour_consumed with 100 percent free' do
     assert_equal 4, @reservation.free_half_hour_consumed
   end

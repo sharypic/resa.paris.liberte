@@ -57,7 +57,7 @@ class Reservation < ApplicationRecord
   end
 
   def safe_time_account_line
-    time_account_line || NullObjects::TimeAccountLine.new
+    time_account_line || NullTimeAccountLine.new
   end
 
   def duration_in_seconds
@@ -65,7 +65,7 @@ class Reservation < ApplicationRecord
   end
 
   def destroyable?
-    starts_at.utc < Time.now.utc
+    starts_at.utc > Time.now.utc
   end
 
   # Before save

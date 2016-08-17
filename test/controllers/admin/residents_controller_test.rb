@@ -1,11 +1,13 @@
 require 'test_helper'
 module Admin
-  class ResidentsControllerTest < ActionDispatch::IntegrationTest
+  class AdminResidentsControllerTest < ActionDispatch::IntegrationTest
+    include Devise::Test::IntegrationHelpers
     fixtures :teams, :residents
 
     setup do
       @team = teams(:staff)
       @resident = residents(:staff_member)
+      sign_in(@resident)
     end
 
     test 'should get index' do

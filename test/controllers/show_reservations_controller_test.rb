@@ -30,8 +30,8 @@ class CreateReservationsControllerTest < ActionDispatch::IntegrationTest
     resident = residents(:mfo)
     room = rooms(:shed)
     sign_in(resident)
-    reservation = Reservation.create!(starts_at: Time.zone.today + 8.hours,
-                                      ends_at: Time.zone.today + 9.hours,
+    reservation = Reservation.create!(starts_at: 8.hours.from_now.utc,
+                                      ends_at: 9.hours.from_now.utc,
                                       name: 'mouf',
                                       room: room,
                                       resident: resident)

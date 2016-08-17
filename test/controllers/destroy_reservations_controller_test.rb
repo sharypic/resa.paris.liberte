@@ -42,11 +42,11 @@ class DestroyReservationsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'destroy reservation' do
-    reservation = Reservation.create(name: 'Meeting',
-                                     starts_at: @date + 1.hour,
-                                     ends_at: @date + 2.hours,
-                                     room: @room,
-                                     resident: @resident)
+    reservation = Reservation.create!(name: 'Meeting',
+                                      starts_at: 4.hour.from_now,
+                                      ends_at: 6.hours.from_now,
+                                      room: @room,
+                                      resident: @resident)
     sign_in(@resident)
     opts = { room_slug: @room.to_slug }
     opts = opts.merge(date_to_param(reservation.starts_at))

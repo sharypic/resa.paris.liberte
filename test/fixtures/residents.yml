@@ -11,3 +11,4 @@ staff_member:
   encrypted_password: <%= Resident.new.send(:password_digest, 'kikoolol') %>
   firstname: 'Guillaume'
   lastname: 'Perdrix'
+  admin: true
