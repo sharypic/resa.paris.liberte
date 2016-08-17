@@ -10,6 +10,7 @@ fr:
       from_starts_at: 'De'
       to_ends_at: 'à'
       submit: 'Réserver'
+      errors: 'Veuillez corriger les erreurs suivantes :'
     destroy:
       success: "La réservation vient d'être supprimée"
       error: "La réservation vient d'être supprimée"

@@ -10,6 +10,8 @@ class DebitReservation
   end
 
   def create
+    return false unless reservation.valid?
+
     return save_reservation if reservation.team_have_enough_free_seconds?
     return false unless reservation.team_have_enough_paid_seconds?
     safe_save_reservation_with_debit

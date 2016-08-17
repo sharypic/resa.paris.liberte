@@ -3,13 +3,13 @@ fr:
     attributes:
       reservation:
         name: 'Nom'
+        credits: 'Crédits'
+        room: 'Salle'
     errors:
       models:
         reservation:
           attributes:
-            starts_at:
-              not_enough_credits: 'Pas assez de crédit'
-              busy: 'Une réservation à déjà été prise sur ce créneaux horraire'
-            ends_at:
-              not_enough_credits: 'Pas assez de crédit'
-              busy: 'Une réservation à déjà été prise sur ce créneaux horraire'
+            credits:
+              not_enough: 'manquant, vous avez déjà consommez tous vos crédits sur cette semaine: achetez-en ou changer de date.'
+            room:
+              busy: "déjà occupée sur ce créneaux horraire, changez de date & d'heure"

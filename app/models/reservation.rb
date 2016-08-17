@@ -14,6 +14,9 @@
 
 # Join table between resident and room
 class Reservation < ApplicationRecord
+  # for validation
+  attr_reader :credits, :slot
+
   belongs_to :resident
   belongs_to :room
 
@@ -36,7 +39,7 @@ class Reservation < ApplicationRecord
   validates :cached_duration_in_seconds, numericality: { greater_than: 0 }
 
   validate :validates_team_have_enough_credits?, on: :create
-  validate :validates_free_slot?
+  validate :validates_free_room?
 
   # Helpers
   def half_hours_used
@@ -59,15 +62,13 @@ class Reservation < ApplicationRecord
   # Validations: constraints to book a room
   def validates_team_have_enough_credits?
     if !team_have_enough_free_seconds? && !team_have_enough_paid_seconds?
-      errors.add(:starts_at, :not_enough_credits)
-      errors.add(:ends_at, :not_enough_credits)
+      errors.add(:credits, :not_enough)
     end
   end
 
-  def validates_free_slot?
+  def validates_free_room?
     if Reservation.for_room(room_id).in_range(starts_at..ends_at).count > 0
-      errors.add(:starts_at, :busy)
-      errors.add(:ends_at, :busy)
+      errors.add(:room, :busy)
     end
   end
 

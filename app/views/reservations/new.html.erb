@@ -5,8 +5,16 @@
 
   <div class="panel-body">
     <%= form_for([:room, reservation], html: { role: "form" }) do |f| %>
-
-
+      <% if reservation.errors.any? %>
+        <div class="alert alert-danger">
+          <p><%= t('.errors') %></p>
+          <ul>
+          <% reservation.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
       <%= f.hidden_field :room_id, value: reservation.room_id %>
 
       <div class="form-group">

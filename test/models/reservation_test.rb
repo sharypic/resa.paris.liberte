@@ -68,11 +68,16 @@ class ReservationWithFixturesTest < ActiveSupport::TestCase
       ends_at: Time.zone.tomorrow
     )
     assert_not reservation.save, 'should not be valid due to too long duration'
-    assert_equal 2, reservation.errors.size, 'should have 2 errors'
-    assert reservation.errors.key?(:starts_at), 'starts_at should be in error'
-    assert reservation.errors.key?(:ends_at), 'ends_at should be in error'
-    assert_equal ['Pas assez de crédit'],
-                 reservation.errors.messages.fetch(:starts_at)
+    assert_equal 1, reservation.errors.size, 'should have 1 errors'
+    assert reservation.errors.key?(:credits), 'ends_at should be in error'
+    assert_equal [I18n.t(%w(activerecord
+                            errors
+                            models
+                            reservation
+                            attributes
+                            credits
+                            not_enough).join('.'))],
+                 reservation.errors.messages.fetch(:credits)
   end
 
   test 'fix: .team_have_enough_free_seconds? does not blocks creation ' \
