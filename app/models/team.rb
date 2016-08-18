@@ -33,8 +33,11 @@ class Team < ApplicationRecord
   end
 
   def paid_seconds_available(room)
+    account(room).balance
+  end
+
+  def account(room)
     Account.new(self, room_type_from_instance_or_class(room))
-           .balance
   end
 
   private

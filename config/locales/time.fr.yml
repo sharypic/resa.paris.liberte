@@ -3,3 +3,4 @@ fr:
     formats:
       YMD_with_text: '%-d(%a) %b %Y'
       hours_minutes: '%H:%M'
+      short_ymdhm: 'Le %d-%m-%Y à %Hh%m'

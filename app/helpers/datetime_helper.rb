@@ -39,4 +39,8 @@ module DatetimeHelper
   def self.seconds_to_half_hour(amount_in_seconds)
     amount_in_seconds / 30.minutes.to_i
   end
+
+  def self.half_hour_to_seconds(amount_in_half_hour)
+    amount_in_half_hour * 30.minutes.to_i
+  end
 end

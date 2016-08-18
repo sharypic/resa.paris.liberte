@@ -1,31 +1,37 @@
 <h1><%= @team.name %> > Crédits</h1>
 
-<table class="table table-bordered table-stripped">
-  <thead>
-    <tr>
-      <th>ID de transaction</th>
-      <th>Type de transaction</th>
-      <th>Quantité</th>
-      <th>Type de salle</th>
-      <th>Identifiant de la salle</th>
-      <th>Résident</th>
-      <th>Date</th>
-    </tr>
-  </thead>
+<div class="row">
+  <div class="col-md-6">
+    <h2>Consommation des crédits</h2>
+    <table class="table table-bordered table-stripped">
+      <thead>
+        <tr>
+          <th>Quantité</th>
+          <th>Salle</th>
+          <th>Résident</th>
+          <th>Date</th>
+        </tr>
+      </thead>
 
-  <tbody>
-    <% @time_account_lines.each do |time_account_line| %>
-      <tr class="row-time-account-line-<%= time_account_line.class.name.downcase %>">
-        <td><%= time_account_line.id %></td>
-        <td><%= time_account_line.class.name %></td>
-        <td><%= time_account_line.half_hours_used %></td>
-        <td><%= time_account_line.room.denomination %></td>
-        <td><%= time_account_line.room.name %></td>
-        <td><%= time_account_line.resident.fullname %></td>
-        <td><%= time_account_line.created_at %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+      <tbody>
+        <% @time_account_lines.each do |time_account_line| %>
+          <% next if time_account_line.new_record? %>
+          <tr class="row-time-account-line-<%= time_account_line.class.name.downcase %>">
+            <td>
+              <%= icon(time_account_line.half_hours_used > 0 ? :'cart-plus' : :'cart-arrow-down') %>
+              <%= time_account_line.half_hours_used %>
+            </td>
+            <td><%= Room.class_for_string(time_account_line.room_type).denomination %></td>
+            <td><%= time_account_line.resident.fullname %></td>
+            <td><%= I18n.l(time_account_line.created_at, format: :short_ymdhm) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 
-
+  <div class="col-md-6">
+    <h2>Ajouter des crédits</h2>
+    <%= render 'form', time_account_line: @time_account_line %>
+  </div>
+</div>

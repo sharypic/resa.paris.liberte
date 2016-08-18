@@ -43,6 +43,10 @@ class Room < ApplicationRecord
     ]
   end
 
+  def self.class_for_string(room_type_as_string)
+    Object.const_get(room_type_as_string)
+  end
+
   def self.slugs
     list.map(&:to_slug)
   end
