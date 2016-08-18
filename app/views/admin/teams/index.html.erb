@@ -10,9 +10,10 @@
   </h1>
 
 </div>
-<table class="table table-bordered table-stripped">
+<table class="<%= admin_table_class_names %>">
   <thead>
     <tr>
+      <th>#</th>
       <th>Équipe</th>
       <th colspan="4"></th>
     </tr>
@@ -21,7 +22,8 @@
   <tbody>
     <% @teams.each do |team| %>
       <tr>
-        <td><span class="btn btn-link"><%= team.name %></span></td>
+        <td><%= team.id %></td>
+        <td><%= team.name %></td>
         <td>
           <%= link_to admin_team_residents_path(team),class: 'btn btn-primary' do %>
           <%= icon(:group) %>

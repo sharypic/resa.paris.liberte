@@ -15,9 +15,10 @@
   </h1>
 </div>
 
-<table class="table table-bordered table-stripped">
+<table class="<%= admin_table_class_names %>">
   <thead>
     <tr>
+      <th>#</th>
       <th>Email</th>
       <th>Firstname</th>
       <th>Lastname</th>
@@ -29,6 +30,7 @@
   <tbody>
     <% @residents.each do |resident| %>
       <tr>
+        <td><%= resident.id %></td>
         <td><%= resident.email %></td>
         <td><%= resident.firstname %></td>
         <td><%= resident.lastname %></td>

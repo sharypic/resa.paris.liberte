@@ -8,9 +8,10 @@
 <div class="row">
   <div class="col-sm-6">
     <h2>Consommation des crédits</h2>
-    <table class="table table-bordered table-stripped">
+    <table class="<%= admin_table_class_names %>">
       <thead>
         <tr>
+          <th>#</th>
           <th>Quantité</th>
           <th>Salle</th>
           <th>Résident</th>
@@ -21,10 +22,12 @@
       <tbody>
         <% @time_account_lines.each do |time_account_line| %>
           <% next if time_account_line.new_record? %>
-          <tr class="row-time-account-line-<%= time_account_line.class.name.downcase %>">
+          <% half_hours_used = time_account_line.half_hours_used %>
+          <tr class="<%= half_hours_used > 0 ? 'success' : 'danger' %>">
+            <td><%= time_account_line.id %></td>
             <td>
-              <%= icon(time_account_line.half_hours_used > 0 ? :'cart-plus' : :'cart-arrow-down') %>
-              <%= time_account_line.half_hours_used %>
+              <%= icon(half_hours_used > 0 ? :'cart-plus' : :'cart-arrow-down') %>
+              <%= half_hours_used %>
             </td>
             <td><%= Room.class_for_string(time_account_line.room_type).denomination %></td>
             <td><%= time_account_line.resident.fullname %></td>

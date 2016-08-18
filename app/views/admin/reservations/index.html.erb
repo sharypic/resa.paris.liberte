@@ -6,10 +6,10 @@
 ] %>
 <h1>Liste des <strong>Réservations</strong> de l'équipe <strong><%= @team.name %></strong></h1>
 
-<table class="table table-bordered table-stripped">
+<table class="<%= admin_table_class_names %>">
   <thead>
     <tr>
-      <th>ID</th>
+      <th>#</th>
       <th>Nom</th>
       <th>Salle</th>
        <th>Résident</th>
