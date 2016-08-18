@@ -3,21 +3,46 @@
 <table class="table table-bordered table-stripped">
   <thead>
     <tr>
-      <th>Name</th>
-      <th colspan="6"></th>
+      <th>Équipe</th>
+      <th colspan="4"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @teams.each do |team| %>
       <tr>
-        <td><%= team.name %></td>
-        <td><%= link_to 'Show', admin_team_path(team) %></td>
-        <td><%= link_to 'Edit', edit_admin_team_path(team) %></td>
-        <td><%= link_to 'Destroy', admin_team_path(team), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <td><%= link_to 'Residents', admin_team_residents_path(team) %></td>
-        <td><%= link_to 'credits', admin_team_time_account_lines_path(team) %></td>
-        <td><%= link_to 'Réservations', admin_team_reservations_path(team) %></td>
+        <td><span class="btn btn-link"><%= team.name %></span></td>
+        <td>
+          <%= link_to admin_team_residents_path(team),class: 'btn btn-primary' do %>
+          <%= icon(:group) %>
+          Residents
+          <% end %>
+        </td>
+        <td>
+          <%= link_to admin_team_time_account_lines_path(team),class: 'btn btn-primary' do %>
+            <%= icon(:'shopping-cart') %>
+            Crédits
+          <% end %>
+        </td>
+        <td>
+          <%= link_to admin_team_reservations_path(team), class: 'btn btn-primary' do %>
+          <%= icon(:calendar) %>
+          Réservations
+          <% end %>
+        </td>
+        <td>
+          <%= link_to admin_team_path(team), class: 'btn btn-primary' do %>
+            <%= icon(:eye) %>
+          <% end %>
+
+          <%= link_to edit_admin_team_path(team), class: 'btn btn-primary' do %>
+            <%= icon(:pencil) %>
+          <% end %>
+
+          <%= link_to admin_team_path(team), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' do %>
+            <%= icon(:trash) %>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>

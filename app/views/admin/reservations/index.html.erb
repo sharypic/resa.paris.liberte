@@ -6,8 +6,7 @@
       <th>ID</th>
       <th>Nom</th>
       <th>Salle</th>
-      <th>Type de salle</th>
-      <th>Résident</th>
+       <th>Résident</th>
       <th>Crédit gratuit consommé</th>
       <th>Crédit payant consommé</th>
       <th>Date</th>
@@ -20,14 +19,11 @@
         <td><%= reservation.id %></td>
         <td><%= reservation.name %></td>
         <td><%= reservation.room.name %></td>
-
-        <td><%= reservation.room.denomination %></td>
         <td><%= reservation.resident.fullname %></td>
-
         <td><%= reservation.free_half_hour_consumed %></td>
         <td><%= reservation.paid_half_hour_consumed %></td>
 
-        <td><%= reservation.created_at %></td>
+        <td><%= I18n.l(reservation.created_at, format: :short_ymdhm) %></td>
       </tr>
     <% end %>
   </tbody>
