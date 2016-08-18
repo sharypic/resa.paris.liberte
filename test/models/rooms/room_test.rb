@@ -1,11 +1,12 @@
 require 'test_helper'
 
 class RoomTest < ActiveSupport::TestCase
-  test 'valid_slug?' do
+  test '.slug?' do
     assert Room.slug?(Shed.to_slug)
     assert Room.slug?(Square.to_slug)
     assert Room.slug?(SmallLodge.to_slug)
     assert Room.slug?(BigLodge.to_slug)
+    assert_not Room.slug?('Hello')
   end
 end
 
