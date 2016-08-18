@@ -58,6 +58,10 @@ Rails.application.configure do
   # Suppress logger output for asset requests.
   config.assets.quiet = true
 
+  # Enable serving of images, stylesheets, and JavaScripts from an asset server.
+  config.action_controller.asset_host = ENV['HOST_WITH_PORT']
+  config.action_mailer.asset_host = "http://#{ENV['HOST_WITH_PORT']}"
+
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 
