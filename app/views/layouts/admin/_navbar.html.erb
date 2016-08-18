@@ -15,10 +15,6 @@
     </div>
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li><%= link_to 'Teams', admin_teams_path %></li>
-      </ul>
-
       <ul class="nav navbar-nav navbar-right">
         <% if resident_signed_in? %>
           <li><%= link_to t('devise.shared.links.sign_out'), destroy_resident_session_path, method: :delete %></li>
