@@ -2,7 +2,7 @@ fr:
   rooms:
     index:
       # Title
-      availablity_at: Disponibilité en date de
+      availablity_at: Salles
 
       # Labels
       seats: '%{count} personnes'

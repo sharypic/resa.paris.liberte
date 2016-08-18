@@ -1,6 +1,7 @@
-
-<input type="text" id='js-initialize-datepicker' data-provide='datepicker' data-date-format='dd-mm-yyyy' value="<%= date.strftime('%d-%m-%Y') %>" />
-
+<div class="input-group">
+  <span class="input-group-addon"><%= icon(:calendar) %></span>
+  <input class="form-control" type="text" id='js-initialize-datepicker' data-provide='datepicker' data-date-format='dd-mm-yyyy' value="<%= date.strftime('%d-%m-%Y') %>" />
+</div>
 
 <script type="text/javascript">
   $(document).ready(function() {

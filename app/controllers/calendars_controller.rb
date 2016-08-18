@@ -23,9 +23,10 @@ class CalendarsController < ApplicationController
 
   def locals_for_index
     date = date_or_default(params)
-    rooms = Room.class_for_slug(params[:room_slug]).reservations_for_date(date)
+    room = Room.class_for_slug(params[:room_slug])
+    rooms = room.reservations_for_date(date)
 
-    { date: date, rooms: rooms }
+    { date: date, room: room, rooms: rooms }
   end
 
   def validate_room_slug

@@ -18,11 +18,6 @@
         <% if resident_signed_in? && current_resident.admin? %>
           <li><%= link_to t('.links.admin.text'), admin_dashboards_path, title: t('.links.admin.title') %></li>
         <% end %>
-
-        <li><%= link_to t('.links.rooms.text'), rooms_path, title: t('.links.rooms.title') %></li>
-        <% Room.list.each.with_index do |room| %>
-          <li><%= link_to room.denomination, room_calendars_date_path(room, Time.zone.today), title: t('.links.room_type.title', room_denomination: room.denomination) %></li>
-        <% end %>
       </ul>
 
       <ul class="nav navbar-nav navbar-right">

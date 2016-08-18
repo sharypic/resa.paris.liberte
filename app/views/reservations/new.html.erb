@@ -1,3 +1,7 @@
+<%= render 'layouts/breadcrumb',
+           steps: [ { text: "Salles", href: dated_rooms_path(date_to_param(reservation.starts_at)) },
+                    { text: reservation.room.denomination , href: room_calendars_path({room_slug: reservation.room.to_slug}.merge(date_to_param(reservation.starts_at))) },
+                    { text: 'Reserver' } ] %>
 <div class="panel panel-default devise-bs">
   <div class="panel-heading">
     <h4><%= t('.title', room_name: reservation.room.name, day: reservation.starts_at.strftime('%Y-%m-%d'), hour: reservation.starts_at.strftime('%Hh%M')) %></h4>
