@@ -9,7 +9,12 @@ class ReservationsController < ApplicationController
   # Nested below as get /rooms/:id/reservations/:id
   # Used by popover via ajax request
   def show
-    if resident_signed_in?
+    if params[:webcal_bounce]
+      redirect_to room_reservation_url(protocol: :webcal,
+                                       room_id: @reservation.room.id,
+                                       id: @reservation,
+                                       format: :ics)
+    elsif resident_signed_in?
       respond_to do |format|
         format.html do
           render layout: false,
