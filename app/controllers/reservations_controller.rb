@@ -22,8 +22,7 @@ class ReservationsController < ApplicationController
                            room: Room.find(params[:room_id]) }
         end
         format.ics do
-          send_data IcalReservation.new(@reservation).to_ics,
-                    filename: 'invite.ics'
+          render text: IcalReservation.new(@reservation).to_ics
         end
       end
     else
