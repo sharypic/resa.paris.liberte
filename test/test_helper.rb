@@ -1,13 +1,15 @@
 require 'simplecov'
 SimpleCov.start 'rails' do
+  # ignores boilerplates, ex: devise, application_*...
   add_filter do |source_file|
-    # ignores boilerplates, ex: devise, application_*...
-    source_file.lines.count <= 6
+    source_file.lines.count <= 5
   end
 
-  add_group 'Service', 'app/services'
-  add_group 'Presenter', 'app/presenter'
-  add_group 'Concern', 'app/controllers/concerns'
+  add_group 'Service',      'app/services'
+  add_group 'Presenter',    'app/presenter'
+  add_group 'Concern',      'app/controllers/concerns'
+  add_group 'NullObjects',  'app/models/null_objects'
+  add_group 'Accounting',   'app/models/time_account_lines'
 end
 
 ENV['RAILS_ENV'] ||= 'test'

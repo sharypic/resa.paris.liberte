@@ -1,6 +1,7 @@
 require 'test_helper'
+
 module Admin
-  class AdminResidentsControllerTest < ActionDispatch::IntegrationTest
+  class ResidentsControllerTest < ActionDispatch::IntegrationTest
     include Devise::Test::IntegrationHelpers
     fixtures :teams, :residents
 
