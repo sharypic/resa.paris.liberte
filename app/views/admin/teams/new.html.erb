@@ -1,5 +1,8 @@
-<h1>New Team</h1>
+<%= render 'layouts/breadcrumb', steps: [
+  { text: "Dasbboard", href: admin_dashboards_path() },
+  { text: "Équipes", href: admin_teams_url },
+  { text: "Ajouter" }
+] %>
 
+<h1>Ajouter une équipe</h1>
 <%= render 'form', team: @team %>
-
-<%= link_to 'Back', admin_teams_path %>

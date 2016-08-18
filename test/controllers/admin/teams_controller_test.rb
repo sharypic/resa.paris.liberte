@@ -25,12 +25,7 @@ module Admin
         post admin_teams_url, params: { team: { name: @team.name } }
       end
 
-      assert_redirected_to admin_team_url(Team.last)
-    end
-
-    test 'should show team' do
-      get admin_team_url(@team)
-      assert_response :success
+      assert_redirected_to admin_teams_url
     end
 
     test 'should get edit' do
@@ -40,7 +35,7 @@ module Admin
 
     test 'should update team' do
       patch admin_team_url(@team), params: { team: { name: @team.name } }
-      assert_redirected_to admin_team_url(@team)
+      assert_redirected_to admin_teams_url
     end
 
     test 'should destroy team' do

@@ -1,15 +1,11 @@
 module Admin
   # Access teams details
   class TeamsController < Admin::ApplicationController
-    before_action :set_team, only: [:show, :edit, :update, :destroy]
+    before_action :set_team, only: [:edit, :update, :destroy]
 
     # GET /teams
     def index
       @teams = Team.all
-    end
-
-    # GET /teams/1
-    def show
     end
 
     # GET /teams/new
@@ -26,7 +22,7 @@ module Admin
       @team = Team.new(team_params)
 
       if @team.save
-        redirect_to admin_team_path(@team),
+        redirect_to admin_teams_url,
                     notice: 'Team was successfully created.'
       else
         render :new
@@ -36,7 +32,7 @@ module Admin
     # PATCH/PUT /teams/1
     def update
       if @team.update(team_params)
-        redirect_to admin_team_path(@team),
+        redirect_to admin_teams_url,
                     notice: 'Team was successfully updated.'
       else
         render :edit

@@ -18,8 +18,8 @@ Rails.application.routes.draw do
   # Admin
   namespace :admin do
     resources :dashboards, only: [:index]
-    resources :teams do
-      resources :residents
+    resources :teams, except: [:show] do
+      resources :residents, except: [:show]
       resources :time_account_lines, only: [:index, :create]
       resources :reservations, only: [:index]
     end

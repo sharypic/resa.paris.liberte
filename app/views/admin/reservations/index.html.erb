@@ -1,4 +1,10 @@
-<h1><%= @team.name %> > Réservations</h1>
+<%= render 'layouts/breadcrumb', steps: [
+  { text: "Dasbboard", href: admin_dashboards_path() },
+  { text: "Équipes", href: admin_teams_path() },
+  { text: @team.name },
+  { text: 'Réservations' }
+] %>
+<h1>Liste des <strong>Réservations</strong> de l'équipe <strong><%= @team.name %></strong></h1>
 
 <table class="table table-bordered table-stripped">
   <thead>
@@ -29,5 +35,4 @@
   </tbody>
 </table>
 
-<br>
 

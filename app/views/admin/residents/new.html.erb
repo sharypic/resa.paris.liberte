@@ -1,5 +1,12 @@
-<h1><%= @team.name %> > New Resident</h1>
+<%= render 'layouts/breadcrumb', steps: [
+  { text: "Dasbboard", href: admin_dashboards_path() },
+  { text: "Équipes", href: admin_teams_url },
+  { text: @team.name },
+  { text: 'Résidents', href: admin_team_residents_path(@team) },
+  { text: "Ajouter" }
+] %>
+<h1><strong>Ajouter</strong> un résident à l'équipe <strong><%= @team.name %></strong></h1>
 
 <%= render 'form', team: @team, resident: @resident %>
 
-<%= link_to 'Back', admin_team_residents_path(@team) %>
+

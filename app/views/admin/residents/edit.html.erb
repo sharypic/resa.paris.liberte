@@ -1,6 +1,11 @@
-<h1>Editing Resident</h1>
+<%= render 'layouts/breadcrumb', steps: [
+  { text: "Dasbboard", href: admin_dashboards_path() },
+  { text: "Équipes", href: admin_teams_url },
+  { text: @team.name },
+  { text: 'Résidents', href: admin_team_residents_path(@team) },
+  { text: @resident.fullname }
+] %>
 
+<h1><strong>Modifier</strong> le résident <strong><%= @resident.fullname %></strong></h1>
 <%= render 'form', team: @team, resident: @resident %>
 
-<%= link_to 'Show', edit_admin_team_resident_path(@team, @resident) %> |
-<%= link_to 'Back', admin_team_residents_path(@team) %>

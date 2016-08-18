@@ -1,7 +1,12 @@
-<h1><%= @team.name %> > Crédits</h1>
-
+<%= render 'layouts/breadcrumb', steps: [
+  { text: "Dasbboard", href: admin_dashboards_path() },
+  { text: "Équipes", href: admin_teams_path() },
+  { text: @team.name },
+  { text: 'Crédits' }
+] %>
+<h1><strong>Crédits</strong> de l'équipe <strong><%= @team.name %></strong></h1>
 <div class="row">
-  <div class="col-md-6">
+  <div class="col-sm-6">
     <h2>Consommation des crédits</h2>
     <table class="table table-bordered table-stripped">
       <thead>
@@ -30,7 +35,7 @@
     </table>
   </div>
 
-  <div class="col-md-6">
+  <div class="col-sm-6">
     <h2>Ajouter des crédits</h2>
     <%= render 'form', time_account_line: @time_account_line %>
   </div>

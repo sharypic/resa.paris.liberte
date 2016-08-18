@@ -33,13 +33,7 @@ module Admin
           }
         }
       end
-      assert_redirected_to admin_team_resident_path(Resident.last.team,
-                                                    Resident.last)
-    end
-
-    test 'should show resident' do
-      get admin_team_resident_url(@resident.team, @resident)
-      assert_response :success
+      assert_redirected_to admin_team_residents_path(Resident.last.team)
     end
 
     test 'should get edit' do
@@ -57,7 +51,7 @@ module Admin
           team_id: 1
         }
       }
-      assert_redirected_to admin_team_resident_url(@team, @resident)
+      assert_redirected_to admin_team_residents_url(@team)
     end
 
     test 'should destroy resident' do

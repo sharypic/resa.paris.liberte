@@ -1,6 +1,9 @@
-<h1>Editing Team</h1>
+<%= render 'layouts/breadcrumb', steps: [
+  { text: "Dasbboard", href: admin_dashboards_path() },
+  { text: "Équipes", href: admin_teams_url },
+  { text: @team.name }
+] %>
 
+<h1><strong>Modifier</strong> l'équipe <strong><%= @team.name %></strong></h1>
 <%= render 'form', team: @team %>
 
-<%= link_to 'Show', admin_team_path(@team) %> |
-<%= link_to 'Back', admin_teams_path %>

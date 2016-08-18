@@ -2,15 +2,11 @@ module Admin
   # CRUD for admin residents
   class ResidentsController < Admin::ApplicationController
     before_action :set_team
-    before_action :set_resident, only: [:show, :edit, :update, :destroy]
+    before_action :set_resident, only: [:edit, :update, :destroy]
 
     # GET /residents
     def index
       @residents = Resident.all
-    end
-
-    # GET /residents/1
-    def show
     end
 
     # GET /residents/new
@@ -27,7 +23,7 @@ module Admin
       @resident = @team.residents.new(resident_params)
 
       if @resident.save
-        redirect_to admin_team_resident_path(@resident.team, @resident),
+        redirect_to admin_team_residents_path(@resident.team),
                     notice: 'Resident was successfully created.'
       else
         render :new
@@ -37,7 +33,7 @@ module Admin
     # PATCH/PUT /residents/1
     def update
       if @resident.update(resident_params)
-        redirect_to admin_team_resident_path(@resident.team, @resident),
+        redirect_to admin_team_residents_path(@resident.team),
                     notice: 'Resident was successfully updated.'
       else
         render :edit
