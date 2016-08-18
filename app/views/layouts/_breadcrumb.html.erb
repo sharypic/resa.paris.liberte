@@ -1,0 +1,18 @@
+
+<ol class="breadcrumb-calendar breadcrumb">
+  <% steps.each.with_index do |step, i| %>
+    <li class="<%= steps.size - 1 == i ? 'active' : '' %> ">
+      <% if step[:href] %>
+        <%= link_to step[:text], step[:href] %>
+      <% else %>
+        <%= step[:text] %>
+      <% end %>
+    </li>
+  <% end %>
+  <% if defined?(datepicker) %>
+    <ul class="pull-right list-unstyled">
+      <li class="li-breadcrumb-calendar"><%= datepicker %></li>
+    </ul>
+  <% end %>
+</ol>
+

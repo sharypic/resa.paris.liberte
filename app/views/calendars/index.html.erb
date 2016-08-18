@@ -5,15 +5,15 @@
 <table class="table table-bordered table-cal <%= classname_for_room(params[:room_slug]) %> <%= classname_for_date(date) %> ">
   <colgroup>
     <col class="col-time">
-    <% rooms.each.with_index do |room, i| %>
+    <% rooms.each do |room| %>
       <col class="col-room-<%= room.to_slug %>">
     <% end %>
   </colgroup>
   <thead>
     <tr>
       <th class="th-no-border"></th>
-      <% rooms.each.with_index do |room, i| %>
-        <th><%= "#{room.name} - #{i}" %></th>
+      <% rooms.each do |room, i| %>
+        <th><%= room.name %></th>
       <% end %>
     </tr>
   </thead>
