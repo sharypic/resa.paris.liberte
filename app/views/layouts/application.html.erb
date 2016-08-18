@@ -31,7 +31,7 @@
     <![endif]-->
   </head>
 
-  <body>
+  <body data-turbolinks="<%= disable_turbolink_only_on_signin %>">
     <%= render 'layouts/alert_and_notice' %>
     <%= render 'layouts/navbar' %>
     <div class="container"><%= yield %></div>
