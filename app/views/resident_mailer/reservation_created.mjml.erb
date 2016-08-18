@@ -14,6 +14,11 @@
     </mj-table>
 
     <mj-text font-size="11px" align="center"><%= I18n.t('mail.reservation_created.body.cta.download_ics') %></mj-text>
+
+    <mj-button font-family="Helvetica" background-color="#F8FF01" href="<%= room_reservation_url(@reservation.room, @reservation, format: :ics, protocol: :webcal) %>" color="black">
+      <%= I18n.t('mail.reservation_created.body.cta.add_to_calendar') %>
+    </mj-button>
+
   </mj-column>
 </mj-section>
 <mj-section>
