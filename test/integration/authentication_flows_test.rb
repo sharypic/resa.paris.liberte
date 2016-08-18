@@ -47,6 +47,7 @@ class AuthenticationFlowsTest < ActionDispatch::IntegrationTest
   test 'Logout from homepage' do
     sign_in(@resident)
     get root_url
+    follow_redirect!
 
     assert_select ".navbar a[href='#{destroy_resident_session_path}']",
                   I18n.t('devise.shared.links.sign_out'),
