@@ -13,10 +13,10 @@ class ReservationsController < ApplicationController
              locals: { reservation: Reservation.find(params[:id]),
                        room: Room.find(params[:room_id]) }
     else
-      render nothing: true, status: :forbidden
+      head :forbidden
     end
   rescue ActiveRecord::RecordNotFound
-    render nothing: true, status: :bad_request
+    head :bad_request
   end
 
   # rubocop:disable Metrics/AbcSize

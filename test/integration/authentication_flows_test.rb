@@ -29,7 +29,7 @@ class AuthenticationFlowsTest < ActionDispatch::IntegrationTest
   test 'Sign in failure from homepage' do
     post resident_session_path, params: { resident: { email: @resident.email,
                                                       password: 'fail' } }
-
+    follow_redirect!
     assert_select '.alert-danger .text-danger',
                   I18n.t('devise.failure.invalid'),
                   'Alert sign in failure missing'
