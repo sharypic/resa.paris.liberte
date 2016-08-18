@@ -1,0 +1,6 @@
+fr:
+  activerecord:
+    attributes:
+      resident:
+        room_type: Type de salle
+        amount: Quantité de crédit
