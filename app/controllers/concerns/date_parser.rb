@@ -7,9 +7,9 @@ module DateParser
   class MalformattedDateError < ArgumentError; end
   class DayOffError < RuntimeError; end
 
-  def date_or_default(params)
-    if parse_date?(params)
-      date = date_from_param(params)
+  def date_or_default(params, prefix = '')
+    if parse_date?(params, prefix)
+      date = date_from_param(params, prefix)
       raise DayOffError, 'how dare you' if day_off?(date)
       return date
     else
@@ -25,7 +25,9 @@ module DateParser
     date.beginning_of_the_week
   end
 
-  def parse_date?(params)
-    [:year, :month, :day].all? { |key| params.key?(key) }
+  def parse_date?(params, prefix = '')
+    [:"#{prefix}year",
+     :"#{prefix}month",
+     :"#{prefix}day"].all? { |key| params.key?(key) }
   end
 end

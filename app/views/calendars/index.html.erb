@@ -1,6 +1,6 @@
 <%= render 'layouts/breadcrumb', steps: [ { text: t('.reservations_at'), href: dated_rooms_path(date_to_param(date)) },
                                           { text: room.denomination } ],
-                                 datepicker: render('layouts/datepicker', date: date, url_on_date_selected: room_calendars_path(room_slug: room.to_slug, year: ':year', month: ':month', day: ':day')) %>
+                                 datepicker: render('layouts/datepicker', id: 'datepicker', date: date, url_on_date_selected: room_calendars_path(room_slug: room.to_slug, year: ':year', month: ':month', day: ':day')) %>
 
 <table class="table table-bordered table-cal <%= classname_for_room(params[:room_slug]) %> <%= classname_for_date(date) %> ">
   <colgroup>
@@ -71,7 +71,7 @@
         $.ajax({ method: 'GET', url: $(this).data('content-xhr-url') })
           .then(function(html) {
             $target.popover({ trigger: 'manual',
-                              placement: 'top',
+                              placement: 'auto',
                               content: html,
                               html: true})
                    .popover('show')

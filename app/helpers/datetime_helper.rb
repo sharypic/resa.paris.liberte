@@ -1,35 +1,35 @@
 # Serialize / Deserialize dates
 module DatetimeHelper
-  def date_to_param(date)
+  def date_to_param(date, prefix = '')
     {
-      year:    date.strftime('%Y'),
-      month:   date.strftime('%m'),
-      day:     date.strftime('%d')
+      :"#{prefix}year"  => date.strftime('%Y'),
+      :"#{prefix}month" => date.strftime('%m'),
+      :"#{prefix}day"   => date.strftime('%d')
     }
   end
 
-  def datetime_to_param(datetime)
+  def datetime_to_param(datetime, prefix = '')
     {
-      year:    datetime.strftime('%Y'),
-      month:   datetime.strftime('%m'),
-      day:     datetime.strftime('%d'),
-      hour:    datetime.strftime('%H'),
-      minute:  datetime.strftime('%M')
+      :"#{prefix}year" =>   datetime.strftime('%Y'),
+      :"#{prefix}month" =>  datetime.strftime('%m'),
+      :"#{prefix}day" =>    datetime.strftime('%d'),
+      :"#{prefix}hour" =>   datetime.strftime('%H'),
+      :"#{prefix}minute" => datetime.strftime('%M')
     }
   end
 
-  def date_from_param(param)
-    Time.zone.local(param[:year],
-                    param[:month],
-                    param[:day])
+  def date_from_param(param, prefix = '')
+    Time.zone.local(param[:"#{prefix}year"],
+                    param[:"#{prefix}month"],
+                    param[:"#{prefix}day"])
   end
 
-  def datetime_from_param(param)
-    Time.zone.local(param[:year],
-                    param[:month],
-                    param[:day],
-                    param[:hour],
-                    param[:minute])
+  def datetime_from_param(param, prefix = '')
+    Time.zone.local(param[:"#{prefix}year"],
+                    param[:"#{prefix}month"],
+                    param[:"#{prefix}day"],
+                    param[:"#{prefix}hour"],
+                    param[:"#{prefix}minute"])
   end
 
   def day_off?(date)

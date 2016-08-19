@@ -33,10 +33,10 @@ class Resident < ApplicationRecord
     "#{firstname} #{lastname}"
   end
 
-  def usage_of(room_type)
+  def usage_of(room_type, from_date, to_date)
     room_type_ids = room_type.select(:id).all.map(&:id)
 
-    reservations.all.sum do |reservation|
+    reservations.in_range((from_date..to_date)).all.sum do |reservation|
       if room_type_ids.include?(reservation.room_id)
         reservation.cached_duration_in_seconds
       else

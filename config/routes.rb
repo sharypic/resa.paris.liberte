@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  # General routes
+  segment_date = '/:year/:month/:day'
+  constraints_date = { year: /\d{4}/, month: /\d{2}/, day: /\d{2}/ }
+  segment_datetime = "#{segment_date}/:hour/:minute"
+  constraints_datetime = constraints_date.merge(hour: /\d{2}/, minute: /\d{2}/)
+
   # Authentication
   devise_for :residents, path_names: {
     sessions: 'residents/sessions',
@@ -19,9 +25,22 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :dashboards, only: [:index]
     resources :teams, except: [:show] do
-      resources :residents, except: [:show]
       resources :time_account_lines, only: [:index, :create]
-      resources :reservations, only: [:index]
+
+      resources :residents, except: [:show] do
+        collection do
+          get :index, as: :dated,
+                      path: '/from/:from_year/:from_month/:from_day' \
+                            '/to/:to_year/:to_month/:to_day'
+        end
+      end
+      resources :reservations, only: [:index] do
+        collection do
+          get :index, as: :dated,
+                      path: '/from/:from_year/:from_month/:from_day' \
+                            '/to/:to_year/:to_month/:to_day'
+        end
+      end
     end
   end
 
@@ -30,12 +49,6 @@ Rails.application.routes.draw do
 
   # App routes
   root 'pages#home'
-
-  # General routes
-  segment_date = '/:year/:month/:day'
-  constraints_date = { year: /\d{4}/, month: /\d{2}/, day: /\d{2}/ }
-  segment_datetime = "#{segment_date}/:hour/:minute"
-  constraints_datetime = constraints_date.merge(hour: /\d{2}/, minute: /\d{2}/)
 
   # Core of app is built around Rooms
   # A Resident can view rooms by type (:index)

@@ -1,12 +1,11 @@
-<%= render 'layouts/breadcrumb', steps: [
-  { text: "Équipes", href: admin_teams_url },
-  { text: @team.name },
-  { text: 'Résidents' }
-] %>
+<%= render 'layouts/breadcrumb', steps: [{ text: "Équipes", href: admin_teams_url },
+                                         { text: @team.name },
+                                         { text: 'Résidents' }] %>
 
 <div class="row">
   <h1 class="col-sm-8">
     Liste des <strong>Residents</strong> de l'équipe <strong><%= @team.name %></strong>
+
   </h1>
 
   <h1 class="col-sm-4">
@@ -14,6 +13,14 @@
   </h1>
 </div>
 
+<div class="row">
+  <div class="col-md-6">
+    <%= render('layouts/datepicker', id: 'from_date', date: from_date, url_on_date_selected: dated_admin_team_residents_path({team_id: @team.id}.merge(from_year: ':year', from_month: ':month', from_day: ':day', to_year: to_date.year, to_month: to_date.month, to_day: to_date.day))) %>
+  </div>
+  <div class="col-md-6">
+    <%= render('layouts/datepicker', id: 'to_date', date: to_date, url_on_date_selected: dated_admin_team_residents_path({team_id: @team.id}.merge(from_year: from_date.year, from_month: from_date.month, from_day: from_date.day, to_year: ':year', to_month: ':month', to_day: ':day'))) %>
+  </div>
+</div>
 <table class="<%= admin_table_class_names %>">
   <thead>
     <tr>
@@ -44,10 +51,10 @@
             <%= icon(:'square-o') %>
           <% end %>
         </td>
-        <td><%= DatetimeHelper.seconds_to_half_hour(resident.usage_of(Shed)) %></td>
-        <td><%= DatetimeHelper.seconds_to_half_hour(resident.usage_of(Square)) %></td>
-        <td><%= DatetimeHelper.seconds_to_half_hour(resident.usage_of(SmallLodge)) %></td>
-        <td><%= DatetimeHelper.seconds_to_half_hour(resident.usage_of(BigLodge)) %></td>
+        <td><%= DatetimeHelper.seconds_to_half_hour(resident.usage_of(Shed, from_date, to_date)) %></td>
+        <td><%= DatetimeHelper.seconds_to_half_hour(resident.usage_of(Square, from_date, to_date)) %></td>
+        <td><%= DatetimeHelper.seconds_to_half_hour(resident.usage_of(SmallLodge, from_date, to_date)) %></td>
+        <td><%= DatetimeHelper.seconds_to_half_hour(resident.usage_of(BigLodge, from_date, to_date)) %></td>
         <td>
           <%= link_to edit_admin_team_resident_path(@team, resident), class: 'btn btn-primary' do %>
             <%= icon(:pencil) %>

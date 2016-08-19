@@ -3,10 +3,17 @@ module Admin
   class ResidentsController < Admin::ApplicationController
     before_action :set_team
     before_action :set_resident, only: [:edit, :update, :destroy]
+    include DateParser
 
     # GET /residents
     def index
-      @residents = @team.residents.includes(:reservations)
+      from_date = date_or_default(params, 'from_')
+      to_date = date_or_default(params, 'to_')
+      to_date = from_date + 1.week if from_date == to_date
+
+      @residents = @team.residents
+
+      render locals: { from_date: from_date, to_date: to_date }
     end
 
     # GET /residents/new
