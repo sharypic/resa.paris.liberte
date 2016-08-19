@@ -73,7 +73,7 @@ module RoomsHelper
     if DatetimeHelper.seconds_to_half_hour(paid_seconds_available) > 0
       link_to(I18n.t('rooms.index.links.book_paid.text'),
               room_calendars_date_path(room, date),
-              class: 'btn btn-warning',
+              class: 'btn btn-warning m-l-1',
               title: I18n.t('rooms.index.links.book_paid.title'))
     end
   end
