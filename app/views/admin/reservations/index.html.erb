@@ -10,6 +10,7 @@
     <tr>
       <th>#</th>
       <th>Nom</th>
+      <th>Type de salle</th>
       <th>Salle</th>
        <th>Résident</th>
       <th>Crédit gratuit consommé</th>
@@ -23,7 +24,8 @@
       <tr class="row-time-account-line-<%= reservation.class.name.downcase %>">
         <td><%= reservation.id %></td>
         <td><%= reservation.name %></td>
-        <td><%= reservation.room.name %></td>
+        <td><%= reservation.room.denomination %></td>
+        <td><%= "[##{reservation.room.id}] #{reservation.room.name}" %></td>
         <td><%= reservation.resident.fullname %></td>
         <td><%= reservation.free_half_hour_consumed %></td>
         <td><%= reservation.paid_half_hour_consumed %></td>

@@ -6,7 +6,7 @@ module Admin
 
     # GET /residents
     def index
-      @residents = Resident.all
+      @residents = @team.residents.includes(:reservations)
     end
 
     # GET /residents/new

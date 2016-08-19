@@ -22,6 +22,10 @@
       <th>Firstname</th>
       <th>Lastname</th>
       <th>Admin</th>
+      <th><%= Shed.denomination %></th>
+      <th><%= Square.denomination %></th>
+      <th><%= SmallLodge.denomination %></th>
+      <th><%= BigLodge.denomination %></th>
       <th></th>
     </tr>
   </thead>
@@ -40,6 +44,10 @@
             <%= icon(:'square-o') %>
           <% end %>
         </td>
+        <td><%= DatetimeHelper.seconds_to_half_hour(resident.usage_of(Shed)) %></td>
+        <td><%= DatetimeHelper.seconds_to_half_hour(resident.usage_of(Square)) %></td>
+        <td><%= DatetimeHelper.seconds_to_half_hour(resident.usage_of(SmallLodge)) %></td>
+        <td><%= DatetimeHelper.seconds_to_half_hour(resident.usage_of(BigLodge)) %></td>
         <td>
           <%= link_to edit_admin_team_resident_path(@team, resident), class: 'btn btn-primary' do %>
             <%= icon(:pencil) %>

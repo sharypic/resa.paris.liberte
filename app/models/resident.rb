@@ -32,4 +32,16 @@ class Resident < ApplicationRecord
   def fullname
     "#{firstname} #{lastname}"
   end
+
+  def usage_of(room_type)
+    room_type_ids = room_type.select(:id).all.map(&:id)
+
+    reservations.all.sum do |reservation|
+      if room_type_ids.include?(reservation.room_id)
+        reservation.cached_duration_in_seconds
+      else
+        0
+      end
+    end
+  end
 end
