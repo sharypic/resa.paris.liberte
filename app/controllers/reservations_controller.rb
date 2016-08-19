@@ -4,30 +4,33 @@ class ReservationsController < ApplicationController
 
   before_action :authenticate_resident!, except: %i(show)
   before_action :validate_room_id, except: %i(show)
-  before_action :set_reservation, only: %i(show)
 
   # Nested below as get /rooms/:id/reservations/:id
   # Used by popover via ajax request
   def show
-    if params[:webcal_bounce]
-      redirect_to room_reservation_url(protocol: :webcal,
-                                       room_id: @reservation.room.id,
-                                       id: @reservation,
-                                       format: :ics)
-    elsif resident_signed_in?
-      respond_to do |format|
-        format.html do
-          render layout: false,
-                 locals: { reservation: @reservation,
-                           room: Room.find(params[:room_id]) }
-        end
-        format.ics do
-          render text: IcalReservation.new(@reservation).to_ics
+    head(:forbidden) && return if request.format.html? &&
+                                  !resident_signed_in?
+    reservation = Reservation.find(params[:id])
+
+    respond_to do |format|
+      format.html do
+        render layout: false,
+               locals: { reservation: reservation,
+                         room: Room.find(params[:room_id]) }
+      end
+      format.ics do
+        if params[:webcal_bounce]
+          redirect_to room_reservation_url(protocol: :webcal,
+                                           room_id: reservation.room.id,
+                                           id: reservation,
+                                           format: :ics)
+        else
+          render text: IcalReservation.new(reservation).to_ics
         end
       end
-    else
-      head :forbidden
     end
+  rescue ActiveRecord::RecordNotFound
+    head :bad_request
   end
 
   # rubocop:disable Metrics/AbcSize
@@ -69,12 +72,6 @@ class ReservationsController < ApplicationController
   end
 
   private
-
-  def set_reservation
-    @reservation = Reservation.find(params[:id])
-  rescue ActiveRecord::RecordNotFound
-    head :bad_request
-  end
 
   def destroy_reservation_with_flash(reservation)
     if !reservation.destroyable?

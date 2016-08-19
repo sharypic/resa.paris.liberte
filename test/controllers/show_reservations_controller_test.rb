@@ -5,7 +5,8 @@ class CreateReservationsControllerTest < ActionDispatch::IntegrationTest
   fixtures :teams, :residents, :rooms
 
   test 'responds with nothing and 403 status when not signed in' do
-    get room_reservation_path(room_id: 1, id: 1), xhr: true
+    get room_reservation_path(room_id: 1, id: 1, format: :html),
+        xhr: true
     assert_response :forbidden
   end
 
@@ -19,10 +20,12 @@ class CreateReservationsControllerTest < ActionDispatch::IntegrationTest
                                       room: room,
                                       resident: resident)
 
-    get room_reservation_path(room_id: room.id, id: 'A'), xhr: true
+    get room_reservation_path(room_id: room.id, id: 'A', format: :html),
+        xhr: true
     assert_response :bad_request
 
-    get room_reservation_path(room_id: 'A', id: reservation.id), xhr: true
+    get room_reservation_path(room_id: 'A', id: reservation.id, format: :html),
+        xhr: true
     assert_response :bad_request
   end
 
@@ -36,7 +39,10 @@ class CreateReservationsControllerTest < ActionDispatch::IntegrationTest
                                       room: room,
                                       resident: resident)
 
-    get room_reservation_path(room_id: room.id, id: reservation.id), xhr: true
+    get room_reservation_path(room_id: room.id,
+                              id: reservation.id,
+                              format: :html),
+        xhr: true
 
     assert_response :success
 
