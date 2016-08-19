@@ -6,6 +6,7 @@
 #  type       :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  name       :string
 #
 
 # STI Root for Shed, Square, BigLodge, SmallLodge

@@ -2,14 +2,15 @@
 #
 # Table name: reservations
 #
-#  id          :integer          not null, primary key
-#  name        :string
-#  starts_at   :datetime
-#  ends_at     :datetime
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  room_id     :integer
-#  resident_id :integer
+#  id                         :integer          not null, primary key
+#  name                       :string
+#  starts_at                  :datetime
+#  ends_at                    :datetime
+#  created_at                 :datetime         not null
+#  updated_at                 :datetime         not null
+#  room_id                    :integer
+#  resident_id                :integer
+#  cached_duration_in_seconds :integer
 #
 
 # Join table between resident and room

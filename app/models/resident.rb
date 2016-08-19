@@ -16,6 +16,9 @@
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  team_id                :integer
+#  firstname              :string
+#  lastname               :string
+#  admin                  :boolean
 #
 
 # Resident is able to book rooms
