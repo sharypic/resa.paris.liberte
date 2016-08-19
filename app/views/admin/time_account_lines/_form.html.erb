@@ -1,17 +1,15 @@
 <%= form_for([:admin, @team, time_account_line], url: admin_team_time_account_lines_path(@team)) do |f| %>
-  <row>
-    <fieldset>
-      <div class="form-group">
-        <%= f.label :amount %>
-       <%= f.number_field :amount, min: 1, step: 1, class: 'form-control' %>
-      </div>
-      <div class="form-group">
-        <%= f.label :room_type %>
-        <%= f.collection_select :room_type, Room.list, :name, :denomination, class: 'form-control' %>
-      </div>
-      <div class="actions">
-        <%= f.submit 'Ajouter du crédit', class: 'btn btn-primary' %>
-      </div>
-    </fieldset>
-  </row>
+  <fieldset>
+    <div class="form-group">
+      <%= f.label :amount %>
+     <%= f.number_field :amount, min: 1, step: 1, class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <%= f.label :room_type %>
+      <%= f.collection_select :room_type, Room.list, :name, :denomination, class: 'form-control' %>
+    </div>
+    <div class="actions">
+      <%= f.submit 'Ajouter du crédit', class: 'btn btn-primary' %>
+    </div>
+  </fieldset>
 <% end %>

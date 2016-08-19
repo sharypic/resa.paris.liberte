@@ -16,7 +16,7 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <% if resident_signed_in? && current_resident.admin? %>
-          <li><%= link_to t('.links.admin.text'), admin_dashboards_path, title: t('.links.admin.title') %></li>
+          <li><%= link_to t('.links.admin.text'), admin_teams_path, title: t('.links.admin.title') %></li>
         <% end %>
       </ul>
 

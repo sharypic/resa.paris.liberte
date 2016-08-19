@@ -10,8 +10,9 @@ class ResidentTest < ActiveSupport::TestCase
   test 'usage_of rooms without reservation returns 0' do
     resident = residents(:mfo)
 
+    date = Time.zone.today.beginning_of_week
     Room.list.each do |room|
-      assert_equal 0, resident.usage_of(room)
+      assert_equal 0, resident.usage_of(room, date, date + 1.week)
     end
   end
 
@@ -24,9 +25,11 @@ class ResidentTest < ActiveSupport::TestCase
                         resident: resident,
                         room: rooms(:shed))
 
-    assert_equal 1.hour.to_i, resident.usage_of(Shed)
-    assert_equal 0, resident.usage_of(Square)
-    assert_equal 0, resident.usage_of(SmallLodge)
-    assert_equal 0, resident.usage_of(BigLodge)
+    assert_equal 1.hour.to_i,
+                 resident.usage_of(Shed, date, date + 10.hours),
+                 'should compute the duration of booked reservation'
+    assert_equal 0, resident.usage_of(Square, date, date + 10.hours)
+    assert_equal 0, resident.usage_of(Shed, date, date + 5.hours)
+    assert_equal 0, resident.usage_of(Square, date, date + 7.hours)
   end
 end

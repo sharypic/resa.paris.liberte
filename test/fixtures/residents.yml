@@ -4,6 +4,7 @@ mfo:
   encrypted_password: <%= Resident.new.send(:password_digest, 'guillaume') %>
   firstname: 'Martin'
   lastname: 'Fourcade'
+  admin: false
 
 staff_member:
   team_id: 2 # teams(:staff)

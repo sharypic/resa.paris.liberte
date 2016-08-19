@@ -57,7 +57,7 @@ class IndexRoomsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
 
     date_value_sector = "[value='#{date.strftime('%d-%m-%Y')}']"
-    assert_select "#js-initialize-datepicker#{date_value_sector}",
+    assert_select "#datepicker#{date_value_sector}",
                   true,
                   'can not find initialized datepicker'
   end
