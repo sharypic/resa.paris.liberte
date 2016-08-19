@@ -2,13 +2,16 @@
            steps: [ { text: "Salles", href: dated_rooms_path(date_to_param(reservation.starts_at)) },
                     { text: reservation.room.denomination , href: room_calendars_path({room_slug: reservation.room.to_slug}.merge(date_to_param(reservation.starts_at))) },
                     { text: 'Reserver' } ] %>
-<div class="panel panel-default devise-bs">
-  <div class="panel-heading">
-    <h4><%= t('.title', room_name: reservation.room.name, day: reservation.starts_at.strftime('%Y-%m-%d'), hour: reservation.starts_at.strftime('%Hh%M')) %></h4>
-  </div>
+<%= form_for([:room, reservation], html: { role: "form" }) do |f| %>
+  <%= f.hidden_field :room_id, value: reservation.room_id %>
+  <div class="panel panel-default devise-bs">
+    <div class="panel-heading">
+      <h4>
+        <%= t('.title', room_name: reservation.room.name, day: reservation.starts_at.strftime('%Y-%m-%d'), hour: reservation.starts_at.strftime('%Hh%M')) %>
+      </h4>
+    </div>
 
-  <div class="panel-body">
-    <%= form_for([:room, reservation], html: { role: "form" }) do |f| %>
+    <div class="panel-body">
       <% if reservation.errors.any? %>
         <div class="alert alert-danger">
           <p><%= t('.errors') %></p>
@@ -19,7 +22,6 @@
           </ul>
         </div>
       <% end %>
-      <%= f.hidden_field :room_id, value: reservation.room_id %>
 
       <div class="form-group">
         <%= f.label :name %>
@@ -31,9 +33,9 @@
 
         <%= t('.to_ends_at') %> <%= f.datetime_select 'ends_at', minute_step: 30, start_hour: 8, end_hour: 20, datetime_separator: '', default: reservation.starts_at + 30.minutes %>
       </div>
-
+    </div>
+    <div class="panel-footer">
       <%= f.submit t('.submit'), class: "btn btn-primary" %>
-    <% end %>
+    </div>
   </div>
-</div>
-
+<% end %>

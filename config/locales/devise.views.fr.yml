@@ -1,16 +1,4 @@
 fr:
-  activerecord:
-    attributes:
-      user:
-        current_password: Mot de passe actuel
-        email: Courriel
-        password: Mot de passe
-        password_confirmation: Confirmation du mot de passe
-        remember_me: Se souvenir de moi
-        reset_password_token:
-        unlock_token:
-    models:
-      user: Utilisateur
   devise:
     failure:
       already_authenticated: Vous êtes déjà connecté(e).
