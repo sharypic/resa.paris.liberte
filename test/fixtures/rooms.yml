@@ -1,30 +1,44 @@
 shed:
   id: 1
   type: Shed
+  name: Atelier
 
 square_0:
   type: Square
+  name: Carré 1
 square_1:
   type: Square
+  name: Carré 2
 square_2:
   type: Square
+  name: Carré 3
 square_3:
   type: Square
+  name: Carré 4
+
 
 small_lodge_0:
   type: SmallLodge
+  name: Petite loge 1
 small_lodge_1:
   type: SmallLodge
+  name: Petite loge 2
 small_lodge_2:
   type: SmallLodge
+  name: Petite loge 3
 small_lodge_3:
   type: SmallLodge
+  name: Petite loge 4
 
 big_lodge_0:
   type: BigLodge
+  name: Grande loge 1
 big_lodge_1:
   type: BigLodge
+  name: Grande loge 4
 big_lodge_2:
   type: BigLodge
+  name: Grande loge 4
 big_lodge_3:
   type: BigLodge
+  name: Grande loge 4
