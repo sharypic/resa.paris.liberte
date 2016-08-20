@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
   # General routes
-  segment_date = '/:year/:month/:day'
   constraints_date = { year: /\d{4}/, month: /\d{2}/, day: /\d{2}/ }
-  segment_datetime = "#{segment_date}/:hour/:minute"
   constraints_datetime = constraints_date.merge(hour: /\d{2}/, minute: /\d{2}/)
+  segment_date = '/:year/:month/:day'
+  segment_datetime = "#{segment_date}/:hour/:minute"
 
   # Authentication
   devise_for :residents, path_names: {
@@ -67,7 +67,7 @@ Rails.application.routes.draw do
     resources :reservations, only: [:create, :show, :destroy] do
       collection do
         get :new, as: :new,
-                  path: "/new#{segment_datetime}",
+                  path: "/new(#{segment_datetime})",
                   constraints: constraints_datetime
       end
     end
