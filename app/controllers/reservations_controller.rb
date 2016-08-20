@@ -1,7 +1,7 @@
 # Allow a signed in user to book a reservation in a room
 class ReservationsController < ApplicationController
   include DatetimeHelper
-
+  include CalendarsHelper
   before_action :authenticate_resident!, except: %i(show)
   before_action :validate_room_id, except: %i(show)
 
@@ -10,23 +10,18 @@ class ReservationsController < ApplicationController
   def show
     head(:forbidden) && return if request.format.html? &&
                                   !resident_signed_in?
+
     reservation = Reservation.find(params[:id])
+    room = Room.find(params[:room_id])
 
     respond_to do |format|
       format.html do
         render layout: false,
-               locals: { reservation: reservation,
-                         room: Room.find(params[:room_id]) }
+               locals: { reservation: reservation, room: room }
       end
       format.ics do
-        if params[:webcal_bounce]
-          redirect_to room_reservation_url(protocol: :webcal,
-                                           room_id: reservation.room.id,
-                                           id: reservation,
-                                           format: :ics)
-        else
-          render text: IcalReservation.new(reservation).to_ics
-        end
+        send_data IcalReservation.new(reservation).to_ics,
+                  filename: "reservation-#{reservation.name.parameterize}.ics"
       end
     end
   rescue ActiveRecord::RecordNotFound
@@ -64,8 +59,14 @@ class ReservationsController < ApplicationController
     if DebitReservation.new(reservation).create
       opts = { room_slug: reservation.room.to_slug }
       opts = opts.merge(date_to_param(reservation.starts_at))
-
-      redirect_to room_calendars_path(opts)
+      redirect_to room_calendars_path(opts),
+                  flash: {
+                    notice: I18n.t(
+                      'calendars.create.confirmation',
+                      gcal_url: add_to_google_calendar_url(reservation),
+                      ics_url: download_reservation_ics_url(reservation)
+                    )
+                  }
     else
       render :new, locals: { reservation: reservation }
     end

@@ -3,4 +3,5 @@ fr:
     index:
       book: 'Réserver %{from}-%{to}'
       reservations_at: 'Salles'
-
+    create:
+      confirmation: "La réservation a bien été faite, vous pouvez <a target=\"_blank\" href=\"%{gcal_url}\">l'ajouter à votre Calendrier Google</a> ou <a target=\"_blank\" href=\"%{ics_url}\">Télécharger l'.ics pour outlook</a>"

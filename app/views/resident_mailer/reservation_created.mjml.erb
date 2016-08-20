@@ -15,8 +15,11 @@
 
     <mj-text font-size="11px" align="center"><%= I18n.t('mail.reservation_created.body.cta.download_ics') %></mj-text>
 
-    <mj-button font-family="Helvetica" background-color="#F8FF01" href="<%= room_reservation_url(@reservation.room, @reservation, format: :ics, webcal_bounce: true) %>" color="black">
-      <%= I18n.t('mail.reservation_created.body.cta.add_to_calendar') %>
+    <mj-button font-family="Helvetica" background-color="#F8FF01" href="<%= add_to_google_calendar_url(@reservation) %>" color="black">
+      <%= I18n.t('mail.reservation_created.body.cta.add_to_google_calendar') %>
+    </mj-button>
+    <mj-button font-family="Helvetica" background-color="#F8FF01" href="<%= download_reservation_ics_url(@reservation) %>" color="black">
+      <%= I18n.t('mail.reservation_created.body.cta.download_ics') %>
     </mj-button>
 
   </mj-column>

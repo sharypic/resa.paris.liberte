@@ -21,4 +21,22 @@ module CalendarsHelper
   def classname_for_date(date)
     "test-calendar-#{date.strftime('%d-%m-%Y')}"
   end
+
+  def add_to_google_calendar_url(reservation)
+    query_options = {
+      action: 'TEMPLATE',
+      dates: [reservation.starts_at.utc.strftime('%Y%m%dT%H%M%SZ'),
+              reservation.ends_at.utc.strftime('%Y%m%dT%H%M%SZ')].join('/'),
+      details: reservation.name,
+      location: ENV['ADDRESS'],
+      text: reservation.name,
+      trp: 'false',
+      sf: 'true'
+    }
+    "https://calendar.google.com/calendar/?#{query_options.to_query}"
+  end
+
+  def download_reservation_ics_url(reservation)
+    room_reservation_url(reservation.room, reservation.id, format: :ics)
+  end
 end

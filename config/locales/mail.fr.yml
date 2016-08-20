@@ -14,8 +14,8 @@ fr:
           label: "Où"
           value: "%{room_name}"
         cta:
-          add_to_calendar: Ajouter a mon calendrier
-          download_ics: "Vous pouvez ajouter ce RDV à votre calendrier en téléchargeant le fichier invite.ics en PJ et en double cliquant dessus"
+          add_to_google_calendar: Ajouter à Google Calendar
+          download_ics: "Télécharger pour Outlook"
           delete_reservation:
             label: "Vous avez changé d'avis ?"
             button: 'Supprimer la réservation'
