@@ -16,7 +16,10 @@
       @datepicker = @$element.datepicker(
         daysOfWeekDisabled: '0,6'
         weekStart: 1
-        language: 'fr'
+        language: 'fr',
+        todayBtn: 'linked',
+        autoclose: true,
+        todayHighlight: true
       )
       @datepicker
 
