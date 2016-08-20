@@ -19,3 +19,14 @@
 @import 'pages/admin';
 @import 'pages/room';
 
+a{text-decoration: underline;}
+a.btn{text-decoration: none;}
+
+// ios force text size on input to prevent zoom
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  select,
+  textarea,
+  input {
+    font-size: 16px;
+  }
+}

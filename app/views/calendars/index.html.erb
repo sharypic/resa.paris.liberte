@@ -21,8 +21,8 @@
   <tbody>
     <% iterate_day(date, 30.minutes) do |half_hour_starts_at, half_hour_ends_at| %>
       <% full_hour = half_hour_starts_at.min == 0 %>
-      <tr class="<%= full_hour ? 'tr-full-hour' : 'tr-half-hour' %>">
-        <td class="td-time ">
+      <tr class="<%= full_hour ? 'tr-full-hour' : 'tr-half-hour' %> <%= half_hour_ends_at < Time.zone.now ? 'disabled' : '' %>">
+        <td class="td-time">
           <% if full_hour %>
             <%= half_hour_starts_at.strftime('%H:%M') %>
           <% end %>

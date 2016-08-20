@@ -1,7 +1,10 @@
 <%= render 'layouts/breadcrumb',
            steps: [ { text: "Salles", href: dated_rooms_path(date_to_param(reservation.starts_at)) },
                     { text: reservation.room.denomination , href: room_calendars_path({room_slug: reservation.room.to_slug}.merge(date_to_param(reservation.starts_at))) },
-                    { text: 'Reserver' } ] %>
+                    { text: 'Reserver' } ],
+            datepicker: render('layouts/datepicker', id: 'datepicker', date: reservation.starts_at, url_on_date_selected: new_room_reservations_path(room_id: reservation.room_id, year: ':year', month: ':month', day: ':day', hour: reservation.starts_at.strftime('%H'), minute: reservation.starts_at.strftime('%M')))
+             %>
+
 <%= form_for([:room, reservation], html: { role: "form" }) do |f| %>
   <%= f.hidden_field :room_id, value: reservation.room_id %>
   <div class="panel panel-default devise-bs">
