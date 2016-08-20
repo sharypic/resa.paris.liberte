@@ -22,7 +22,7 @@ module DateParser
   def default_date
     date = Time.zone.today
     return date unless day_off?(date)
-    date.beginning_of_the_week
+    date.beginning_of_week
   end
 
   def parse_date?(params, prefix = '')

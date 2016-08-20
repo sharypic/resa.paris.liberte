@@ -2,6 +2,7 @@ require 'test_helper'
 
 class IndexRoomsControllerTest < ActionDispatch::IntegrationTest
   include DatetimeHelper
+  include DateParser
   include Devise::Test::IntegrationHelpers
   fixtures :teams, :residents, :rooms
 
@@ -26,7 +27,7 @@ class IndexRoomsControllerTest < ActionDispatch::IntegrationTest
     get rooms_path
 
     Room.list.each do |room|
-      opts = { room_slug: room.to_slug }.merge(date_to_param(Time.zone.today))
+      opts = { room_slug: room.to_slug }.merge(date_to_param(default_date))
       url = room_calendars_path(opts)
 
       assert_select "#test-#{room.name}" do
