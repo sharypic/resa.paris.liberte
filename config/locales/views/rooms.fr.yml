@@ -8,13 +8,13 @@ fr:
       seats: '%{count} personnes'
       cost_per_half_hour: '%{count}€/h'
       free_half_hours_available:
-        zero: '%{count} demi-heure gratuite restante cette semaine'
-        one: '%{count} demi-heure gratuite restante cette semaine'
-        other: '%{count} demi-heures gratuite restantes cette semaine'
+        zero: '%{count} demi-heure <strong>gratuite</strong> restante cette semaine'
+        one: '%{count} demi-heure <strong>gratuite</strong> restante cette semaine'
+        other: '%{count} demi-heures <strong>gratuite</strong> restantes cette semaine'
       paid_half_hours_available:
-        zero: '%{count} demi-heure payante restante'
-        one: '%{count} demi-heure payante restante'
-        other: '%{count} demi-heures payante restantes'
+        zero: '%{count} demi-heure <strong>payante</strong> restante'
+        one: '%{count} demi-heure <strong>payante</strong> restante'
+        other: '%{count} demi-heures <strong>payante</strong> restantes'
 
       # Links
       links:

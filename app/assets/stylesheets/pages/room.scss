@@ -1,3 +1,11 @@
-.m-l-1{
-  margin-left: 5px;
+.room-type{
+  margin-bottom: 20px;
+}
+
+// decrease on desktop
+$screen-sm-min: 768px;
+@media (min-width: $screen-sm-min) {
+  .room-type{
+    margin-bottom: 15px;
+  }
 }

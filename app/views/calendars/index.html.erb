@@ -42,7 +42,7 @@
                   <%= reservation.starts_at.strftime('%Hh%M') %> - <%= reservation.ends_at.strftime('%Hh%M') %>
                 </p>
                 <p class="block-reserved-name">
-                  <%= reservation.name %>
+                  <abbr title="<%= reservation.name %>"><%= reservation.name %></abbr>
                 </p>
               </div>
             </td>

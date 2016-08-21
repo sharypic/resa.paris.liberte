@@ -1,17 +1,47 @@
 //
 // table
 //
-.table-cal{
-  border: none;
-  $cell-height: 25px;
+$desktop-cell-height: 25px;
+$mobile-cell-height: 44px;
 
-  // group col
+// mobile table cell bigger
+.table-cal {
   .col-time{ width: 10% }
-  .col-room-atelier{ width: 90% }
-
+  .col-room-atelier{
+    font-size: 18px;
+  }
   .col-room-carre,
   .col-room-grande-loge,
   .col-room-grande-loge{ width: 22.5% }
+
+  > tbody > tr > td{
+    height: $mobile-cell-height;
+    line-height: $mobile-cell-height;
+  }
+}
+
+// decrease on desktop
+$screen-sm-min: 768px;
+@media (min-width: $screen-sm-min) {
+  .table-cal {
+    .col-time{ width: 4% }
+    .col-room-carre,
+    .col-room-grande-loge,
+    .col-room-grande-loge{ width: 24% }
+
+    > tbody > tr > td{
+      height: $desktop-cell-height;
+      line-height: $desktop-cell-height;
+    }
+
+  }
+}
+
+.table-cal{
+  border: none;
+  > tbody > tr > td{
+    position: relative;
+  }
   // all
   > thead > tr > th,
   > tbody > tr > td {
@@ -22,11 +52,7 @@
   > thead > tr > th {
     border-bottom: 0;
   }
-  > tbody > tr > td{
-    position: relative;
-    height: $cell-height;
-    line-height: $cell-height;
-  }
+
   // first cell [0,0]
   .th-no-border{
     border-top-color: transparent;
@@ -36,11 +62,13 @@
   .td-time{
     border-left: 0;
     line-height: 12px;
-    font-size: 12px;
     padding-right: 3px;
     padding-top: 3px;
     vertical-align: top;
     text-align: right;
+  }
+  .td-time, th{
+    font-size: 12px;
   }
 
   // alternate rows, marking hour with darker line
@@ -105,6 +133,9 @@
       margin: 0;
       text-align: left;
       line-height: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
     .block-reserved-name{
       font-size: 12px;

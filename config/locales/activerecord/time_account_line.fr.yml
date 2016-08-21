@@ -1,0 +1,6 @@
+fr:
+  activerecord:
+    attributes:
+      time_account_line:
+        room_type: Type de salle
+        amount: Quantité de crédit

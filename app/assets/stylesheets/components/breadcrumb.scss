@@ -1,7 +1,15 @@
 .breadcrumb-calendar{
+  // border: 1px solid #ddd;
+  background: transparent;
   overflow: hidden;
   > li {
     padding: 7px 0;
+    &, &.active{
+      color: #333;
+    }
+  }
+  input{
+    box-shadow: none;
   }
 }
 
@@ -9,3 +17,9 @@
   width: 140px;
 }
 
+.room-type{
+  // .panel-heading,
+  .panel-footer{
+    p { margin-bottom: 0;}
+  }
+}

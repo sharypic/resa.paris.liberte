@@ -2,17 +2,37 @@
                                  datepicker: render('layouts/datepicker', id: 'datepicker', date: date, url_on_date_selected: dated_rooms_path(year: ':year', month: ':month', day: ':day')) %>
 <div class="row">
   <% Room.list.each.with_index do |room| %>
-      <div class="col-sm-6 col-xs-12" id="test-<%= room.name %>">
-        <h2 class='room-denomination'><%= room.denomination %></h2>
+    <%
+      free_seconds_available = current_resident.team.weekly_free_seconds_available(room, date)
+      paid_seconds_available = current_resident.team.paid_seconds_available(room)
+    %>
+      <div class="col-lg-3 col-sm-6 col-xs-12 room-type" id="test-<%= room.name %>">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class='room-denomination'>
+              <%= room.denomination %>
+              <%= link_to_pay_for_booking %>
+            </h4>
+            <p>
+              <span class='room-seats'><%= t('.seats', count: room.seats) %></span>
+              —
+              <span class='room-cost-per-half-hour'><%= t('.cost_per_half_hour', count: room.cost_per_half_hour) %>
+              </span>
+            </p>
+          </div>
+          <div class="panel-body">
+            <h5>Ma consommation :</h5>
+            <%= block_progress_seconds(room, date, free_seconds_available, paid_seconds_available) %>
 
-        <p>
-          <span class='room-seats'><%= t('.seats', count: room.seats) %></span>
-          —
-          <span class='room-cost-per-half-hour'><%= t('.cost_per_half_hour', count: room.cost_per_half_hour) %>
-          </span>
-        </p>
-
-        <%= available_seconds_per_week(current_resident.team, room, date) %>
+            <%= raw label_half_hours_available(free_seconds_available, :free) %>
+            <%= raw label_half_hours_available(paid_seconds_available, :paid) %>
+          </div>
+          <div class="panel-footer">
+            <p class="text-center">
+            <%= link_to_pay_or_free_booking(room, date, free_seconds_available, paid_seconds_available) %>
+            </p>
+          </div>
+        </div>
       </div>
   <% end %>
 </div>

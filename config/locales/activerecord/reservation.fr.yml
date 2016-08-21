@@ -2,7 +2,7 @@ fr:
   activerecord:
     attributes:
       reservation:
-        name: 'Nom'
+        name: 'Titre de la réservation'
         credits: 'Crédits'
         room: 'Salle'
     errors:

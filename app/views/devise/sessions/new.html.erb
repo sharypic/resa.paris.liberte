@@ -1,4 +1,4 @@
-<%= form_for(resource, as: resource_name, url: resident_session_path(), html: { role: "form" }) do |f| %>
+<%= form_for(resource, as: resource_name, url: resident_session_path(), html: { role: "form" , class: 'col-sm-6 col-sm-offset-3' }) do |f| %>
   <div class="panel panel-default devise-bs">
     <div class="panel-heading">
       <h4><%= t('.sign_in', :default => "Sign in") %></h4>

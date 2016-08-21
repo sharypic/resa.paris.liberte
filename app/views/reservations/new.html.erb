@@ -9,9 +9,8 @@
   <%= f.hidden_field :room_id, value: reservation.room_id %>
   <div class="panel panel-default devise-bs">
     <div class="panel-heading">
-      <h4>
-        <%= t('.title', room_name: reservation.room.name, day: reservation.starts_at.strftime('%Y-%m-%d'), hour: reservation.starts_at.strftime('%Hh%M')) %>
-      </h4>
+      <h4><%= t('.title', room_name: reservation.room.name) %></h4>
+      <p><%= t('.date', day: reservation.starts_at.strftime('%Y-%m-%d')) %></p>
     </div>
 
     <div class="panel-body">
@@ -32,6 +31,8 @@
       </div>
 
       <div class="form-group">
+        <label class=""><%= t('.period') %></label>
+        <br />
         <%= t('.from_starts_at') %> <%= f.datetime_select 'starts_at',minute_step: 30, start_hour: 8, end_hour: 20, datetime_separator: ''  %>
 
         <%= t('.to_ends_at') %> <%= f.datetime_select 'ends_at', minute_step: 30, start_hour: 8, end_hour: 20, datetime_separator: '', default: reservation.starts_at + 30.minutes %>
