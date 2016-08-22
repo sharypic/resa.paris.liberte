@@ -60,7 +60,7 @@ Rails.application.routes.draw do
 
       resources :calendars, only: [:index],
                             as: :room_calendars,
-                            path: ":room_slug/calendars#{segment_date}"
+                            path: ":room_slug/calendars(#{segment_date})"
     end
 
     # A Resident can create a reservation for a specific Room

@@ -38,6 +38,7 @@
           .replace(':month', @padIntegerWithTwoZero(month))
           .replace(':day', @padIntegerWithTwoZero(day))
 
-    onClick: (event) => Turbolinks.visit(@rewriteUrl(event.date))
+    onClick: (event) => Turbolinks.visit(@rewriteUrl(event.date),
+                                         action: 'replace')
 
 )(window.App, window.Turbolinks)

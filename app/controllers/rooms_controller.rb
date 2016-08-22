@@ -3,6 +3,7 @@ class RoomsController < ApplicationController
   include DateParser
 
   before_action :authenticate_resident!
+  # before_action :poc_authenticate_resident!
 
   def index
     render locals: { date: date_or_default(params) }

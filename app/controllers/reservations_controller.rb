@@ -44,6 +44,7 @@ class ReservationsController < ApplicationController
 
   # Nested below as get /rooms/:id/reservations/new
   def new
+    @title = "Réserver"
     render locals: {
       reservation: current_resident.reservations.new(
         room_id: @room.id,
