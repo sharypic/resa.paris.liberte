@@ -60,6 +60,7 @@ $screen-sm-min: 768px;
   }
   // hours cell [0, ...], position hour top right
   .td-time{
+    background-color: transparent!important;
     border-left: 0;
     line-height: 12px;
     padding-right: 3px;

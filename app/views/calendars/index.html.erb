@@ -21,7 +21,7 @@
   <tbody>
     <% iterate_day(date, 30.minutes) do |half_hour_starts_at, half_hour_ends_at| %>
       <% full_hour = half_hour_starts_at.min == 0 %>
-      <tr class="<%= full_hour ? 'tr-full-hour' : 'tr-half-hour' %> <%= half_hour_ends_at < Time.zone.now ? 'disabled' : '' %>">
+      <tr class="<%= full_hour ? 'tr-full-hour' : 'tr-half-hour' %> <%= half_hour_ends_at < Time.zone.now ? 'active' : '' %>">
         <td class="td-time">
           <% if full_hour %>
             <%= half_hour_starts_at.strftime('%H:%M') %>
@@ -30,7 +30,9 @@
 
         <% rooms.each.with_index do |room, i| %>
           <% reservation = room.reservations.find { |reservation| reservation.in?(half_hour_starts_at, half_hour_ends_at) } %>
-          <% if reservation == nil %>
+          <% if reservation == nil && half_hour_ends_at < Time.zone.now %>
+            <td></td>
+          <% elsif reservation == nil && half_hour_ends_at >= Time.zone.now %>
             <td class="td-open">
               <%= link_to t('.book', from: half_hour_starts_at.strftime('%H:%M'), to: half_hour_ends_at.strftime('%H:%M')), new_room_reservations_path({room_id: room.id}.merge(datetime_to_param(half_hour_starts_at))), class: 'block-opened block-hour-wrapper' %>
             </td>
