@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # Allow a signed in user to book a reservation in a room
 class ReservationsController < ApplicationController
   include DatetimeHelper
@@ -6,10 +7,10 @@ class ReservationsController < ApplicationController
   before_action :validate_room_id, except: %i(show)
 
   # Nested below as get /rooms/:id/reservations/:id
-  # Used by popover via ajax request
+  # format.html Used by popover via ajax request
+  # format.ics Used to download ics
   def show
-    head(:forbidden) && return if request.format.html? &&
-                                  !resident_signed_in?
+    head(:forbidden) && return unless resident_signed_in?
 
     reservation = Reservation.find(params[:id])
     room = Room.find(params[:room_id])

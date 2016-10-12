@@ -1,4 +1,5 @@
-# List show a calendar for a rom type
+# frozen_string_literal: true
+# List show a calendar for a room type
 class CalendarsController < ApplicationController
   include DateParser
 
