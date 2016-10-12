@@ -4,6 +4,7 @@ mfo:
   encrypted_password: <%= Resident.new.send(:password_digest, 'guillaume') %>
   firstname: 'Martin'
   lastname: 'Fourcade'
+  confirmed_at: <%= Time.now.utc %>
   admin: false
 
 staff_member:
@@ -12,4 +13,5 @@ staff_member:
   encrypted_password: <%= Resident.new.send(:password_digest, 'kikoolol') %>
   firstname: 'Guillaume'
   lastname: 'Perdrix'
+  confirmed_at: <%= Time.now.utc %>
   admin: true

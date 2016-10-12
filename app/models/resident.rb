@@ -27,7 +27,8 @@ class Resident < ApplicationRecord
          :recoverable,
          :rememberable,
          :trackable,
-         :validatable
+         :validatable,
+         :confirmable
 
   belongs_to :team
   has_many :reservations

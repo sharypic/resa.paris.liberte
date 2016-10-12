@@ -7,8 +7,9 @@ Rails.application.routes.draw do
 
   # Authentication
   devise_for :residents, path_names: {
-    sessions: 'residents/sessions',
-    passwords: 'residents/passwords'
+    sessions:       'residents/sessions',
+    passwords:      'residents/passwords',
+    confirmations:  'residents/confirmations'
   }
 
   # Dev

@@ -1,0 +1,20 @@
+<%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post, role: "form", class: 'col-sm-6 col-sm-offset-3' }) do |f| %>
+  <div class="panel panel-default devise-bs">
+    <div class="panel-heading">
+      <h4><%= t('.resend_confirmation_instructions') %></h4>
+    </div>
+
+    <div class="panel-body">
+      <%= bootstrap_devise_error_messages! %>
+      <div class="form-group">
+        <%= f.label :email %>
+        <%= f.email_field :email, autofocus: true, value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email), class: "form-control"  %>
+      </div>
+    </div>
+    <div class="panel-footer">
+      <%= f.submit t('.submit'), class: "btn btn-primary" %>
+      <%= render "devise/shared/links" %>
+    </div>
+  </div>
+<% end %>
+

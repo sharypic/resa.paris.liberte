@@ -44,6 +44,21 @@ module Admin
       assert_redirected_to admin_team_residents_path(Resident.last.team)
     end
 
+    test 'creates resident and send email' do
+      sign_in(@resident)
+      assert_difference('ActionMailer::Base.deliveries.size', 1) do
+        post admin_team_residents_url(@team), params: {
+          resident: {
+            email: 'Hello@world.net',
+            firstname: 'hellp',
+            lastname: 'world',
+            password: 'kthxbye',
+            team_id: @team.id
+          }
+        }
+      end
+    end
+
     test 'should get edit' do
       sign_in(@resident)
       get edit_admin_team_resident_path(@resident.team, @resident)

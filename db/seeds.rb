@@ -27,7 +27,8 @@ def create_residents
                    team: Team.first,
                    firstname: 'Martin',
                    lastname: 'Fourcade',
-                   admin: true)
+                   admin: true,
+                   confirmed_at: Time.now.utc)
 end
 
 # rubocop:disable Metrics/AbcSize
@@ -41,4 +42,9 @@ end
 # rubocop:enable Metrics/AbcSize
 
 run
-Resident.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
+Resident.create!(
+  email: 'admin@example.com', 
+  password: 'password', 
+  password_confirmation: 'password'
+  confirmed_at: Time.now.utc
+)
