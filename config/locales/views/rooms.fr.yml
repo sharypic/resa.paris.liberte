@@ -27,3 +27,9 @@ fr:
         pay_for_credits:
           text: Acheter des crédits
           title: Vos crédits acheté ne seront accessible qu'une fois le paiement confirmé
+
+      # Modal - Contact to Pay
+      modal:
+        title: 'Acheter des crédits'
+        body: 'Pour charger vos crédits, envoyez un mail à Claire (%{email}) ou appelez-là directement si urgent (%{tel}).'
+        close: 'Fermer'

@@ -1,7 +1,5 @@
 # UI helpers for rooms
 module RoomsHelper
-  BILLING_EMAIL = 'people@paris.liberte'.freeze
-
   def available_seconds_per_week(team, room, date, free_seconds_available, paid_seconds_available)
     content_tag :div do
       concat label_half_hours_available(paid_seconds_available, :paid)
@@ -62,12 +60,5 @@ module RoomsHelper
       button_tag(I18n.t('rooms.index.links.book.text'),
                  class: 'btn btn-primary disabled')
     end
-  end
-
-  def link_to_pay_for_booking
-    mail_to(BILLING_EMAIL,
-            I18n.t('rooms.index.links.pay_for_credits.text'),
-            class: 'btn btn-sm btn-default pull-right',
-            title: I18n.t('rooms.index.links.pay_for_credits.title'))
   end
 end
