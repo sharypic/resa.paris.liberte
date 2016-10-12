@@ -4,18 +4,14 @@ module RoomsHelper
 
   def available_seconds_per_week(team, room, date, free_seconds_available, paid_seconds_available)
     content_tag :div do
-      # concat block_free_seconds(room,
-      #                           date,
-      #                           free_seconds_available,
-      #                           paid_seconds_available)
       concat label_half_hours_available(paid_seconds_available, :paid)
     end
   end
 
   def block_progress_seconds(room,
-                         date,
-                         free_seconds_available,
-                         paid_seconds_available)
+                             date,
+                             free_seconds_available,
+                             paid_seconds_available)
     max_free = room.free_seconds_per_week
     free_progress = 100 * free_seconds_available / max_free
 

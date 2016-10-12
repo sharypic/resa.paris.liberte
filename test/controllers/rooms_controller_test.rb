@@ -34,7 +34,7 @@ class IndexRoomsControllerTest < ActionDispatch::IntegrationTest
         assert_select "a[href='#{url}']",
                       true,
                       "missing #{room.name} link to calendar"
-        assert_select 'h2.room-denomination',
+        assert_select 'h4.room-denomination .test-room-denomination',
                       room.denomination,
                       "missing #{room.name} denomination"
         assert_select 'span.room-seats',

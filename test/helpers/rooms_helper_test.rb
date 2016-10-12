@@ -9,18 +9,6 @@ class RoomsHelperTest < ActionView::TestCase
     @date = Time.zone.today
   end
 
-  # test '.block_free_seconds_per_week' do
-  # end
-
-  test '.block_paid_seconds does not include progress bar' do
-    paid_seconds_available = teams(:dev).paid_seconds_available(@room)
-    fragment = node(block_paid_seconds(paid_seconds_available))
-
-    assert_select fragment, 'div' do
-      assert_select '.progress', false
-    end
-  end
-
   test '.progress' do
     fragment = node(progress_bar(10))
 
@@ -45,35 +33,35 @@ class RoomsHelperTest < ActionView::TestCase
                   '1 demi-heure payante restante'
   end
 
-  test '.link_to_free_booking with credits > 30.minutes' do
+  test '.link_to_pay_or_free_booking with free credits > 30.minutes' do
     url_opts = { room_slug: @room.to_slug }.merge(date_to_param(@date))
     link_url = room_calendars_path(url_opts)
 
-    fragment = node(link_to_free_booking(@room, @date, 30.minutes.to_i))
+    fragment = node(link_to_pay_or_free_booking(@room, @date, 30.minutes.to_i, 0))
 
     assert_select fragment, "a.btn-primary[href='#{link_url}']", 'Réserver'
   end
 
-  test '.link_to_free_booking with credits < 30.minutes' do
-    fragment = node(link_to_free_booking(@room, @date, 29.minutes.to_i))
+  test '.link_to_pay_or_free_booking with free credits < 30.minutes' do
+    fragment = node(link_to_pay_or_free_booking(@room, @date, 29.minutes.to_i, 0))
 
     assert_select fragment,
                   'button.btn.btn-primary.disabled',
                   'Réserver'
   end
 
-  test '.link_to_paid_book with credits >= 30.minutes' do
+  test '.link_to_pay_or_free_booking with paying credits >= 30.minutes' do
     url_opts = { room_slug: @room.to_slug }.merge(date_to_param(@date))
     link_url = room_calendars_path(url_opts)
 
-    fragment = node(link_to_paid_booking(@room, @date, 30.minutes.to_i))
+    fragment = node(link_to_pay_or_free_booking(@room, @date, 0, 30.minutes.to_i))
     assert_select fragment,
                   "a.btn-warning[href='#{link_url}']",
                   'Réserver avec des crédits payant'
   end
 
-  test '.link_to_paid_book with credits < 30.minutes' do
-    fragment = node(link_to_paid_booking(@room, @date, 29.minutes.to_i))
+  test '.link_to_pay_or_free_booking with paying credits < 30.minutes' do
+    fragment = node(link_to_pay_or_free_booking(@room, @date, 0, 29.minutes.to_i))
     assert_select fragment,
                   'a.btn-warning',
                   false
