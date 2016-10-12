@@ -11,6 +11,9 @@
       <%= link_to resident_signed_in? ? rooms_path : root_path, class: 'navbar-brand' do %>
         <%= image_tag 'logo/header-icon-26x34.png', title: t('.links.brand.title'), size: "26x34" %>
       <% end %>
+      <% if resident_signed_in? %>
+        <h1 class='navbar-team'><%= current_resident.team.name %></h2>
+      <% end %>
     </div>
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
