@@ -4,11 +4,6 @@ fr:
       # Title
       availablity_at: Salles
   
-      # Rules
-      rules:
-        book_empty: "L’accès aux espaces est possible et gratuit sans réservation lorsqu'ils sont non-occupés."
-        book_freely: "En fonction des salles, chaque équipe bénéficie de crédits de demi-heures gratuites pour réserver des espaces. Les crédits sont renouvelés sur un rythme hebdomadaire."
-        book_paid: "Au-delà des crédits gratuits, les réservations deviennent payantes et des crédits doivent être achetés."
       # Labels
       seats: '%{count} personnes'
       cost_per_half_hour: '%{count}€/demi-heure'
@@ -32,9 +27,33 @@ fr:
         pay_for_credits:
           text: Acheter des crédits
           title: Vos crédits acheté ne seront accessible qu'une fois le paiement confirmé
+    
+    ############
+    # partials #
+    ############
+    
+    # Modal - Contact to Pay
+    modal_to_pay:
+      title: 'Acheter des crédits'
+      body: 'Pour charger vos crédits, envoyez un mail à Claire (%{email}) ou appelez-là directement si urgent (%{tel}).'
+      close: 'Fermer'
 
-      # Modal - Contact to Pay
-      modal:
-        title: 'Acheter des crédits'
-        body: 'Pour charger vos crédits, envoyez un mail à Claire (%{email}) ou appelez-là directement si urgent (%{tel}).'
-        close: 'Fermer'
+    # Rules
+    rules:
+      book_empty: "L’accès aux espaces est possible et gratuit sans réservation lorsqu'ils sont non-occupés."
+      book_freely: "En fonction des salles, chaque équipe bénéficie de crédits de demi-heures gratuites pour réserver des espaces. Les crédits sont renouvelés sur un rythme hebdomadaire."
+      book_paid: "Au-delà des crédits gratuits, les réservations deviennent payantes et des crédits doivent être achetés."
+   
+    
+    # Weekly reservations for team
+    weekly_team_reservations:
+      title: "Planning de <strong>%{team_name}</strong> sur la semaine du <strong>%{date}</strong>"
+      table:
+        thead:
+          date: Date
+          time_range: Créneau
+          room: Salle
+          reservation_name: Réservation
+        tbody:
+          time_range: "De %{starts_at} à %{ends_at}"
+          reservation_name: "%{reservation_name} par %{organizer}"

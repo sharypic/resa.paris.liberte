@@ -5,7 +5,14 @@ class RoomsController < ApplicationController
   before_action :authenticate_resident!
 
   def index
-    render locals: { date: date_or_default(params) }
+    date = date_or_default(params)
+    weekly_team_reservations = current_resident.team
+                                               .reservations
+                                               .for_week(date)
+                                               .includes(:resident, :room)
+                                               .order(:starts_at)
+    render locals: { date: date,
+                     weekly_team_reservations: weekly_team_reservations }
   rescue MalformattedDateError
     redirect_to rooms_path, flash: { alert: t('errors.date.malformed') }
   rescue DayOffError

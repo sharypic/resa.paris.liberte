@@ -1,11 +1,7 @@
 <%= render 'layouts/breadcrumb', steps: [{ text: t('.availablity_at') }],
                                  datepicker: render('layouts/datepicker', id: 'datepicker', date: date, url_on_date_selected: dated_rooms_path(year: ':year', month: ':month', day: ':day')) %>
 
-<div class="alert alert-info">
-  <p><%= t('.rules.book_empty') %></p>
-  <p><%= t('.rules.book_freely') %></p>
-  <p><%= t('.rules.book_paid') %></p>                                
-</div>
+<%= render 'rules' %>
 
 <div class="row">
   <% Room.list.each.with_index do |room| %>
@@ -19,7 +15,7 @@
             <h4 class='room-denomination'>
               <span class='test-room-denomination'><%= room.denomination %></span>
               <button class="btn btn-sm btn-default pull-right" data-toggle="modal" data-target="#modal-to-pay">
-                <%= I18n.t('rooms.index.links.pay_for_credits.text') %>
+                <%= t('.links.pay_for_credits.text') %>
               </button>
             </h4>
             <p>
@@ -46,19 +42,6 @@
   <% end %>
 </div>
 
-<div class="modal fade" id="modal-to-pay" tabindex="-1" role="dialog" aria-labelledby="modal-to-pay">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="<%= t('.modal.close') %>"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel"><%= t('.modal.title') %></h4>
-      </div>
-      <div class="modal-body">
-        <%= t('.modal.body', email: ENV['MAIL_TO_PAY'], tel: ENV['TEL_TO_PAY']) %>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal"><%= t('modal.close') %></button>
-      </div>
-    </div>
-  </div>
-</div>
+<%= render 'weekly_team_reservations', date: date, weekly_team_reservations: weekly_team_reservations %>
+
+<%= render 'modal_to_pay' %>

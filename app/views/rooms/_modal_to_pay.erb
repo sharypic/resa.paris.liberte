@@ -1,0 +1,16 @@
+<div class="modal fade" id="modal-to-pay" tabindex="-1" role="dialog" aria-labelledby="modal-to-pay">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="<%= t('.close') %>"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel"><%= t('.title') %></h4>
+      </div>
+      <div class="modal-body">
+        <%= t('.body', email: ENV['MAIL_TO_PAY'], tel: ENV['TEL_TO_PAY']) %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal"><%= t('modal.close') %></button>
+      </div>
+    </div>
+  </div>
+</div>

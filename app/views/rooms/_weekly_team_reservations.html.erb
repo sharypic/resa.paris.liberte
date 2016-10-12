@@ -1,0 +1,21 @@
+<div>
+  <h4><%=raw t('.title', team_name: current_resident.team.name, date: date.strftime('%d-%m-%Y')) %></h4>
+  <table class="table">
+    <thead>
+      <tr>
+        <th class="col-md-2"><%= t('.table.thead.date') %></th>
+        <th class="col-md-2"><%= t('.table.thead.time_range') %></th>
+        <th class="col-md-2"><%= t('.table.thead.room') %></th>
+        <th class="col-md-6"><%= t('.table.thead.reservation_name') %></th>
+      </tr>
+    </thead>
+    <% weekly_team_reservations.each do |reservation| %>
+      <tr>
+        <td class="col-md-2"><%= reservation.starts_at.strftime('%a. %d %b. %Y') %></td>
+        <td class="col-md-2"><%= t('.table.tbody.time_range', starts_at: reservation.starts_at.strftime('%H:%M'), ends_at: reservation.ends_at.strftime('%H:%M')) %></td>
+        <td class="col-md-2"><%= reservation.room.name %></td>
+        <td class="col-md-8"><%= t('.table.tbody.reservation_name', reservation_name: reservation.name, organizer: reservation.resident.email) %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
