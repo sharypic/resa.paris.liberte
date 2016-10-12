@@ -3,7 +3,12 @@ fr:
     index:
       # Title
       availablity_at: Salles
-
+  
+      # Rules
+      rules:
+        book_empty: "L’accès aux espaces est possible et gratuit sans réservation lorsqu'ils sont non-occupés."
+        book_freely: "En fonction des salles, chaque équipe bénéficie de crédits de demi-heures gratuites pour réserver des espaces. Les crédits sont renouvelés sur un rythme hebdomadaire."
+        book_paid: "Au-delà des crédits gratuits, les réservations deviennent payantes et des crédits doivent être achetés."
       # Labels
       seats: '%{count} personnes'
       cost_per_half_hour: '%{count}€/h'
