@@ -4,6 +4,7 @@
   class App.Datepicker
     constructor: ($element, url) ->
       @$element = $element
+      @$elementInputGroupAddon = $element.parent().find('.input-group-addon')
       @url = url
 
     setup: ->
@@ -24,6 +25,7 @@
       @datepicker
 
     bindEvents: ->
+      @$elementInputGroupAddon.on('click', => @$element.datepicker('show') )
       @datepicker.on('changeDate', @onClick)
 
     padIntegerWithTwoZero: (str) ->
