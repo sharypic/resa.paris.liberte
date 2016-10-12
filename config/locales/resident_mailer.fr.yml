@@ -8,10 +8,10 @@ fr:
       body:
         title: 'Votre réservation a bien été prise en compte'
         when:
-          label: "Quand"
+          label: "QUAND"
           value: "Le %{date} - de %{starts_at} à %{ends_at}"
         where:
-          label: "Où"
+          label: "OÙ"
           value: "%{room_name}"
         cta:
           do_not_forget: "Ajouter cette réservation à votre calendrier"
