@@ -1,30 +1,30 @@
 <mj-section background-color="#fff">
   <mj-column>
-    <mj-text font-size="20px" align="center" color="#000" font-family="helvetica"><%= I18n.t('mail.reservation_created.body.title') %></mj-text>
+    <mj-text font-size="20px" align="center" color="#000" font-family="helvetica"><%= t('.body.title') %></mj-text>
 
     <mj-table padding="10px" cellpadding="3">
       <tr>
-        <td style="color:#666;" align="right"><%= I18n.t('mail.reservation_created.body.when.label') %></td>
-        <td align="left"><%= I18n.t('mail.reservation_created.body.when.value', date: I18n.l(@reservation.starts_at, format: :YMD_with_text), starts_at: I18n.l(@reservation.starts_at, format: :hours_minutes), ends_at: I18n.l(@reservation.ends_at, format: :hours_minutes)) %></td>
+        <td style="color:#666;" align="right"><%= t('.body.when.label') %></td>
+        <td align="left"><%= t('.body.when.value', date: I18n.l(@reservation.starts_at, format: :YMD_with_text), starts_at: I18n.l(@reservation.starts_at, format: :hours_minutes), ends_at: I18n.l(@reservation.ends_at, format: :hours_minutes)) %></td>
       </tr>
       <tr>
-        <td style="color:#666;" align="right"><%= I18n.t('mail.reservation_created.body.where.label') %></td>
-        <td align="left"><%= I18n.t('mail.reservation_created.body.where.value', room_name: @reservation.room.name) %></td>
+        <td style="color:#666;" align="right"><%= t('.body.where.label') %></td>
+        <td align="left"><%= t('.body.where.value', room_name: @reservation.room.name) %></td>
       </tr>
     </mj-table>
 
-    <mj-text font-size="11px" align="center"><%= I18n.t('mail.reservation_created.body.cta.do_not_forget') %></mj-text>
+    <mj-text font-size="11px" align="center"><%= t('.body.cta.do_not_forget') %></mj-text>
 
     <mj-button font-family="Helvetica" background-color="#337ab7" href="<%= add_to_google_calendar_url(@reservation) %>" color="#fff">
-      <%= I18n.t('mail.reservation_created.body.cta.add_to_google_calendar') %>
+      <%= t('.body.cta.add_to_google_calendar') %>
     </mj-button>
     <mj-button font-family="Helvetica" background-color="#337ab7" href="<%= download_reservation_ics_url(@reservation) %>" color="#fff">
-      <%= I18n.t('mail.reservation_created.body.cta.download_ics') %>
+      <%= t('.body.cta.download_ics') %>
     </mj-button>
 
-    <mj-text font-size="11px" align="center"><%= I18n.t('mail.reservation_created.body.cta.delete_reservation.label') %></mj-text>
+    <mj-text font-size="11px" align="center"><%= t('.body.cta.delete_reservation.label') %></mj-text>
     <mj-button font-family="Helvetica" background-color="#337ab7" href="<%= room_calendars_url({ room_slug: @reservation.room.to_slug }.merge(date_to_param(@reservation.starts_at))) %>" color="#fff">
-      <%= I18n.t('mail.reservation_created.body.cta.delete_reservation.button') %>
+      <%= t('.body.cta.delete_reservation.button') %>
     </mj-button>
   </mj-column>
 </mj-section>

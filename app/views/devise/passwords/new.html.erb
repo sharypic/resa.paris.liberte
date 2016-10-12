@@ -1,7 +1,7 @@
 <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post, role: "form", class: 'col-sm-6 col-sm-offset-3' }) do |f| %>
   <div class="panel panel-default devise-bs">
     <div class="panel-heading">
-      <h4><%= t('.forgot_your_password', :default => 'Forgot your password?') %></h4>
+      <h4><%= t('.forgot_your_password') %></h4>
     </div>
     <div class="panel-body">
       <%= bootstrap_devise_error_messages! %>
@@ -11,7 +11,7 @@
       </div>
     </div>
     <div class="panel-footer">
-        <%= f.submit t('.send_me_reset_password_instructions', :default => "Send me reset password instructions"), class: "btn btn-primary" %>
+        <%= f.submit t('.send_me_reset_password_instructions'), class: "btn btn-primary" %>
         <%= render "devise/shared/links" %>
     </div>
   </div>

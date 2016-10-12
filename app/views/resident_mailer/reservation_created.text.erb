@@ -1,12 +1,12 @@
-<%= I18n.t('mail.reservation_created.body.title') %>
+<%= t('.body.title') %>
 
-<%= I18n.t('mail.reservation_created.body.when.label') %> : <%= I18n.t('mail.reservation_created.body.when.value', date: I18n.l(@reservation.starts_at, format: :YMD_with_text), starts_at: I18n.l(@reservation.starts_at, format: :hours_minutes), ends_at: I18n.l(@reservation.ends_at, format: :hours_minutes)) %>
+<%= t('.body.when.label') %> : <%= t('.body.when.value', date: I18n.l(@reservation.starts_at, format: :YMD_with_text), starts_at: I18n.l(@reservation.starts_at, format: :hours_minutes), ends_at: I18n.l(@reservation.ends_at, format: :hours_minutes)) %>
 
-<%= I18n.t('mail.reservation_created.body.where.label') %> : <%= I18n.t('mail.reservation_created.body.where.value', room_name: @reservation.room.name) %>
+<%= t('.body.where.label') %> : <%= t('.body.where.value', room_name: @reservation.room.name) %>
 
-<%= I18n.t('mail.reservation_created.body.cta.download_ics') %>
+<%= t('.body.cta.download_ics') %>
 
-<%= I18n.t('mail.reservation_created.body.cta.delete_reservation.label') %>
+<%= t('.body.cta.delete_reservation.label') %>
 
-<%= I18n.t('mail.reservation_created.body.cta.delete_reservation.button') %> : <%= room_calendars_url({room_slug: @reservation.room.to_slug}.merge(date_to_param(@reservation.starts_at))) %>
+<%= t('.body.cta.delete_reservation.button') %> : <%= room_calendars_url({room_slug: @reservation.room.to_slug}.merge(date_to_param(@reservation.starts_at))) %>
 
