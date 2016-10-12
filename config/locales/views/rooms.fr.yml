@@ -11,15 +11,15 @@ fr:
         book_paid: "Au-delà des crédits gratuits, les réservations deviennent payantes et des crédits doivent être achetés."
       # Labels
       seats: '%{count} personnes'
-      cost_per_half_hour: '%{count}€/h'
+      cost_per_half_hour: '%{count}€/demi-heure'
       free_half_hours_available:
         zero: '%{count} demi-heure <strong>gratuite</strong> restante cette semaine'
         one: '%{count} demi-heure <strong>gratuite</strong> restante cette semaine'
-        other: '%{count} demi-heures <strong>gratuite</strong> restantes cette semaine'
+        other: '%{count} demi-heures <strong>gratuites</strong> restantes cette semaine'
       paid_half_hours_available:
         zero: '%{count} demi-heure <strong>payante</strong> restante'
         one: '%{count} demi-heure <strong>payante</strong> restante'
-        other: '%{count} demi-heures <strong>payante</strong> restantes'
+        other: '%{count} demi-heures <strong>payantes</strong> restantes'
 
       # Links
       links:
