@@ -1,7 +1,6 @@
 <%= render 'layouts/breadcrumb', steps: [{ text: t('.availablity_at') }],
                                  datepicker: render('layouts/datepicker', id: 'datepicker', date: date, url_on_date_selected: dated_rooms_path(year: ':year', month: ':month', day: ':day')) %>
 
-<%= render 'rules' %>
 
 <div class="row">
   <% Room.list.each.with_index do |room| %>
@@ -41,6 +40,7 @@
       </div>
   <% end %>
 </div>
+<%= render 'rules' %>
 
 <%= render 'weekly_team_reservations', date: date, weekly_team_reservations: weekly_team_reservations %>
 
