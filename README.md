@@ -34,7 +34,7 @@ Copy .env.sample to .env and update value
 # host
 HOST_WITH_PORT=
 
-# Temp password for demo
+# Temp password for demo, at least 6 chars
 DEFAULT_PWD=
 
 # Defaults for mails
@@ -55,18 +55,30 @@ SMTP_ENABLE_STARTTLS_AUTO=
 DJ_USERNAME=hello
 DJ_PASSWORD=world
 ```
+
+### Create database, migrate & seed
+```
+bundle exec heroku local:run rails db:create
+bundle exec heroku local:run rails db:migrate
+bundle exec heroku local:run rails db:seed
+```
+
+### How to run the test suite
+```bin/rails test```
+
+### Run development server
+```
+bundle exec heroku local
+```
+### Run development console
+```
+bundle exec heroku local:run rails c
+```
+
 ### Various documentations
 * Datepicker : https://github.com/Nerian/bootstrap-datepicker-rails
 
 
-### Run development server
-```
-heroku local
-```
-### Run development console
-```
-heroku local:run rails c
-```
 
 ### Production
 Expose ENV variable via
@@ -76,15 +88,6 @@ heroku config:add/set ENVKEY=ENVVALUE
 
 Also you need to setup two buildpacks : ruby (default) plus node (for mjml), see: https://github.com/sighmon/mjml-rails#deploying-with-heroku
 
-## Database creation / migration
-* creates with ```bin/rails ```
-* migrate with ```bin/rails db:create```
-
-## Database initialization
-```bin/rails rake db:seed```
-
-## How to run the test suite
-* ```bin/rails test```
 
 ## Services (job queues, cache servers, search engines, etc.)
 * async processing is done via Delayed job duee to it's "lightweight" (does not requires a redis)
