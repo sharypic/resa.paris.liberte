@@ -60,14 +60,7 @@ class ReservationsController < ApplicationController
     if DebitReservation.new(reservation).create
       opts = { room_slug: reservation.room.to_slug }
       opts = opts.merge(date_to_param(reservation.starts_at))
-      redirect_to room_calendars_path(opts),
-                  flash: {
-                    notice: I18n.t(
-                      'calendars.create.confirmation',
-                      gcal_url: add_to_google_calendar_url(reservation),
-                      ics_url: download_reservation_ics_url(reservation)
-                    )
-                  }
+      redirect_to room_calendars_path(opts)#,
     else
       render :new, locals: { reservation: reservation }
     end
