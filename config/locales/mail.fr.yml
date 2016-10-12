@@ -14,6 +14,7 @@ fr:
           label: "Où"
           value: "%{room_name}"
         cta:
+          do_not_forget: "Ajouter cette réservation à votre calendrier"
           add_to_google_calendar: Ajouter à Google Calendar
           download_ics: "Télécharger pour Outlook"
           delete_reservation:

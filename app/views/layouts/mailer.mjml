@@ -1,10 +1,10 @@
 <mjml>
   <mj-body>
     <mj-container>
-      <mj-section background-color="#000">
+      <mj-section background-color="">
         <mj-column>
-          <mj-image width="60" src="<%= asset_url('logo/apple-icon-60x60.png') %>"></mj-image>
-          <mj-divider border-color="#F8FF01"></mj-divider>
+          <mj-image width="50" src="<%= asset_url('logo/liberte-paris_50x39.png') %>"></mj-image>
+          <mj-divider border-color="#000"></mj-divider>
         <mj-column>
       </mj-section>
       <%= yield %>
