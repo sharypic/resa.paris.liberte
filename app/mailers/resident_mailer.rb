@@ -13,10 +13,9 @@ class ResidentMailer < ApplicationMailer
                                                        .to_attachment
 
     mail(to: reservation.resident.email,
-         subject: I18n.t('mail.reservation_created.subject',
-                         reservation_name: reservation.name)) do |format|
+         subject: t('.subject', reservation_name: reservation.name)) do |format|
       format.mjml
       format.text
-    end
+    end  
   end
 end
