@@ -2,8 +2,12 @@
   // border: 1px solid #ddd;
   background: transparent;
   overflow: hidden;
+  text-align: center;
   > li {
-    padding: 7px 0;
+    line-height: 46px;
+    padding: 0;
+    float: left;
+    
     &, &.active{
       color: #333;
     }
@@ -12,10 +16,17 @@
     box-shadow: none;
   }
 }
-
-.li-breadcrumb-calendar{
-  width: 150px;
+// decrease on desktop
+$screen-sm-min: 768px;
+@media (min-width: $screen-sm-min) {
+  .ul-breadcrumb-calendar{
+    position: absolute;
+    display: inline-block;
+    width: 170px;
+    margin-left: -85px;
+  }
 }
+
 
 .room-type{
   // .panel-heading,
