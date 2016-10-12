@@ -20,23 +20,23 @@ class ResidentMailerTest < ActionMailer::TestCase
 
     assert_equal [ENV['MAIL_FROM']], email.from
     assert_equal [@reservation.resident.email], email.to
-    assert_equal I18n.t('mail.reservation_created.subject', reservation_name: @reservation.name),
+    assert_equal I18n.t('resident_mailer.reservation_created.subject', reservation_name: @reservation.name),
                  email.subject,
                  'wrong subject'
 
     assert_select_email do
-      assert_select :td, text: I18n.t('mail.reservation_created.body.when.value',
+      assert_select :td, text: I18n.t('resident_mailer.reservation_created.body.when.value',
                                       date: I18n.l(@reservation.starts_at,
                                                    format: :YMD_with_text),
                                       starts_at: I18n.l(@reservation.starts_at,
                                                         format: :hours_minutes),
                                       ends_at: I18n.l(@reservation.ends_at,
                                                       format: :hours_minutes))
-      assert_select :td, text: I18n.t('mail.reservation_created.body.where.value',
+      assert_select :td, text: I18n.t('resident_mailer.reservation_created.body.where.value',
                                       room_name: @reservation.room.name)
-      assert_select :div, text: I18n.t('mail.reservation_created.body.cta.download_ics')
-      assert_select :div, text: I18n.t('mail.reservation_created.body.cta.delete_reservation.label')
-      assert_select :td, text: I18n.t('mail.reservation_created.body.cta.delete_reservation.button')
+      assert_select :div, text: I18n.t('resident_mailer.reservation_created.body.cta.download_ics')
+      assert_select :div, text: I18n.t('resident_mailer.reservation_created.body.cta.delete_reservation.label')
+      assert_select :td, text: I18n.t('resident_mailer.reservation_created.body.cta.delete_reservation.button')
       reservation_url = room_calendars_url(
         { room_slug: @reservation.room.to_slug }
         .merge(date_to_param(@reservation.starts_at))
