@@ -4,7 +4,6 @@ def run
     create_teams
     create_residents
     create_rooms
-    # create_reservations(Time.zone.today)
   end
 end
 
@@ -14,10 +13,24 @@ def create_teams
 end
 
 def create_rooms
-  Shed.create!
+  Shed.create!(name: 'Atelier B (2e)')
+  
+  ['Carré A (3e)', 'Carré B (3e)'].each do |square_name|
+    Square.create!(name: square_name)
+  end
+  
+  ['Loge A (2e)', 
+   'Loge B (2e)', 
+   'Loge C (3e)', 
+   'Loge F (4e)'].each do |big_lodge_name|
+    BigLodge.create!(name: big_lodge_name)
+  end
 
-  4.times do
-    [Square, BigLodge, SmallLodge].each(&:create!)
+  ['Loge D (3e)', 
+   'Loge E (4e)', 
+   'Loge G (4e)', 
+   'Loge H (4e)'].each do |small_lodge_name|
+    SmallLodge.create!(name: small_lodge_name)
   end
 end
 
@@ -31,20 +44,4 @@ def create_residents
                    confirmed_at: Time.now.utc)
 end
 
-# rubocop:disable Metrics/AbcSize
-def create_reservations(today)
-  opts = { room: SmallLodge.first, resident: Resident.first }
-  Reservation.create!(opts.merge(starts_at: today + 8.hours,
-                                 ends_at: today + 8.hours + 30.minutes))
-  Reservation.create!(opts.merge(starts_at: today + 10.hours,
-                                 ends_at: today + 10.hours))
-end
-# rubocop:enable Metrics/AbcSize
-
 run
-Resident.create!(
-  email: 'admin@example.com', 
-  password: 'password', 
-  password_confirmation: 'password'
-  confirmed_at: Time.now.utc
-)
