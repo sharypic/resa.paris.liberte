@@ -15,7 +15,11 @@ end
 def create_rooms
   Shed.create!(name: 'Atelier B (2e)')
   
-  ['Carré A (3e)', 'Carré B (3e)'].each do |square_name|
+  [
+    'Carré A (3e)', 
+    'Carré B (3e)',
+    'Carré C (4e)',
+    'Carré D (4e)'].each do |square_name|
     Square.create!(name: square_name)
   end
   
