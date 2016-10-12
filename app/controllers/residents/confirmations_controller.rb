@@ -1,4 +1,4 @@
 module Residents
-  class ConfirmationsController < Devise::ConfirmablesController
+  class ConfirmationsController < Devise::ConfirmationsController
   end
 end
