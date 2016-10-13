@@ -68,14 +68,19 @@ bundle exec heroku local:run rails c
 
 
 # Deploy
-
+## Environment
 * **Setup two buildpacks** : ruby (default) & node (for mjml), see: [heroku buildpack documentation](https://github.com/sighmon/mjml-rails#deploying-with-heroku)
 * Expose **ENV** with ```heroku config:add/set ENVKEY=ENVVALUE```
 * Ask for **heroku access** [admin](mailto:fourcade.m@gmail.com)
 
 ## Deployment instructions
+
+## Recommended via SempahoreCI
+* Have heroku access (ask to fourcade.m@gmail.com)
+* Ask fourcade.m@gmail.com for semaphore CI 
+
+## Not recommended, but possible 
 * Have heroku access (ask to fourcade.m@gmail.com)
 * add heroku repo as ```git remote add heroku https://git.heroku.com/{APPNAME}```
 * then ```./deploy.sh```
-
 
