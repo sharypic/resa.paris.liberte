@@ -3,6 +3,7 @@
 }
 
 .navbar-team{
+  z-index: 0;
   color: #777;
   line-height: 50px;
   position: absolute;
@@ -10,4 +11,9 @@
   left: 0;
   text-align: center;
   margin:0 auto;
+}
+
+.navbar-header, .navbar-collapse{
+  z-index: 1;
+  position: relative;
 }
