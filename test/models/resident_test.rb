@@ -9,7 +9,7 @@ class ResidentTest < ActiveSupport::TestCase
       lastname: 'Fourcade', 
       email: 'fourcade.m@gmail.com'
     )
-    assert_equal 'Martin Fourcade', resident.email
+    assert_equal 'Martin Fourcade', resident.fullname
   end
 
   test '.fullname fallbacks to email without firstname and lastname' do
