@@ -1,3 +1,5 @@
+[![Build Status](https://semaphoreci.com/api/v1/projects/d0a117c4-cf68-4a34-9acd-0f3cb3d92d0c/1010808/badge.svg)](https://semaphoreci.com/mfourcade/resa-paris-liberte)
+
 # Feature set
 
 * Residents of a coworking space book rooms. (# models/Resident,Rooms::*)
