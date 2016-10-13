@@ -5,7 +5,6 @@ class DeviseMailerTest < ActionMailer::TestCase
 
   test '.confirmation_instructions works' do
     email = DeviseMailer.confirmation_instructions(residents(:mfo), 'token')
-    byebug
     assert_equal [ENV['MAIL_FROM']], email.from, 'wrong from address'
   end
 
