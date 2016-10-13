@@ -30,6 +30,9 @@ describe 'Datepicker', ->
           daysOfWeekDisabled: '0,6'
           weekStart: 1
           language: 'fr'
+          todayBtn: 'linked'
+          autoclose: true
+          todayHighlight: true
         )
 
   describe '.bindEvents', ->
