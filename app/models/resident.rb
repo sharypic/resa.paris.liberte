@@ -34,7 +34,8 @@ class Resident < ApplicationRecord
   has_many :reservations
 
   def fullname
-    "#{firstname} #{lastname}"
+    return "#{firstname} #{lastname}" if firstname.present? && lastname.present?
+    email
   end
 
   def usage_of(room_type, from_date, to_date)

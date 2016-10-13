@@ -3,10 +3,21 @@ require 'test_helper'
 class ResidentTest < ActiveSupport::TestCase
   fixtures :residents, :rooms
 
-  test '.fullname concat firstname and lastname' do
-    resident = Resident.new(firstname: 'Martin', lastname: 'Fourcade')
-    assert_equal 'Martin Fourcade', resident.fullname
+  test '.fullname fallback use firstname and lastname when present' do
+    resident = Resident.new(
+      firstname: 'Martin', 
+      lastname: 'Fourcade', 
+      email: 'fourcade.m@gmail.com'
+    )
+    assert_equal 'Martin Fourcade', resident.email
   end
+
+  test '.fullname fallbacks to email without firstname and lastname' do
+    resident = Resident.new(email: 'fourcade.m@gmail.com')
+    assert_equal 'fourcade.m@gmail.com', resident.fullname
+  end
+
+  
 
   test 'usage_of rooms without reservation returns 0' do
     resident = residents(:mfo)
