@@ -1,8 +1,10 @@
+# Custom mailer for devise in order to support MJML layouts
 # see: https://github.com/plataformatec/devise/wiki/How-To:-Use-custom-mailer
 # see: https://github.com/plataformatec/devise/blob/master/app/mailers/devise/mailer.rb
 class DeviseMailer < Devise::Mailer   
-  helper :application 
   include Devise::Controllers::UrlHelpers 
+  
+  helper :application 
   default template_path: 'devise/mailer'
   layout 'mailer'
 
