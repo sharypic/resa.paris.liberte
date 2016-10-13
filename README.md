@@ -33,33 +33,6 @@ bundle install
 ### Setup .env
 Copy .env.sample to .env and update value
 
-```
-# host
-HOST_WITH_PORT=
-
-# Temp password for demo, at least 6 chars
-DEFAULT_PWD=
-
-# Defaults for mails
-MAIL_FROM=
-
-# SMTP setup
-SMTP_ADDRESS=
-SMTP_PORT=
-SMTP_DOMAIN=
-SMTP_USER_NAME=
-SMTP_PASSWORD=
-SMTP_AUTHENTICATION=
-SMTP_ENABLE_STARTTLS_AUTO=
-
-# Delayed Job Basic auth
-DJ_USERNAME=hello
-DJ_PASSWORD=world
-
-# Address of coworking space (send with .ics data)
-ADDRESS=
-```
-
 ### Create database, migrate & seed
 ```
 bundle exec heroku local:run rails db:create
