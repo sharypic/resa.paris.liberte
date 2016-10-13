@@ -11,10 +11,13 @@ gem 'puma', '~> 3.0'
 # Jobs
 gem 'delayed_job'
 gem 'delayed_job_active_record'
+
 # Delayed Job Web interface fix
 # see: https://github.com/ejschmitt/delayed_job_web/issues/84
-gem 'sinatra', github: 'sinatra/sinatra'
-gem 'rack-protection', github: 'sinatra/rack-protection'
+github 'sinatra/sinatra' do
+  gem 'rack-protection'
+end
+
 gem 'delayed_job_web'
 
 # Preprocessors
