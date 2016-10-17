@@ -10,7 +10,7 @@ fr:
       timeout: Votre session est expirée, veuillez vous reconnecter pour continuer.
       unauthenticated: Vous devez vous connecter ou vous enregistrer pour continuer.
       unconfirmed: Vous devez confirmer votre compte par courriel.
-    
+
     mailer:
       confirmation_instructions:
         action: Confirmer votre compte resa.paris.liberte courriel
@@ -25,7 +25,7 @@ fr:
         instruction_2: Si vous n'avez pas émis cette demande, merci d'ignorer ce courriel.
         instruction_3: Votre mot de passe ne changera pas tant que vous n'aurez pas cliqué sur ce lien et renseigné un nouveau mot de passe.
         subject: Instructions pour changer le mot de passe
-    
+
     passwords:
       edit:
         change_my_password: Changer mon mot de passe
@@ -65,7 +65,7 @@ fr:
       timeout: Votre session est expirée, veuillez vous reconnecter pour continuer.
       unauthenticated: Vous devez vous connecter ou vous enregistrer pour continuer.
       unconfirmed: Vous devez confirmer votre compte par courriel.
-    
+
     shared:
       links:
         back: Retour
@@ -76,7 +76,7 @@ fr:
         sign_in_with_provider: Connexion avec %{provider}
         sign_up: Inscription
         sign_out: 'Se deconnecter'
-    
+
     errors:
       messages:
         already_confirmed: a déjà été confirmé(e)
@@ -86,4 +86,4 @@ fr:
         not_locked: n’était pas verrouillé(e)
         not_saved:
           one: 'une erreur est survenue:'
-          other: "%{count} erreurs ont empêché ce (cet ou cette) %{resource} d’être enregistré(e) :"
+          other: "%{count} erreurs ont empêché ce %{resource} d’être enregistré :"

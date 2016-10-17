@@ -1,5 +1,11 @@
 fr:
   activerecord:
+    errors:
+      models:
+        resident:
+          attributes:
+            email:
+              already_confirmed: "déjà confirmé"
     attributes:
       resident:
         email: Courriel
