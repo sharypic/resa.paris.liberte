@@ -2,7 +2,7 @@ require 'test_helper'
 # Test sign success & failure as well as sign out
 class AuthenticationFlowsTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
-  fixtures :residents
+  fixtures :residents, :teams
 
   setup do
     @password = 'guillaume'
@@ -39,9 +39,8 @@ class AuthenticationFlowsTest < ActionDispatch::IntegrationTest
     post resident_session_path, params: { resident: { email: @resident.email,
                                                       password: @password } }
     follow_redirect!
-    assert_select '.alert-info .text-notice',
-                  I18n.t('devise.sessions.signed_in'),
-                  'Alert sign in success missing'
+    assert_select '.navbar-team', @resident.team.name
+    assert_select '.alert-info .text-notice', false
   end
 
   test 'Logout from homepage' do
