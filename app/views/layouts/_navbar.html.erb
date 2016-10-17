@@ -16,8 +16,8 @@
 
     <div class="collapse navbar-collapse" id="header-collapse">
       <%= link_to resident_signed_in? ? rooms_path : root_path, class: 'navbar-brand' do %>
-        <%= image_tag 'logo/header-icon-26x34.png', title: t('.links.brand.title'), size: "26x34" %>
-      <% end %>  
+        <%= image_tag 'logo/header-icon-26x34.png', alt: t('.links.brand.title'), size: "26x34" %>
+      <% end %>
 
       <% if resident_signed_in? && current_resident.admin? %>
         <ul class="nav navbar-nav">

@@ -7,13 +7,13 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-
-      <%= link_to  resident_signed_in? ? rooms_path : root_path, class: 'navbar-brand' do %>
-        <%= image_tag 'logo/header-icon-31x40.png', alt: "Logo Liberté Paris", size: "31x40" %>
-      <% end %>
     </div>
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <%= link_to  resident_signed_in? ? rooms_path : root_path, class: 'navbar-brand' do %>
+        <%= image_tag 'logo/header-icon-26x34.png', alt: "Logo Liberté Paris", size: "26x34" %>
+      <% end %>
+
       <ul class="nav navbar-nav navbar-right">
         <% if resident_signed_in? %>
           <li><%= link_to t('devise.shared.links.sign_out'), destroy_resident_session_path, method: :delete %></li>
