@@ -43,6 +43,9 @@ gem 'icalendar'
 gem 'devise'
 gem 'devise-bootstrap-views'
 
+# Logging
+gem 'airbrake'
+
 group :development, :test do
   gem 'byebug', platform: :mri
   gem 'rubocop'
