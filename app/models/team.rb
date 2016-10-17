@@ -16,6 +16,12 @@ class Team < ApplicationRecord
   has_many :reservations, through: :residents, dependent: :destroy
   has_many :time_account_lines, dependent: :destroy
 
+  def weekly_reservations(date)
+    reservations.for_week(date)
+                .includes(:resident, :room)
+                .order(:starts_at)
+  end
+
   def weekly_free_seconds_available(room, date)
     total = room.free_seconds_per_week -
             weekly_free_seconds_consumned(room, date)

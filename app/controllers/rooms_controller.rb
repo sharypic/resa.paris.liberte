@@ -6,11 +6,8 @@ class RoomsController < ApplicationController
 
   def index
     date = date_or_default(params)
-    weekly_team_reservations = current_resident.team
-                                               .reservations
-                                               .for_week(date)
-                                               .includes(:resident, :room)
-                                               .order(:starts_at)
+    weekly_team_reservations = current_resident.team.weekly_reservations(date)
+
     render locals: { date: date,
                      weekly_team_reservations: weekly_team_reservations }
   rescue MalformattedDateError
