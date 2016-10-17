@@ -14,4 +14,14 @@ class PagesControllerTest < ActionDispatch::IntegrationTest
     get root_url
     assert_redirected_to rooms_url
   end
+
+  test 'error page' do
+    get '/500.html'
+    assert_select '.dialog h1',
+                  'Oops... une erreur est survenue',
+                  'missing error message'
+    assert_select '.dialog p',
+                  'Vous pouvez nous faire un retour à contact@liberte.paris',
+                  'missing contact email'
+  end
 end
