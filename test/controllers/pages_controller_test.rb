@@ -20,8 +20,11 @@ class PagesControllerTest < ActionDispatch::IntegrationTest
     assert_select '.dialog h1',
                   'Oops... une erreur est survenue',
                   'missing error message'
-    assert_select '.dialog p',
-                  'Vous pouvez nous faire un retour à contact@liberte.paris',
+    assert_select '.dialog p a.test-contact',
+                  'contact@liberte.paris',
                   'missing contact email'
+    assert_select '.dialog p a.test-back',
+                  "Retourner à la page d'accueil",
+                  'missing back to homepage'
   end
 end
